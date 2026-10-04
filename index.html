@@ -1279,6 +1279,247 @@ const DATA = {
         ]}
       }
     ]
+  },
+
+  espagnol: {
+    emoji: "🇪🇸", name: "Espagnol", color: "#d63031",
+    chapters: [
+      {
+        id: "esp-present", title: "Le présent de l'indicatif",
+        quiz: [
+          { q: "Quelle est la terminaison de YO pour les verbes en -AR au présent ?", choices: ["-o","-as","-a","-amos"], answer: 0 },
+          { q: "Comment conjugue-t-on BEBER à la 3e personne du pluriel ?", choices: ["beben","bebeis","bebe","bebemos"], answer: 0 },
+          { q: "Quelle terminaison prend TÚ pour tous les groupes au présent ?", choices: ["-s","−o","-n","-mos"], answer: 0 },
+          { q: "VIVIR à la 1ère personne du pluriel (nosotros) :", choices: ["vivimos","vivéis","vivo","viven"], answer: 0 },
+          { q: "Au présent, le pronom sujet est-il obligatoire en espagnol ?", choices: ["Non, la terminaison suffit","Oui, toujours","Oui sauf pour YO","Non, sauf au pluriel"], answer: 0 }
+        ],
+        flashcards: [
+          { front: "HABLAR — yo", back: "hablo" },
+          { front: "HABLAR — tú / él / nosotros / vosotros / ellos", back: "hablas / habla / hablamos / habláis / hablan" },
+          { front: "BEBER — yo / tú / él", back: "bebo / bebes / bebe" },
+          { front: "BEBER — nosotros / vosotros / ellos", back: "bebemos / bebéis / beben" },
+          { front: "VIVIR — yo / tú / él", back: "vivo / vives / vive" },
+          { front: "VIVIR — nosotros / vosotros / ellos", back: "vivimos / vivís / viven" }
+        ],
+        summary: `<h2>Le présent de l'indicatif</h2>
+<p>En espagnol, il y a <strong>3 groupes</strong> de verbes selon leur terminaison à l'infinitif.</p>
+<h3>Groupe 1 : verbes en -AR (ex. HABLAR)</h3>
+<table style="width:100%;border-collapse:collapse">
+  <tr style="background:var(--card2)"><th>Pronom</th><th>Terminaison</th><th>HABLAR</th></tr>
+  <tr><td>yo</td><td>-o</td><td>hablo</td></tr>
+  <tr><td>tú</td><td>-as</td><td>hablas</td></tr>
+  <tr><td>él/ella</td><td>-a</td><td>habla</td></tr>
+  <tr><td>nosotros</td><td>-amos</td><td>hablamos</td></tr>
+  <tr><td>vosotros</td><td>-áis</td><td>habláis</td></tr>
+  <tr><td>ellos</td><td>-an</td><td>hablan</td></tr>
+</table>
+<h3>Groupe 2 : verbes en -ER (ex. BEBER)</h3>
+<table style="width:100%;border-collapse:collapse">
+  <tr style="background:var(--card2)"><th>Pronom</th><th>Terminaison</th><th>BEBER</th></tr>
+  <tr><td>yo</td><td>-o</td><td>bebo</td></tr>
+  <tr><td>tú</td><td>-es</td><td>bebes</td></tr>
+  <tr><td>él/ella</td><td>-e</td><td>bebe</td></tr>
+  <tr><td>nosotros</td><td>-emos</td><td>bebemos</td></tr>
+  <tr><td>vosotros</td><td>-éis</td><td>bebéis</td></tr>
+  <tr><td>ellos</td><td>-en</td><td>beben</td></tr>
+</table>
+<h3>Groupe 3 : verbes en -IR (ex. VIVIR)</h3>
+<table style="width:100%;border-collapse:collapse">
+  <tr style="background:var(--card2)"><th>Pronom</th><th>Terminaison</th><th>VIVIR</th></tr>
+  <tr><td>yo</td><td>-o</td><td>vivo</td></tr>
+  <tr><td>tú</td><td>-es</td><td>vives</td></tr>
+  <tr><td>él/ella</td><td>-e</td><td>vive</td></tr>
+  <tr><td>nosotros</td><td>-imos</td><td>vivimos</td></tr>
+  <tr><td>vosotros</td><td>-ís</td><td>vivís</td></tr>
+  <tr><td>ellos</td><td>-en</td><td>viven</td></tr>
+</table>
+<p><strong>Astuces :</strong> YO se termine toujours en <strong>-o</strong> · TÚ toujours en <strong>-s</strong> · ELLOS toujours en <strong>-n</strong>. Le pronom sujet n'est PAS obligatoire !</p>`,
+        mindmap: { center: "Présent indicatif", branches: [
+          { label: "Groupe -AR", color: "#d63031", children: ["yo → -o","tú → -as","él → -a","nosotros → -amos","vosotros → -áis","ellos → -an"] },
+          { label: "Groupe -ER", color: "#e17055", children: ["yo → -o","tú → -es","él → -e","nosotros → -emos","vosotros → -éis","ellos → -en"] },
+          { label: "Groupe -IR", color: "#d63031", children: ["yo → -o","tú → -es","él → -e","nosotros → -imos","vosotros → -ís","ellos → -en"] },
+          { label: "Règles clés", color: "#c0392b", children: ["YO → -o toujours","TÚ → -s toujours","ELLOS → -n toujours","Pronom non obligatoire"] }
+        ]}
+      },
+      {
+        id: "esp-futprox", title: "Le futur proche — IR A + infinitif",
+        quiz: [
+          { q: "Comment forme-t-on le futur proche en espagnol ?", choices: ["IR A + infinitif","ESTAR + gérondif","HABER + participe","infinitif + terminaison"], answer: 0 },
+          { q: "Que signifie 'Voy a estudiar' ?", choices: ["Je vais étudier","J'étudie","J'ai étudié","J'étudierais"], answer: 0 },
+          { q: "Conjugaison de IR à la 2e personne du singulier (tú) :", choices: ["vas","voy","va","vamos"], answer: 0 },
+          { q: "Quel est un des 3 usages du futur proche ?", choices: ["Exprimer une intention d'action future","Décrire une habitude","Raconter le passé","Faire une hypothèse sur le présent"], answer: 0 },
+          { q: "Comment dit-on 'médecin' en espagnol ?", choices: ["doctor/a","enfermero/a","bombero/a","abogado/a"], answer: 0 }
+        ],
+        flashcards: [
+          { front: "IR A + infinitif — structure", back: "voy/vas/va/vamos/vais/van + a + infinitif" },
+          { front: "Futuro Próximo — 3 usages", back: "1. Intention d'action future\n2. Exprimer des plans\n3. Actions imminentes" },
+          { front: "Professions (h/f)", back: "abogado/a · actor/actriz · bombero/a · chef · emprendedor/a · enfermero/a" },
+          { front: "Professions (suite)", back: "fontanero/a · peluquero/a · periodista · psicólogo/a · arquitecto/a · cantante" },
+          { front: "Vocabulaire Vocación", back: "tener claro = être sûr(e) · broma = blague · moraleja = la morale · feliz = heureux · vacaciones = vacances" },
+          { front: "Exemple futur proche", back: "Voy a ser médico. = Je vais être médecin.\nVas a trabajar mañana. = Tu vas travailler demain." }
+        ],
+        summary: `<h2>Le futur proche — Futuro Próximo</h2>
+<p>Le futur proche s'utilise pour parler d'<strong>actions futures planifiées</strong>.</p>
+<h3>Structure</h3>
+<p style="font-size:1.2em;text-align:center;padding:1em;background:var(--card2);border-radius:8px"><strong>IR A + infinitif</strong></p>
+<table style="width:100%;border-collapse:collapse">
+  <tr style="background:var(--card2)"><th>Pronom</th><th>IR conjugué</th><th>Exemple</th></tr>
+  <tr><td>yo</td><td>voy</td><td>voy a estudiar</td></tr>
+  <tr><td>tú</td><td>vas</td><td>vas a comer</td></tr>
+  <tr><td>él/ella</td><td>va</td><td>va a ser médico</td></tr>
+  <tr><td>nosotros</td><td>vamos</td><td>vamos a salir</td></tr>
+  <tr><td>vosotros</td><td>vais</td><td>vais a llegar</td></tr>
+  <tr><td>ellos</td><td>van</td><td>van a trabajar</td></tr>
+</table>
+<h3>3 usages</h3>
+<ul><li><strong>Intention</strong> : Voy a ser abogado.</li><li><strong>Plans futurs</strong> : Vamos a viajar este verano.</li><li><strong>Imminence</strong> : ¡Va a llover!</li></ul>
+<h3>Professions — Las profesiones</h3>
+<p>abogado/a · actor/actriz · bombero/a · chef · emprendedor/a · enfermero/a · fontanero/a · peluquero/a · periodista · psicólogo/a · arquitecto/a · cantante · ingeniero/a · jardinero/a · policía · veterinario/a · doctor/a</p>`,
+        mindmap: { center: "Futuro Próximo", branches: [
+          { label: "Structure", color: "#d63031", children: ["IR conjugué","+ A","+ infinitif"] },
+          { label: "IR conjugué", color: "#c0392b", children: ["voy/vas/va","vamos/vais/van"] },
+          { label: "3 usages", color: "#e17055", children: ["Intention future","Plans","Imminence"] },
+          { label: "Professions", color: "#d63031", children: ["doctor/a","abogado/a","enfermero/a","bombero/a","cantante","periodista"] }
+        ]}
+      },
+      {
+        id: "esp-gustar", title: "Gustar, Encantar & diphtongues",
+        quiz: [
+          { q: "Comment dit-on 'J'aime les chats' en espagnol ?", choices: ["Me gustan los gatos","Me gusta los gatos","Gusto los gatos","Me gusto los gatos"], answer: 0 },
+          { q: "PODER au présent — yo :", choices: ["puedo","podo","pode","podeo"], answer: 0 },
+          { q: "Quel est le changement de diphtongue de O→UE ?", choices: ["o→ue dans les syllabes accentuées","e→ie dans toutes les syllabes","o→ue partout","e→ie seulement au pluriel"], answer: 0 },
+          { q: "QUERER au présent — ellos :", choices: ["quieren","quieran","queren","queran"], answer: 0 },
+          { q: "Comment dit-on 'J'adore danser' avec ENCANTAR ?", choices: ["Me encanta bailar","Me encantan bailar","Encanto bailar","Me encanta bailo"], answer: 0 }
+        ],
+        flashcards: [
+          { front: "GUSTAR — règle d'accord", back: "me GUSTA + verbe infinitif / nom singulier\nme GUSTAN + nom pluriel" },
+          { front: "ENCANTAR — exemples", back: "Me encanta el fútbol. (J'adore le foot)\nMe encantan las películas. (J'adore les films)" },
+          { front: "Diphtongue O→UE — PODER", back: "puedo / puedes / puede\npodemos / podéis / pueden\n⚠ nosotros/vosotros sans diphtongue !" },
+          { front: "Diphtongue O→UE — autres verbes", back: "volver → vuelvo\nsoñar → sueño, sueñas, sueña, soñamos, soñáis, sueñan" },
+          { front: "Diphtongue E→IE — QUERER", back: "quiero / quieres / quiere\nqueremos / queréis / quieren" },
+          { front: "Diphtongue E→IE — autres verbes", back: "defender → defiendo\npensar → pienso, piensas, piensa, pensamos, pensáis, piensan" }
+        ],
+        summary: `<h2>Gustar, Encantar & les diphtongues</h2>
+<h3>GUSTAR et ENCANTAR</h3>
+<p>Ces verbes fonctionnent à l'envers du français !</p>
+<table style="width:100%;border-collapse:collapse">
+  <tr style="background:var(--card2)"><th>Construction</th><th>Usage</th><th>Exemple</th></tr>
+  <tr><td>me GUSTA + infinitif</td><td>J'aime + verbe</td><td>Me gusta bailar.</td></tr>
+  <tr><td>me GUSTA + singulier</td><td>J'aime + nom sg</td><td>Me gusta el deporte.</td></tr>
+  <tr><td>me GUSTAN + pluriel</td><td>J'aime + nom pl</td><td>Me gustan los gatos.</td></tr>
+</table>
+<p>ENCANTAR suit la même règle : me encanta / me encantan.</p>
+<h3>Les verbes à diphtongues</h3>
+<p>Certaines voyelles changent dans les syllabes <strong>accentuées</strong> (toutes sauf nosotros/vosotros).</p>
+<table style="width:100%;border-collapse:collapse">
+  <tr style="background:var(--card2)"><th>Changement</th><th>Verbe</th><th>yo / tú / él</th><th>nosotros</th></tr>
+  <tr><td>O → UE</td><td>poder</td><td>puedo/puedes/puede</td><td>podemos</td></tr>
+  <tr><td>O → UE</td><td>soñar</td><td>sueño/sueñas/sueña</td><td>soñamos</td></tr>
+  <tr><td>E → IE</td><td>querer</td><td>quiero/quieres/quiere</td><td>queremos</td></tr>
+  <tr><td>E → IE</td><td>pensar</td><td>pienso/piensas/piensa</td><td>pensamos</td></tr>
+</table>`,
+        mindmap: { center: "Gustar & Diphtongues", branches: [
+          { label: "GUSTAR", color: "#d63031", children: ["me gusta + infinitif","me gusta + sg","me gustan + pl","te/le/nos/os/les gusta(n)"] },
+          { label: "ENCANTAR", color: "#c0392b", children: ["même règle que gustar","me encanta bailar","me encantan las series"] },
+          { label: "O → UE", color: "#e17055", children: ["poder→puedo","soñar→sueño","volver→vuelvo","nosotros/vosotros: normal"] },
+          { label: "E → IE", color: "#d63031", children: ["querer→quiero","pensar→pienso","defender→defiendo","nosotros/vosotros: normal"] }
+        ]}
+      },
+      {
+        id: "esp-pronominaux", title: "Los verbos pronominaux",
+        quiz: [
+          { q: "Comment dit-on 's'appeler' en espagnol (infinitif) ?", choices: ["llamarse","llama","se llamar","llamar se"], answer: 0 },
+          { q: "Comment se place le pronom réfléchi avec un verbe conjugué ?", choices: ["DEVANT le verbe conjugué","Après le verbe conjugué","À la fin de la phrase","Avant l'infinitif seulement"], answer: 0 },
+          { q: "Conjugaison de LLAMARSE à la 1ère personne du singulier :", choices: ["me llamo","te llamas","se llama","nos llamamos"], answer: 0 },
+          { q: "LLAMARSE à la 2e personne du pluriel (vosotros) :", choices: ["os llamáis","nos llamamos","se llaman","te llamas"], answer: 0 },
+          { q: "Quel est le pronom réfléchi pour NOSOTROS ?", choices: ["nos","se","os","me"], answer: 0 }
+        ],
+        flashcards: [
+          { front: "Verbe pronominal — définition", back: "Verbe qui s'utilise avec un pronom réfléchi (enclise à l'infinitif)\nEx : llamarse, ducharse, levantarse" },
+          { front: "Position du pronom réfléchi", back: "DEVANT le verbe conjugué :\nMe llamo Ilian. / Te duchas por la mañana.\nCollé à l'infinitif : quiero levantarme" },
+          { front: "LLAMARSE — conjugaison complète", back: "yo me llamo\ntú te llamas\nél/ella se llama\nnosotros nos llamamos\nvosotros os llamáis\nellos se llaman" },
+          { front: "Verbes pronominaux — routine matinale", back: "levantarse (se lever)\nducharse (se doucher)\nlavarse (se laver)\ndespertarse (se réveiller)\nprepararse (se préparer)" },
+          { front: "Verbes pronominaux — apparence", back: "vestirse (s'habiller)\npeinarse (se coiffer)\ncepillarse (se brosser)\nmaquillarse (se maquiller)\nacostarse (se coucher)" },
+          { front: "Exemples de phrases", back: "Me llamo Ilian. (Je m'appelle Ilian)\nMe ducho por la mañana. (Je me douche le matin)\n¿Cómo te llamas? (Comment tu t'appelles ?)" }
+        ],
+        summary: `<h2>Los verbos pronominaux</h2>
+<p>Les verbes pronominaux sont des verbes qui s'utilisent avec un <strong>pronom réfléchi</strong>. À l'infinitif, ce pronom est <em>collé</em> à la fin : <strong>llam-arse</strong>, <strong>duch-arse</strong>.</p>
+<h3>Position du pronom réfléchi</h3>
+<ul>
+  <li>Avec un verbe <strong>conjugué</strong> → pronom <strong>DEVANT</strong> le verbe : <em>Me llamo Ilian.</em></li>
+  <li>Avec un <strong>infinitif</strong> → pronom <strong>collé après</strong> : <em>Quiero levantarme.</em></li>
+</ul>
+<h3>Conjugaison de LLAMARSE</h3>
+<table style="width:100%;border-collapse:collapse">
+  <tr style="background:var(--card2)"><th>Pronom</th><th>Réfléchi</th><th>Conjugué</th></tr>
+  <tr><td>yo</td><td>me</td><td>me llamo</td></tr>
+  <tr><td>tú</td><td>te</td><td>te llamas</td></tr>
+  <tr><td>él/ella</td><td>se</td><td>se llama</td></tr>
+  <tr><td>nosotros</td><td>nos</td><td>nos llamamos</td></tr>
+  <tr><td>vosotros</td><td>os</td><td>os llamáis</td></tr>
+  <tr><td>ellos</td><td>se</td><td>se llaman</td></tr>
+</table>
+<h3>Verbes pronominaux courants</h3>
+<p>levantarse · ducharse · lavarse · acostarse · despertarse · prepararse · vestirse · peinarse · cepillarse · maquillarse</p>`,
+        mindmap: { center: "Verbos pronominaux", branches: [
+          { label: "Structure", color: "#d63031", children: ["Infinitif + -se enclise","Pronom DEVANT si conjugué","Collé si infinitif"] },
+          { label: "LLAMARSE", color: "#c0392b", children: ["me llamo","te llamas","se llama","nos llamamos","os llamáis","se llaman"] },
+          { label: "Pronoms réfléchis", color: "#e17055", children: ["yo → me","tú → te","él → se","nosotros → nos","vosotros → os","ellos → se"] },
+          { label: "Routine quotidienne", color: "#d63031", children: ["levantarse","ducharse","vestirse","peinarse","acostarse"] }
+        ]}
+      },
+      {
+        id: "esp-futursimple", title: "El futuro simple",
+        quiz: [
+          { q: "Comment forme-t-on le futur simple des verbes réguliers ?", choices: ["infinitif complet + terminaison","radical + terminaison","infinitif - r + terminaison","participe + terminaison"], answer: 0 },
+          { q: "Quelle est la terminaison de YO au futur simple ?", choices: ["-é","-ás","-á","-emos"], answer: 0 },
+          { q: "Radical irrégulier de PODER au futur :", choices: ["podr-","pued-","pod-","poder-"], answer: 0 },
+          { q: "Radical irrégulier de HACER au futur :", choices: ["har-","hac-","haré-","haz-"], answer: 0 },
+          { q: "TENER au futur — ellos :", choices: ["tendrán","tenerán","tendán","tienen"], answer: 0 }
+        ],
+        flashcards: [
+          { front: "Futuro Simple — formation régulière", back: "infinitif COMPLET + terminaisons\n-é / -ás / -á / -emos / -éis / -án\n(même pour -AR, -ER, -IR)" },
+          { front: "Futur régulier — HABLAR", back: "hablaré / hablarás / hablará\nhablare­mos / hablaréis / hablarán" },
+          { front: "Irréguliers — racines en -DR-", back: "poner → pondr-\ntener → tendr-\nvaler → valdr-\nvenir → vendr-\nsalir → saldr-" },
+          { front: "Irréguliers — racines raccourcies", back: "caber → cabr- · decir → dir-\nhaber → habr- · hacer → har-\npoder → podr- · querer → querr-\nsaber → sabr-" },
+          { front: "TENER au futur complet", back: "tendré / tendrás / tendrá\ntendremos / tendréis / tendrán" },
+          { front: "HACER au futur complet", back: "haré / harás / hará\nharemos / haréis / harán" }
+        ],
+        summary: `<h2>El futuro simple</h2>
+<p>Le futur simple s'utilise pour des actions futures ou des prédictions. C'est l'un des temps les plus réguliers !</p>
+<h3>Formation régulière</h3>
+<p style="font-size:1.1em;text-align:center;padding:0.8em;background:var(--card2);border-radius:8px"><strong>infinitif COMPLET + terminaison</strong><br>fonctionne pour -AR, -ER et -IR !</p>
+<table style="width:100%;border-collapse:collapse">
+  <tr style="background:var(--card2)"><th>Pronom</th><th>Terminaison</th><th>HABLAR</th></tr>
+  <tr><td>yo</td><td>-é</td><td>hablaré</td></tr>
+  <tr><td>tú</td><td>-ás</td><td>hablarás</td></tr>
+  <tr><td>él/ella</td><td>-á</td><td>hablará</td></tr>
+  <tr><td>nosotros</td><td>-emos</td><td>hablaremos</td></tr>
+  <tr><td>vosotros</td><td>-éis</td><td>hablaréis</td></tr>
+  <tr><td>ellos</td><td>-án</td><td>hablarán</td></tr>
+</table>
+<h3>Verbes irréguliers (radical changé)</h3>
+<table style="width:100%;border-collapse:collapse">
+  <tr style="background:var(--card2)"><th>Infinitif</th><th>Radical futur</th><th>Exemple yo</th></tr>
+  <tr><td>hacer</td><td>har-</td><td>haré</td></tr>
+  <tr><td>poder</td><td>podr-</td><td>podré</td></tr>
+  <tr><td>poner</td><td>pondr-</td><td>pondré</td></tr>
+  <tr><td>querer</td><td>querr-</td><td>querré</td></tr>
+  <tr><td>saber</td><td>sabr-</td><td>sabré</td></tr>
+  <tr><td>tener</td><td>tendr-</td><td>tendré</td></tr>
+  <tr><td>venir</td><td>vendr-</td><td>vendré</td></tr>
+  <tr><td>decir</td><td>dir-</td><td>diré</td></tr>
+  <tr><td>salir</td><td>saldr-</td><td>saldré</td></tr>
+</table>
+<p>⚠ Les terminaisons restent toujours les mêmes : -é / -ás / -á / -emos / -éis / -án</p>`,
+        mindmap: { center: "Futuro Simple", branches: [
+          { label: "Réguliers", color: "#d63031", children: ["infinitif + terminaison","yo → -é","tú → -ás","él → -á","nosotros → -emos","ellos → -án"] },
+          { label: "Irrég. -DR-", color: "#c0392b", children: ["poner→pondr","tener→tendr","venir→vendr","salir→saldr","valer→valdr"] },
+          { label: "Irrég. raccourcis", color: "#e17055", children: ["hacer→har","poder→podr","querer→querr","saber→sabr","decir→dir","haber→habr"] },
+          { label: "Terminaisons", color: "#d63031", children: ["-é · -ás · -á","-emos · -éis · -án","Mêmes pour -AR/-ER/-IR"] }
+        ]}
+      }
+    ]
   }
 };
 
