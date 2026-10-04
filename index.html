@@ -891,6 +891,129 @@ const DATA = {
     emoji: "📖", name: "Français", color: "#6c5ce7",
     chapters: [
       {
+        id: "classes-gram", title: "Les classes grammaticales", desc: "Natures des mots — variables et invariables",
+        quiz: [
+          { q: "Quelle est la classe grammaticale de 'joyeusement' ?", options: ["Nom commun","Adverbe","Adjectif","Conjonction"], correct: 1, explanation: "Les adverbes sont invariables et modifient un verbe, un adjectif ou un autre adverbe. Test : on peut le supprimer ('il tintait') et le remplacer par un autre adverbe.", q_: "Texte Tomek : 'une cloche tintait joyeusement'" },
+          { q: "Comment reconnaître un verbe ?", options: ["Il peut se mettre au pluriel","On peut l'encadrer par 'ne… pas' et le remplacer par un autre temps","On peut lui ajouter 'très'","Il peut être remplacé par un pronom"], correct: 1, explanation: "Test du verbe : 'Elle lit ce livre' → 'Elle ne lit pas ce livre' (encadrement) ET 'Elle lisait ce livre' (changement de temps). Impossible à supprimer.", q_: "" },
+          { q: "Parmi ces mots, lequel est un déterminant ?", options: ["petit","rêveurs","l'","joyeusement"], correct: 2, explanation: "L' est un article défini (déterminant). Impossible à supprimer (ø inscription → incorrect). On peut le remplacer par un autre déterminant : 'une inscription'.", q_: "" },
+          { q: "Quelle différence y a-t-il entre nom commun et nom propre ?", options: ["Le nom propre désigne une personne uniquement","Le nom propre désigne un être ou lieu unique et prend une majuscule","Le nom commun est invariable","Il n'y a pas de différence"], correct: 1, explanation: "Nom propre : Paris, Espagne, Tomek → désigne une entité unique, prend une majuscule. Nom commun : facteur, repas, boutique → nom partagé par toute une catégorie.", q_: "" },
+          { q: "Les mots invariables comprennent :", options: ["Verbes et noms","Adjectifs et déterminants","Prépositions, adverbes, conjonctions, interjections","Pronoms et verbes"], correct: 2, explanation: "Mots INVARIABLES = prépositions (à, de, dans…), adverbes (très, jamais…), conjonctions (mais, que…), interjections (Ah ! Ouf !). Ils ne s'accordent jamais.", q_: "" }
+        ],
+        flashcards: [
+          { front: "Verbe — comment le reconnaître ?", back: "Encadrer par 'ne…pas' ✓\nRemplacer par un autre temps ✓\nImpossible à supprimer ✓\nEx : 'Elle lit' → 'Elle ne lit pas' / 'Elle lisait'" },
+          { front: "Mots variables (6 classes)", back: "1. Verbe\n2. Nom (commun / propre)\n3. Déterminant\n4. Adjectif\n5. Pronom\n(Interjection selon les classements)" },
+          { front: "Mots invariables", back: "• Préposition : à, dans, par, pour, en, de, sans, sous…\n• Adverbe : beaucoup, très, jamais, ici…\n• Conjonction : mais, ou, et, or, ni, car (coord.) / que, quand (subord.)\n• Interjection : Ah ! Ouf ! Chut !" },
+          { front: "Déterminant — les types", back: "Article défini : le, la, l', les\nArticle indéfini : un, une, des\nDém. : ce, cet, cette, ces\nPoss. : mon, ta, ses, nos, leur\nPartitif : du, de la\nIndéfini : chaque, certains, tous les" },
+          { front: "Pronom — les types", back: "Personnel : je, tu, il, me, leur, le…\nDémonstratif : ce, cela, celle-là…\nPossessif : le mien, la tienne…\nRelatif : que, qui, dont, laquelle…\nInterrogatif : lequel, que, qui…" },
+          { front: "Test de l'adjectif", back: "Remplacer par un autre adjectif : un excellent repas → un bon repas ✓\nAjouter 'très' : un très bon repas ✓\nSupprimer dans un GN : un repas ✓" }
+        ],
+        summary: `<h2>Les classes grammaticales</h2>
+<p>La <strong>classe grammaticale</strong> (ou nature) d'un mot, c'est son identité — elle ne change pas selon la phrase.</p>
+<h3>Mots variables</h3>
+<table style="width:100%;border-collapse:collapse;font-size:0.9em">
+  <tr style="background:var(--card2)"><th>Classe</th><th>Exemples</th><th>Test principal</th></tr>
+  <tr><td><strong>Verbe</strong></td><td>lire, venir, être</td><td>Encadrer par ne…pas · changer de temps</td></tr>
+  <tr><td><strong>Nom commun</strong></td><td>facteur, joie, repas</td><td>Remplacer par un autre nom</td></tr>
+  <tr><td><strong>Nom propre</strong></td><td>Paris, Tomek, France</td><td>Majuscule · désigne un être unique</td></tr>
+  <tr><td><strong>Déterminant</strong></td><td>le, un, ce, mon, du</td><td>Impossible à supprimer</td></tr>
+  <tr><td><strong>Adjectif</strong></td><td>petit, rêveur, bleu</td><td>Ajouter "très" · supprimer du GN</td></tr>
+  <tr><td><strong>Pronom</strong></td><td>je, celui-là, le mien, qui</td><td>Remplacer par un pronom de même sorte</td></tr>
+</table>
+<h3>Mots invariables</h3>
+<table style="width:100%;border-collapse:collapse;font-size:0.9em">
+  <tr style="background:var(--card2)"><th>Classe</th><th>Exemples</th></tr>
+  <tr><td><strong>Préposition</strong></td><td>à, dans, par, pour, en, vers, avec, de, sans, sous, sur</td></tr>
+  <tr><td><strong>Adverbe</strong></td><td>beaucoup, parfois, longtemps, très, trop, jamais, là</td></tr>
+  <tr><td><strong>Conjonction</strong></td><td>Coord. : mais, ou, et, or, ni, car · Subord. : que, quand, parce que</td></tr>
+  <tr><td><strong>Interjection</strong></td><td>Ah ! Ouf ! Chut ! Oh ! · Onomatopées : miaou, boum, plouf…</td></tr>
+</table>`,
+        mindmap: { center: "Classes grammaticales", branches: [
+          { label: "Mots variables", color: "#6c5ce7", children: ["Verbe","Nom commun/propre","Déterminant","Adjectif","Pronom"] },
+          { label: "Mots invariables", color: "#0984e3", children: ["Préposition","Adverbe","Conjonction","Interjection"] },
+          { label: "Tests verbe", color: "#e17055", children: ["ne…pas","Autre temps","Impossible à supprimer"] },
+          { label: "Tests adjectif", color: "#00b894", children: ["Très + adjectif","Autre adjectif","Supprimer du GN"] }
+        ]}
+      },
+      {
+        id: "temps-simples", title: "Les temps simples de l'indicatif", desc: "Présent, imparfait, passé simple, futur, conditionnel",
+        quiz: [
+          { q: "Quel est le présent de l'indicatif de PEINDRE à la 3e personne du singulier ?", options: ["peint","peind","pend","peintre"], correct: 0, explanation: "Peindre fait : je peins, tu peins, il peint, nous peignons, vous peignez, ils peignent. Verbe en -indre : le d disparaît, sauf au pluriel où on retrouve gn." },
+          { q: "Le futur de COURIR pour 'Clara' (elle) :", options: ["courra","courira","courera","coura"], correct: 0, explanation: "Courir est irrégulier au futur : je courrai, tu courras, il courra, nous courrons… Attention à ne pas ajouter de 'i' !", q_: "Ex 2 : Clara court deux heures par jour." },
+          { q: "À quel temps appartient : 'J'avais mangé' ?", options: ["Passé composé","Imparfait","Plus-que-parfait","Passé simple"], correct: 2, explanation: "Le plus-que-parfait se forme avec AVOIR ou ÊTRE à l'imparfait + participe passé. C'est un temps composé qui correspond à l'imparfait.", q_: "" },
+          { q: "PASSÉ SIMPLE de VENIR à la 3e personne du pluriel :", options: ["vinrent","venèrent","venirent","sont venus"], correct: 0, explanation: "Venir au passé simple est irrégulier : je vins, tu vins, il vint, nous vînmes, vous vîntes, ils vinrent. (groupe des verbes en -ir irréguliers)", q_: "" },
+          { q: "Quelle est la terminaison de TU au conditionnel présent ?", options: ["-ais","-as","-eras","-es"], correct: 0, explanation: "Le conditionnel présent = radical du futur + terminaisons de l'imparfait : -ais, -ais, -ait, -ions, -iez, -aient. Ex : 'tu pourrais', 'tu ferais'.", q_: "" }
+        ],
+        flashcards: [
+          { front: "Présent de l'indicatif — usage", back: "Action en cours / habitude / vérité générale\nEx : 'Il peint de mieux en mieux.'\nVerbes irréguliers clés : être, avoir, aller, faire, vouloir, pouvoir, savoir, devoir" },
+          { front: "Futur de l'indicatif — formation", back: "Verbes réguliers : infinitif + terminaisons\n-ai / -as / -a / -ons / -ez / -ont\nIrréguliers : aller→ir-, être→ser-, avoir→aur-, faire→fer-, vouloir→voudr-" },
+          { front: "Imparfait — formation", back: "Radical de la 1ère personne du pluriel au présent + terminaisons\n-ais / -ais / -ait / -ions / -iez / -aient\nEx : nous faisons → fais- → je faisais" },
+          { front: "Passé simple — groupes", back: "1er groupe (-ER) : -ai, -as, -a, -âmes, -âtes, -èrent\n2e/3e gr. (-IR/-RE) : -is, -is, -it, -îmes, -îtes, -irent\nIrrég. : venir→vins, tenir→tins, être→fus, avoir→eus" },
+          { front: "Conditionnel présent", back: "Radical du FUTUR + terminaisons de l'IMPARFAIT\n-ais / -ais / -ait / -ions / -iez / -aient\nEx : je voudrais, tu pourrais, il viendrait" },
+          { front: "Verbes irréguliers au futur", back: "être→ser- · avoir→aur- · aller→ir-\nfaire→fer- · vouloir→voudr- · pouvoir→pourr-\nsavoir→saur- · venir→viendr- · tenir→tiendr-" }
+        ],
+        summary: `<h2>Les temps simples de l'indicatif</h2>
+<table style="width:100%;border-collapse:collapse;font-size:0.9em">
+  <tr style="background:var(--card2)"><th>Temps</th><th>Formation</th><th>Exemple (je)</th></tr>
+  <tr><td><strong>Présent</strong></td><td>radical + terminaisons propres à chaque groupe</td><td>je lis, je viens, je vaux</td></tr>
+  <tr><td><strong>Imparfait</strong></td><td>radical nous-présent + -ais/-ais/-ait/-ions/-iez/-aient</td><td>je lisais, je venais</td></tr>
+  <tr><td><strong>Passé simple</strong></td><td>-ai/-as/-a/-âmes/-âtes/-èrent (1er gr.) · -is/-is/-it (2e/3e)</td><td>je lus, je vins, il disparut</td></tr>
+  <tr><td><strong>Futur</strong></td><td>infinitif + -ai/-as/-a/-ons/-ez/-ont</td><td>je lirai, je viendrai</td></tr>
+  <tr><td><strong>Conditionnel</strong></td><td>radical futur + -ais/-ais/-ait/-ions/-iez/-aient</td><td>je lirais, je viendrais</td></tr>
+</table>
+<h3>Verbes irréguliers clés au futur (radical changé)</h3>
+<p>être→<strong>ser</strong>- · avoir→<strong>aur</strong>- · aller→<strong>ir</strong>- · faire→<strong>fer</strong>- · vouloir→<strong>voudr</strong>- · pouvoir→<strong>pourr</strong>- · venir→<strong>viendr</strong>- · tenir→<strong>tiendr</strong>- · savoir→<strong>saur</strong>-</p>
+<h3>Passé simple — rappel des irréguliers fréquents</h3>
+<p>venir→vins · tenir→tins · être→fus · avoir→eus · faire→fis · voir→vis · prendre→pris · mettre→mis · dire→dis</p>`,
+        mindmap: { center: "Temps simples", branches: [
+          { label: "Présent", color: "#6c5ce7", children: ["Action en cours","Habitude","Vérité générale","Irrég : être/avoir/faire…"] },
+          { label: "Imparfait", color: "#0984e3", children: ["Radical nous-présent","-ais/-ais/-ait","-ions/-iez/-aient","Description passée"] },
+          { label: "Passé simple", color: "#e17055", children: ["1er gr : -ai/-as/-a","2e/3e : -is/-it","Irrég : vins/fus/eus","Récit littéraire"] },
+          { label: "Futur & Conditionnel", color: "#00b894", children: ["Futur : infinitif + -ai","Cond : radical futur + -ais","Irrég : ser-/aur-/ir-","Cond = politesse/hypothèse"] }
+        ]}
+      },
+      {
+        id: "temps-composes", title: "Les temps composés", desc: "Accord du participe passé avec ÊTRE et AVOIR",
+        quiz: [
+          { q: "Comment forme-t-on les temps composés ?", options: ["Infinitif + terminaison","Auxiliaire ÊTRE ou AVOIR + participe passé","Radical + terminaison de l'imparfait","Participe présent + COD"], correct: 1, explanation: "Temps composé = auxiliaire conjugué au temps simple correspondant + participe passé. Ex : passé composé = présent de avoir/être + participe passé." },
+          { q: "Quel auxiliaire correspond au plus-que-parfait ?", options: ["ÊTRE ou AVOIR au présent","ÊTRE ou AVOIR au futur","ÊTRE ou AVOIR à l'imparfait","ÊTRE ou AVOIR au passé simple"], correct: 2, explanation: "Le plus-que-parfait = auxiliaire à l'IMPARFAIT + participe passé. Ex : j'avais mangé, il était parti. Il correspond au temps simple : imparfait." },
+          { q: "Avec ÊTRE, comment accorde-t-on le participe passé ?", options: ["Jamais","Avec le COD s'il est avant le verbe","Toujours avec le sujet","Avec le COI"], correct: 2, explanation: "Avec ÊTRE : le participe passé s'accorde TOUJOURS avec le sujet. Ex : Elle est partie (féminin singulier). Elles sont parties (féminin pluriel)." },
+          { q: "Dans 'Nous avons mangé des pommes', le participe passé s'accorde-t-il ?", options: ["Oui, avec le sujet 'nous'","Non, le COD est après le verbe","Oui, avec 'des pommes'","Non, jamais avec avoir"], correct: 1, explanation: "Avec AVOIR, on n'accorde jamais avec le sujet. On accorde avec le COD UNIQUEMENT s'il est placé AVANT le verbe. Ici 'des pommes' est après → pas d'accord." },
+          { q: "Dans 'Les pommes que nous avons mangées', pourquoi l'accord ?", options: ["Car 'nous' est pluriel","Car le COD 'que' (= les pommes) est placé AVANT le verbe","Car 'mangées' est un adjectif","Il n'y a pas d'accord"], correct: 1, explanation: "Avec AVOIR : accord avec le COD si et seulement s'il est placé AVANT le verbe. Ici le pronom 'que' reprend 'les pommes' (fém. pl.) et est avant 'avons mangées' → accord en genre et nombre." }
+        ],
+        flashcards: [
+          { front: "Temps composés — 5 temps", back: "Passé composé → auxiliaire au PRÉSENT\nPlus-que-parfait → auxiliaire à l'IMPARFAIT\nPassé antérieur → auxiliaire au PASSÉ SIMPLE\nFutur antérieur → auxiliaire au FUTUR\nConditionnel passé → auxiliaire au CONDITIONNEL" },
+          { front: "Accord avec ÊTRE", back: "Le participe passé s'accorde TOUJOURS avec le SUJET\nEx : Elle est partie · Ils sont arrivés\nVerbes courants avec ÊTRE : aller, venir, partir, naître, mourir, rester, tomber… + tous les pronominaux" },
+          { front: "Accord avec AVOIR", back: "JAMAIS d'accord avec le sujet\nAccord avec le COD UNIQUEMENT si le COD est placé AVANT le verbe\nEx : 'Les livres que j'ai lus' (COD avant) ✓\nEx : 'J'ai lu des livres' (COD après) ✗" },
+          { front: "Passé composé — exemples", back: "j'ai mangé · elle est partie\nExemple complet : 'J'ai mangé une pomme' (avoir, pas d'accord)\n'Les pommes que j'ai mangées' (COD avant → accord)" },
+          { front: "Plus-que-parfait — exemples", back: "j'avais mangé · elle était partie\nAction passée AVANT une autre action passée\nEx : 'Il m'a dit qu'il avait mangé.' (avait mangé = avant a dit)" },
+          { front: "Futur antérieur — exemples", back: "j'aurai mangé · elle sera partie\nAction future qui sera TERMINÉE avant une autre\nEx : 'Quand il aura fini, il viendra.'" }
+        ],
+        summary: `<h2>Les temps composés de l'indicatif</h2>
+<p>Les temps composés = <strong>auxiliaire (ÊTRE ou AVOIR) + participe passé</strong>.</p>
+<table style="width:100%;border-collapse:collapse;font-size:0.9em">
+  <tr style="background:var(--card2)"><th>Temps composé</th><th>Auxiliaire au…</th><th>Exemple</th></tr>
+  <tr><td><strong>Passé composé</strong></td><td>présent</td><td>j'ai mangé / je suis parti</td></tr>
+  <tr><td><strong>Plus-que-parfait</strong></td><td>imparfait</td><td>j'avais mangé / j'étais parti</td></tr>
+  <tr><td><strong>Passé antérieur</strong></td><td>passé simple</td><td>j'eus mangé / je fus parti</td></tr>
+  <tr><td><strong>Futur antérieur</strong></td><td>futur</td><td>j'aurai mangé / je serai parti</td></tr>
+  <tr><td><strong>Conditionnel passé</strong></td><td>conditionnel</td><td>j'aurais mangé / je serais parti</td></tr>
+</table>
+<h3>Accord du participe passé</h3>
+<table style="width:100%;border-collapse:collapse">
+  <tr style="background:var(--card2)"><th>Auxiliaire</th><th>Règle</th><th>Exemples</th></tr>
+  <tr><td><strong>ÊTRE</strong></td><td>Accord TOUJOURS avec le SUJET</td><td>Elle est partie · Ils sont partis</td></tr>
+  <tr><td><strong>AVOIR</strong></td><td>Jamais avec le sujet · Accord avec le COD si COD AVANT le verbe</td><td>J'ai lu des livres (pas d'accord) · Les livres que j'ai lus (accord)</td></tr>
+</table>
+<p>⚠ Nous avons mangé des pommes → COD après → <strong>pas d'accord</strong><br>
+Les pommes que nous avons mangées → COD avant → <strong>accord féminin pluriel</strong></p>`,
+        mindmap: { center: "Temps composés", branches: [
+          { label: "5 temps", color: "#6c5ce7", children: ["Passé composé (présent)","Plus-que-parfait (imparfait)","Passé antérieur (passé simple)","Futur antérieur (futur)","Conditionnel passé"] },
+          { label: "Auxiliaire ÊTRE", color: "#0984e3", children: ["Accord avec le SUJET","Toujours","Verbes : partir, venir, naître…","Tous les pronominaux"] },
+          { label: "Auxiliaire AVOIR", color: "#e17055", children: ["Jamais avec le sujet","COD avant le verbe → accord","COD après → pas d'accord","'que' = COD avant !"] },
+          { label: "Exemples clés", color: "#6c5ce7", children: ["j'ai mangé (pas d'accord)","elle est partie (accord sujet)","les livres que j'ai lus (COD avant)","il avait fini (plus-que-parfait)"] }
+        ]}
+      },
+      {
         id: "argumentation", title: "L'argumentation", desc: "Convaincre et persuader",
         quiz: [
           { q: "Quelle est la différence entre convaincre et persuader ?", options: ["Il n'y en a aucune","Convaincre s'adresse à la raison, persuader aux émotions","Convaincre utilise des exemples, persuader des chiffres","Convaincre est oral, persuader est écrit"], correct: 1, explanation: "Convaincre = raison (arguments logiques, preuves). Persuader = émotions et sensations (exemples frappants, ton)." },
@@ -1286,12 +1409,13 @@ const DATA = {
     chapters: [
       {
         id: "esp-present", title: "Le présent de l'indicatif",
+        desc: "Conjugaison des 3 groupes (-AR, -ER, -IR) au présent",
         quiz: [
-          { q: "Quelle est la terminaison de YO pour les verbes en -AR au présent ?", choices: ["-o","-as","-a","-amos"], answer: 0 },
-          { q: "Comment conjugue-t-on BEBER à la 3e personne du pluriel ?", choices: ["beben","bebeis","bebe","bebemos"], answer: 0 },
-          { q: "Quelle terminaison prend TÚ pour tous les groupes au présent ?", choices: ["-s","−o","-n","-mos"], answer: 0 },
-          { q: "VIVIR à la 1ère personne du pluriel (nosotros) :", choices: ["vivimos","vivéis","vivo","viven"], answer: 0 },
-          { q: "Au présent, le pronom sujet est-il obligatoire en espagnol ?", choices: ["Non, la terminaison suffit","Oui, toujours","Oui sauf pour YO","Non, sauf au pluriel"], answer: 0 }
+          { q: "Quelle est la terminaison de YO pour les verbes en -AR au présent ?", options: ["-o","-as","-a","-amos"], correct: 0, explanation: "YO prend toujours -o au présent, quel que soit le groupe : hablo, bebo, vivo." },
+          { q: "Comment conjugue-t-on BEBER à la 3e personne du pluriel ?", options: ["beben","bebeis","bebe","bebemos"], correct: 0, explanation: "ELLOS/ELLAS prend -en pour les verbes en -ER : beb + en = beben." },
+          { q: "Quelle terminaison prend TÚ pour tous les groupes au présent ?", options: ["-s","−o","-n","-mos"], correct: 0, explanation: "TÚ se termine toujours en -s : hablas, bebes, vives." },
+          { q: "VIVIR à la 1ère personne du pluriel (nosotros) :", options: ["vivimos","vivéis","vivo","viven"], correct: 0, explanation: "NOSOTROS des verbes en -IR prend -imos : viv + imos = vivimos." },
+          { q: "Au présent, le pronom sujet est-il obligatoire en espagnol ?", options: ["Non, la terminaison suffit","Oui, toujours","Oui sauf pour YO","Non, sauf au pluriel"], correct: 0, explanation: "En espagnol, la terminaison indique la personne : on dit simplement 'hablo' et pas 'yo hablo'." }
         ],
         flashcards: [
           { front: "HABLAR — yo", back: "hablo" },
@@ -1343,12 +1467,13 @@ const DATA = {
       },
       {
         id: "esp-futprox", title: "Le futur proche — IR A + infinitif",
+        desc: "Futuro próximo : IR A + infinitif — intentions et professions",
         quiz: [
-          { q: "Comment forme-t-on le futur proche en espagnol ?", choices: ["IR A + infinitif","ESTAR + gérondif","HABER + participe","infinitif + terminaison"], answer: 0 },
-          { q: "Que signifie 'Voy a estudiar' ?", choices: ["Je vais étudier","J'étudie","J'ai étudié","J'étudierais"], answer: 0 },
-          { q: "Conjugaison de IR à la 2e personne du singulier (tú) :", choices: ["vas","voy","va","vamos"], answer: 0 },
-          { q: "Quel est un des 3 usages du futur proche ?", choices: ["Exprimer une intention d'action future","Décrire une habitude","Raconter le passé","Faire une hypothèse sur le présent"], answer: 0 },
-          { q: "Comment dit-on 'médecin' en espagnol ?", choices: ["doctor/a","enfermero/a","bombero/a","abogado/a"], answer: 0 }
+          { q: "Comment forme-t-on le futur proche en espagnol ?", options: ["IR A + infinitif","ESTAR + gérondif","HABER + participe","infinitif + terminaison"], correct: 0, explanation: "Le futuro próximo = verbe IR conjugué + A + infinitif. Ex : voy a comer." },
+          { q: "Que signifie 'Voy a estudiar' ?", options: ["Je vais étudier","J'étudie","J'ai étudié","J'étudierais"], correct: 0, explanation: "'Voy' = je vais (IR conjugué à yo), 'a estudiar' = à étudier. = Je vais étudier." },
+          { q: "Conjugaison de IR à la 2e personne du singulier (tú) :", options: ["vas","voy","va","vamos"], correct: 0, explanation: "IR au présent : voy/vas/va/vamos/vais/van. Pour tú : vas." },
+          { q: "Quel est un des 3 usages du futur proche ?", options: ["Exprimer une intention d'action future","Décrire une habitude","Raconter le passé","Faire une hypothèse sur le présent"], correct: 0, explanation: "Le futuro próximo exprime : 1) une intention, 2) un plan futur, 3) une action imminente." },
+          { q: "Comment dit-on 'médecin' en espagnol ?", options: ["doctor/a","enfermero/a","bombero/a","abogado/a"], correct: 0, explanation: "Doctor/a = médecin. Enfermero/a = infirmier, bombero/a = pompier, abogado/a = avocat." }
         ],
         flashcards: [
           { front: "IR A + infinitif — structure", back: "voy/vas/va/vamos/vais/van + a + infinitif" },
@@ -1384,12 +1509,13 @@ const DATA = {
       },
       {
         id: "esp-gustar", title: "Gustar, Encantar & diphtongues",
+        desc: "GUSTAR/ENCANTAR inversé + verbes à diphtongues O→UE et E→IE",
         quiz: [
-          { q: "Comment dit-on 'J'aime les chats' en espagnol ?", choices: ["Me gustan los gatos","Me gusta los gatos","Gusto los gatos","Me gusto los gatos"], answer: 0 },
-          { q: "PODER au présent — yo :", choices: ["puedo","podo","pode","podeo"], answer: 0 },
-          { q: "Quel est le changement de diphtongue de O→UE ?", choices: ["o→ue dans les syllabes accentuées","e→ie dans toutes les syllabes","o→ue partout","e→ie seulement au pluriel"], answer: 0 },
-          { q: "QUERER au présent — ellos :", choices: ["quieren","quieran","queren","queran"], answer: 0 },
-          { q: "Comment dit-on 'J'adore danser' avec ENCANTAR ?", choices: ["Me encanta bailar","Me encantan bailar","Encanto bailar","Me encanta bailo"], answer: 0 }
+          { q: "Comment dit-on 'J'aime les chats' en espagnol ?", options: ["Me gustan los gatos","Me gusta los gatos","Gusto los gatos","Me gusto los gatos"], correct: 0, explanation: "GUSTAN (pluriel) car 'los gatos' est pluriel. Le verbe s'accorde avec le sujet réel, pas avec 'me'." },
+          { q: "PODER au présent — yo :", options: ["puedo","podo","pode","podeo"], correct: 0, explanation: "PODER est un verbe à diphtongue O→UE : dans les syllabes accentuées, o devient ue. yo puedo." },
+          { q: "Quel est le changement de diphtongue de O→UE ?", options: ["o→ue dans les syllabes accentuées","e→ie dans toutes les syllabes","o→ue partout","e→ie seulement au pluriel"], correct: 0, explanation: "La diphtongue se produit uniquement dans les syllabes ACCENTUÉES. Nosotros/vosotros gardent le o normal." },
+          { q: "QUERER au présent — ellos :", options: ["quieren","quieran","queren","queran"], correct: 0, explanation: "QUERER est E→IE : ellos quieren. Attention, nosotros queremos garde le e." },
+          { q: "Comment dit-on 'J'adore danser' avec ENCANTAR ?", options: ["Me encanta bailar","Me encantan bailar","Encanto bailar","Me encanta bailo"], correct: 0, explanation: "ENCANTAR + infinitif → me encanta (singulier). Me encantan s'utilise avec un nom pluriel." }
         ],
         flashcards: [
           { front: "GUSTAR — règle d'accord", back: "me GUSTA + verbe infinitif / nom singulier\nme GUSTAN + nom pluriel" },
@@ -1427,12 +1553,13 @@ const DATA = {
       },
       {
         id: "esp-pronominaux", title: "Los verbos pronominaux",
+        desc: "Verbes pronominaux : position du pronom réfléchi et conjugaison",
         quiz: [
-          { q: "Comment dit-on 's'appeler' en espagnol (infinitif) ?", choices: ["llamarse","llama","se llamar","llamar se"], answer: 0 },
-          { q: "Comment se place le pronom réfléchi avec un verbe conjugué ?", choices: ["DEVANT le verbe conjugué","Après le verbe conjugué","À la fin de la phrase","Avant l'infinitif seulement"], answer: 0 },
-          { q: "Conjugaison de LLAMARSE à la 1ère personne du singulier :", choices: ["me llamo","te llamas","se llama","nos llamamos"], answer: 0 },
-          { q: "LLAMARSE à la 2e personne du pluriel (vosotros) :", choices: ["os llamáis","nos llamamos","se llaman","te llamas"], answer: 0 },
-          { q: "Quel est le pronom réfléchi pour NOSOTROS ?", choices: ["nos","se","os","me"], answer: 0 }
+          { q: "Comment dit-on 's'appeler' en espagnol (infinitif) ?", options: ["llamarse","llama","se llamar","llamar se"], correct: 0, explanation: "Les verbes pronominaux ont -se collé à l'infinitif : llam + arse = llamarse." },
+          { q: "Comment se place le pronom réfléchi avec un verbe conjugué ?", options: ["DEVANT le verbe conjugué","Après le verbe conjugué","À la fin de la phrase","Avant l'infinitif seulement"], correct: 0, explanation: "Avec un verbe conjugué, le pronom réfléchi se place DEVANT : me llamo, te duchas." },
+          { q: "Conjugaison de LLAMARSE à la 1ère personne du singulier :", options: ["me llamo","te llamas","se llama","nos llamamos"], correct: 0, explanation: "YO me llamo = Je m'appelle. Le pronom réfléchi de yo est 'me'." },
+          { q: "LLAMARSE à la 2e personne du pluriel (vosotros) :", options: ["os llamáis","nos llamamos","se llaman","te llamas"], correct: 0, explanation: "VOSOTROS os llamáis. Le pronom réfléchi de vosotros est 'os'." },
+          { q: "Quel est le pronom réfléchi pour NOSOTROS ?", options: ["nos","se","os","me"], correct: 0, explanation: "NOSOTROS NOS llamamos. Les pronoms réfléchis : me/te/se/nos/os/se." }
         ],
         flashcards: [
           { front: "Verbe pronominal — définition", back: "Verbe qui s'utilise avec un pronom réfléchi (enclise à l'infinitif)\nEx : llamarse, ducharse, levantarse" },
@@ -1470,12 +1597,13 @@ const DATA = {
       },
       {
         id: "esp-futursimple", title: "El futuro simple",
+        desc: "Futur simple : infinitif + terminaisons + radicaux irréguliers",
         quiz: [
-          { q: "Comment forme-t-on le futur simple des verbes réguliers ?", choices: ["infinitif complet + terminaison","radical + terminaison","infinitif - r + terminaison","participe + terminaison"], answer: 0 },
-          { q: "Quelle est la terminaison de YO au futur simple ?", choices: ["-é","-ás","-á","-emos"], answer: 0 },
-          { q: "Radical irrégulier de PODER au futur :", choices: ["podr-","pued-","pod-","poder-"], answer: 0 },
-          { q: "Radical irrégulier de HACER au futur :", choices: ["har-","hac-","haré-","haz-"], answer: 0 },
-          { q: "TENER au futur — ellos :", choices: ["tendrán","tenerán","tendán","tienen"], answer: 0 }
+          { q: "Comment forme-t-on le futur simple des verbes réguliers ?", options: ["infinitif complet + terminaison","radical + terminaison","infinitif - r + terminaison","participe + terminaison"], correct: 0, explanation: "Le futur simple régulier = infinitif COMPLET + -é/-ás/-á/-emos/-éis/-án. Fonctionne pour -AR, -ER et -IR !" },
+          { q: "Quelle est la terminaison de YO au futur simple ?", options: ["-é","-ás","-á","-emos"], correct: 0, explanation: "YO prend -é au futur simple : hablaré, comeré, viviré. Attention à l'accent !" },
+          { q: "Radical irrégulier de PODER au futur :", options: ["podr-","pued-","pod-","poder-"], correct: 0, explanation: "PODER → podr- (radical raccourci). Puis on ajoute les terminaisons : podré, podrás, podrá..." },
+          { q: "Radical irrégulier de HACER au futur :", options: ["har-","hac-","haré-","haz-"], correct: 0, explanation: "HACER → har- (radical très court). haré, harás, hará, haremos, haréis, harán." },
+          { q: "TENER au futur — ellos :", options: ["tendrán","tenerán","tendán","tienen"], correct: 0, explanation: "TENER → tendr- (irrégulier en -DR-). Ellos tendrán = ils auront." }
         ],
         flashcards: [
           { front: "Futuro Simple — formation régulière", back: "infinitif COMPLET + terminaisons\n-é / -ás / -á / -emos / -éis / -án\n(même pour -AR, -ER, -IR)" },
