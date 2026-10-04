@@ -433,6 +433,36 @@ body {
 .video-frame-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius); background: #000; }
 .video-frame-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
+/* SCHEMA INTERACTIF */
+.schema-wrap { display: flex; flex-direction: column; gap: 12px; padding: 16px; max-width: 900px; margin: 0 auto; }
+.schema-header { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.schema-title { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+.schema-controls { display: flex; gap: 8px; flex-wrap: wrap; }
+.schema-btn { padding: 6px 14px; border-radius: 20px; border: 2px solid var(--accent); background: transparent; color: var(--accent); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+.schema-btn:hover { background: var(--accent); color: #fff; }
+.schema-reset { border-color: var(--text2); color: var(--text2); }
+.schema-reset:hover { background: var(--text2); color: var(--bg); }
+.schema-score { background: var(--card); border-radius: var(--radius); padding: 10px 16px; font-size: 0.9rem; font-weight: 600; text-align: center; }
+.schema-body { position: relative; width: 100%; }
+.schema-body svg { width: 100%; height: auto; display: block; }
+/* muscle labels */
+.muscle-label { position: absolute; display: flex; align-items: center; gap: 4px; }
+.muscle-label input { font-size: 0.7rem; border: 1.5px solid var(--border); border-radius: 6px; padding: 3px 6px; background: var(--bg2); color: var(--text); width: 130px; transition: border-color .2s; }
+.muscle-label input:focus { outline: none; border-color: var(--accent); }
+.muscle-label input.correct { border-color: #00b894; background: rgba(0,184,148,.12); }
+.muscle-label input.wrong { border-color: #e17055; background: rgba(225,112,85,.12); }
+.muscle-label input.revealed { border-color: var(--text2); background: rgba(180,180,180,.1); font-style: italic; }
+.muscle-label .check-btn { width: 22px; height: 22px; border-radius: 50%; border: none; cursor: pointer; font-size: 0.75rem; display: flex; align-items: center; justify-content: center; background: var(--accent); color: #fff; flex-shrink: 0; }
+/* mode affichage : badges fixes */
+.muscle-badge { position: absolute; font-size: 0.65rem; font-weight: 700; background: var(--accent); color: #fff; padding: 2px 7px; border-radius: 10px; white-space: nowrap; pointer-events: none; }
+.schema-legend { background: var(--card); border-radius: var(--radius); padding: 14px; }
+.schema-legend h4 { margin: 0 0 10px; font-size: 0.9rem; }
+.legend-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 6px; }
+.legend-item { font-size: 0.78rem; padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border); }
+.legend-item strong { color: var(--accent); }
+.schema-show-legend { align-self: center; background: none; border: 1.5px solid var(--border); color: var(--text2); border-radius: 20px; padding: 6px 16px; font-size: 0.8rem; cursor: pointer; }
+.schema-show-legend:hover { border-color: var(--accent); color: var(--accent); }
+
 /* TOAST */
 .toast {
   position: fixed;
@@ -670,6 +700,26 @@ body {
 <!-- SCREEN: VIDEO -->
 <div class="screen" id="screenVideo">
   <div id="videoWrap"></div>
+</div>
+
+<!-- SCREEN: SCHEMA -->
+<div class="screen" id="screenSchema">
+  <div class="schema-wrap">
+    <div class="schema-header">
+      <div id="schemaTitle" class="schema-title"></div>
+      <div class="schema-controls">
+        <button class="schema-btn" id="schemaModeBtn" onclick="toggleSchemaMode()">✏️ Mode entraînement</button>
+        <button class="schema-btn schema-reset" onclick="resetSchema()">🔄 Réinitialiser</button>
+      </div>
+    </div>
+    <div id="schemaScore" class="schema-score" hidden></div>
+    <div class="schema-body" id="schemaBody"></div>
+    <div class="schema-legend" id="schemaLegend" hidden>
+      <h4>Légende complète</h4>
+      <div id="schemaLegendContent"></div>
+    </div>
+    <button class="schema-show-legend" onclick="toggleSchemaLegend()">📋 Voir la légende</button>
+  </div>
 </div>
 
 </div><!-- end main-area -->
@@ -2260,6 +2310,209 @@ Les pommes que nous avons mangées → COD avant → <strong>accord féminin plu
         ]}
       }
     ]
+  },
+  sport: {
+    emoji: "💪", name: "Sport", color: "#fd79a8",
+    chapters: [
+      {
+        id: "circuit-training", title: "Circuit Training", desc: "Muscles, exercices, critères de réalisation et fonctions musculaires",
+        quiz: [
+          { q: "Quel est le muscle antagoniste du biceps ?", options: ["Le deltoïde","Le triceps","Le quadriceps","Le grand pectoral"], correct: 1, explanation: "Le biceps fléchit le coude, le triceps l'étend : ils sont antagonistes. Quand l'un se contracte, l'autre s'étire." },
+          { q: "Si mon quadriceps est contracté, quel muscle est étiré ?", options: ["Le biceps fémoral (ischio-jambiers)","Le mollet (triceps sural)","Le tibial antérieur","Le grand fessier"], correct: 0, explanation: "Le quadriceps (face avant de la cuisse) étend le genou. Son antagoniste est le biceps fémoral (ischio-jambiers, face arrière), qui est étiré quand le quadriceps se contracte." },
+          { q: "Lequel de ces muscles est composé de plusieurs 'chefs' ?", options: ["Le grand dorsal","Le biceps brachial","Le grand pectoral","Le deltoïde"], correct: 1, explanation: "Le biceps a 2 chefs (bi-ceps), le triceps 3 chefs (tri-ceps), le quadriceps 4 chefs (quadri-ceps). Le préfixe indique le nombre de chefs." },
+          { q: "Dans un squat, quel est le muscle principal sollicité ?", options: ["Les abdominaux","Le grand pectoral","Le quadriceps","Le grand dorsal"], correct: 2, explanation: "Le squat sollicite principalement le quadriceps (avant de la cuisse), ainsi que les fessiers et les ischio-jambiers. C'est le mouvement roi pour les jambes." },
+          { q: "L'autre nom du mollet est :", options: ["Tibial antérieur","Soléaire","Triceps sural","Gastrocnémien"], correct: 2, explanation: "Le mollet = triceps sural, composé du gastrocnémien (2 chefs) et du soléaire (1 chef). C'est le 'triceps' de la jambe, d'où son nom." }
+        ],
+        flashcards: [
+          { front: "Muscles agoniste / antagoniste", back: "Muscle agoniste : se contracte pour produire un mouvement.\nMuscle antagoniste : s'étire en même temps (effet opposé).\nEx : biceps (fléchit) / triceps (étend) au niveau du coude.\nRègle : toujours travailler les 2 pour l'équilibre musculaire." },
+          { front: "Muscles à plusieurs 'chefs'", back: "Biceps brachial : 2 chefs (avant du bras)\nTriceps brachial : 3 chefs (arrière du bras)\nQuadriceps fémoral : 4 chefs (avant de la cuisse)\nTriceps sural (mollet) : 3 chefs (gastrocnémien x2 + soléaire)\nLe préfixe = le nombre de chefs !" },
+          { front: "Muscles du tronc", back: "Face : Grand pectoral (pecs), abdominaux, obliques\nDos : Trapèzes (haut), Grand dorsal (latissimus), Érecteurs du rachis\nRôle : stabiliser le corps et protéger la colonne vertébrale." },
+          { front: "Muscles des membres inférieurs", back: "Avant cuisse : Quadriceps (4 chefs)\nArrière cuisse : Ischio-jambiers (biceps fémoral + 2 autres)\nFessiers : Grand fessier (le plus puissant du corps)\nMollet : Triceps sural\nAvant jambe : Tibial antérieur" },
+          { front: "Muscles des membres supérieurs", back: "Épaule : Deltoïde (3 faisceaux : ant, moyen, post)\nAvant bras : Biceps brachial\nArrière bras : Triceps brachial\nPoitrine : Grand pectoral\nDos : Grand dorsal (insertion sur l'humérus)" },
+          { front: "Circuit Training — Exercices clés", back: "Jambes : Demi-squat (N1) → Lunge Jump (N3)\nCardio : Jumping Jack (N1) → Squat Jump (N3)\nGainage : Mountain Climbers (N2)\nCorde : Single Under (N2)\nCritères : dos droit, genoux dans l'axe des pieds, amplitude complète" }
+        ],
+        summary: `<h2>Circuit Training — Muscles & Techniques</h2>
+<h3>💪 Les grands groupes musculaires</h3>
+<table style="width:100%;border-collapse:collapse;font-size:0.85em;">
+<tr style="background:var(--accent);color:#fff;"><th style="padding:6px">Zone</th><th style="padding:6px">Muscles principaux</th><th style="padding:6px">Mouvement</th></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">Avant bras</td><td style="padding:6px">Biceps brachial</td><td style="padding:6px">Flexion coude</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">Arrière bras</td><td style="padding:6px">Triceps brachial</td><td style="padding:6px">Extension coude</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">Épaule</td><td style="padding:6px">Deltoïde</td><td style="padding:6px">Abduction bras</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">Poitrine</td><td style="padding:6px">Grand pectoral</td><td style="padding:6px">Adduction bras</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">Dos</td><td style="padding:6px">Trapèzes, Grand dorsal</td><td style="padding:6px">Extension dos</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">Abdomen</td><td style="padding:6px">Abdominaux, Obliques</td><td style="padding:6px">Flexion tronc</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">Avant cuisse</td><td style="padding:6px">Quadriceps (4 chefs)</td><td style="padding:6px">Extension genou</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">Arrière cuisse</td><td style="padding:6px">Ischio-jambiers</td><td style="padding:6px">Flexion genou</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">Fessiers</td><td style="padding:6px">Grand fessier</td><td style="padding:6px">Extension hanche</td></tr>
+<tr><td style="padding:6px">Mollet</td><td style="padding:6px">Triceps sural (mollet)</td><td style="padding:6px">Extension pied</td></tr>
+</table>
+<h3>⚡ Agoniste / Antagoniste</h3>
+<p>Deux muscles travaillent toujours en binôme : <strong>agoniste</strong> (se contracte) et <strong>antagoniste</strong> (s'étire). Exemples : Biceps ↔ Triceps ; Quadriceps ↔ Ischio-jambiers ; Abdominaux ↔ Érecteurs du rachis.</p>
+<h3>🏃 Exercices Circuit Training</h3>
+<p><strong>Niveau 1 :</strong> Demi-squat, Jumping Jack &nbsp;|&nbsp; <strong>Niveau 2 :</strong> Mountain Climbers, Single Under &nbsp;|&nbsp; <strong>Niveau 3 :</strong> Lunge Jump, Squat Jump</p>
+<p>Critères universels : dos droit, regard horizontal, genoux dans l'axe des pieds, amplitude complète du mouvement.</p>`,
+        mindmap: { center: "Circuit Training", branches: [
+          { label: "Muscles supérieurs", color: "#fd79a8", children: ["Deltoïde (épaule)","Grand pectoral","Biceps / Triceps","Trapèzes","Grand dorsal"] },
+          { label: "Muscles inférieurs", color: "#e17055", children: ["Quadriceps (4 chefs)","Ischio-jambiers","Grand fessier","Triceps sural (mollet)","Tibial antérieur"] },
+          { label: "Principes", color: "#6c5ce7", children: ["Agoniste / Antagoniste","Muscles à plusieurs chefs","Contraction / Étirement"] },
+          { label: "Exercices", color: "#00b894", children: ["N1 : squat, jumping jack","N2 : mountain climbers","N3 : lunge jump, squat jump","Critères de réalisation"] }
+        ]},
+        schema: {
+          title: "Schéma des muscles — Corps humain (face & dos)",
+          svg: `<svg viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:800px;display:block;margin:0 auto">
+  <defs>
+    <style>
+      .body-fill { fill: #c8a882; }
+      .body-stroke { fill: none; stroke: #7a5c3a; stroke-width: 1.5; }
+      .muscle { fill-opacity: 0.7; stroke: rgba(0,0,0,0.3); stroke-width: 0.8; }
+      .label-line { stroke: #888; stroke-width: 1; stroke-dasharray: 3,2; }
+      .side-label { font-size: 11px; font-weight: 700; fill: #888; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <!-- LABELS CÔTÉS -->
+  <text x="200" y="22" class="side-label">FACE AVANT</text>
+  <text x="600" y="22" class="side-label">FACE ARRIÈRE</text>
+  <line x1="400" y1="30" x2="400" y2="510" stroke="#444" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- ═══════════ CORPS FACE AVANT (centré x=200) ═══════════ -->
+  <!-- Tête -->
+  <ellipse cx="200" cy="65" rx="28" ry="32" class="body-fill" stroke="#7a5c3a" stroke-width="1.5"/>
+  <!-- Cou -->
+  <rect x="188" y="93" width="24" height="18" rx="4" class="body-fill" stroke="#7a5c3a" stroke-width="1"/>
+  <!-- Tronc -->
+  <path d="M155,110 Q130,130 125,200 Q120,260 130,290 Q150,300 200,302 Q250,300 270,290 Q280,260 275,200 Q270,130 245,110 Z" class="body-fill" stroke="#7a5c3a" stroke-width="1.5"/>
+  <!-- Grand pectoral G -->
+  <path d="M158,115 Q170,130 195,135 Q195,115 175,108 Z" fill="#e84393" class="muscle"/>
+  <!-- Grand pectoral D -->
+  <path d="M242,115 Q230,130 205,135 Q205,115 225,108 Z" fill="#e84393" class="muscle"/>
+  <!-- Abdominaux -->
+  <rect x="186" y="145" width="11" height="18" rx="3" fill="#f39c12" class="muscle"/>
+  <rect x="200" y="145" width="11" height="18" rx="3" fill="#f39c12" class="muscle"/>
+  <rect x="186" y="167" width="11" height="16" rx="3" fill="#f0952a" class="muscle"/>
+  <rect x="200" y="167" width="11" height="16" rx="3" fill="#f0952a" class="muscle"/>
+  <rect x="186" y="187" width="11" height="15" rx="3" fill="#e67e22" class="muscle"/>
+  <rect x="200" y="187" width="11" height="15" rx="3" fill="#e67e22" class="muscle"/>
+  <!-- Obliques -->
+  <path d="M155,160 Q165,185 175,210 Q160,205 150,185 Z" fill="#e74c3c" class="muscle"/>
+  <path d="M245,160 Q235,185 225,210 Q240,205 250,185 Z" fill="#e74c3c" class="muscle"/>
+  <!-- Bras G -->
+  <path d="M125,112 Q105,115 100,155 Q98,175 108,185 Q118,190 130,180 Q140,160 145,125 Z" class="body-fill" stroke="#7a5c3a" stroke-width="1.2"/>
+  <!-- Biceps G -->
+  <path d="M108,120 Q96,135 95,165 Q105,175 118,165 Q125,145 120,122 Z" fill="#3498db" class="muscle"/>
+  <!-- Bras D -->
+  <path d="M275,112 Q295,115 300,155 Q302,175 292,185 Q282,190 270,180 Q260,160 255,125 Z" class="body-fill" stroke="#7a5c3a" stroke-width="1.2"/>
+  <!-- Biceps D -->
+  <path d="M292,120 Q304,135 305,165 Q295,175 282,165 Q275,145 280,122 Z" fill="#3498db" class="muscle"/>
+  <!-- Avant-bras G -->
+  <path d="M108,185 Q95,195 88,230 Q87,250 98,255 Q110,255 118,240 Q125,215 118,188 Z" class="body-fill" stroke="#7a5c3a" stroke-width="1"/>
+  <!-- Avant-bras D -->
+  <path d="M292,185 Q305,195 312,230 Q313,250 302,255 Q290,255 282,240 Q275,215 282,188 Z" class="body-fill" stroke="#7a5c3a" stroke-width="1"/>
+  <!-- Mains G -->
+  <ellipse cx="93" cy="265" rx="12" ry="15" class="body-fill" stroke="#7a5c3a" stroke-width="1"/>
+  <!-- Mains D -->
+  <ellipse cx="307" cy="265" rx="12" ry="15" class="body-fill" stroke="#7a5c3a" stroke-width="1"/>
+  <!-- Bassin -->
+  <path d="M132,290 Q155,310 200,312 Q245,310 268,290 Q260,330 245,340 Q225,345 200,345 Q175,345 155,340 Q140,330 132,290 Z" fill="#d4a06a" class="body-fill" stroke="#7a5c3a" stroke-width="1.2"/>
+  <!-- Cuisse G -->
+  <path d="M145,340 Q130,360 125,410 Q123,430 135,440 Q148,444 158,430 Q168,410 168,360 Q165,340 155,338 Z" class="body-fill" stroke="#7a5c3a" stroke-width="1.2"/>
+  <!-- Quadriceps G -->
+  <path d="M130,345 Q118,370 116,415 Q125,432 140,430 Q154,420 158,390 Q160,362 148,342 Z" fill="#9b59b6" class="muscle"/>
+  <!-- Cuisse D -->
+  <path d="M255,340 Q270,360 275,410 Q277,430 265,440 Q252,444 242,430 Q232,410 232,360 Q235,340 245,338 Z" class="body-fill" stroke="#7a5c3a" stroke-width="1.2"/>
+  <!-- Quadriceps D -->
+  <path d="M270,345 Q282,370 284,415 Q275,432 260,430 Q246,420 242,390 Q240,362 252,342 Z" fill="#9b59b6" class="muscle"/>
+  <!-- Jambe G -->
+  <path d="M128,438 Q120,460 122,490 Q125,505 140,507 Q155,507 160,492 Q163,470 158,440 Z" class="body-fill" stroke="#7a5c3a" stroke-width="1.2"/>
+  <!-- Tibial antérieur G -->
+  <path d="M123,440 Q116,462 118,490 Q128,504 140,503 Q150,490 151,462 Q150,443 140,440 Z" fill="#00b894" class="muscle"/>
+  <!-- Jambe D -->
+  <path d="M272,438 Q280,460 278,490 Q275,505 260,507 Q245,507 240,492 Q237,470 242,440 Z" class="body-fill" stroke="#7a5c3a" stroke-width="1.2"/>
+  <!-- Tibial antérieur D -->
+  <path d="M277,440 Q284,462 282,490 Q272,504 260,503 Q250,490 249,462 Q250,443 260,440 Z" fill="#00b894" class="muscle"/>
+  <!-- Pieds -->
+  <ellipse cx="140" cy="510" rx="20" ry="8" class="body-fill" stroke="#7a5c3a" stroke-width="1"/>
+  <ellipse cx="260" cy="510" rx="20" ry="8" class="body-fill" stroke="#7a5c3a" stroke-width="1"/>
+
+  <!-- ═══════════ CORPS FACE ARRIÈRE (centré x=600) ═══════════ -->
+  <!-- Tête -->
+  <ellipse cx="600" cy="65" rx="28" ry="32" class="body-fill" stroke="#7a5c3a" stroke-width="1.5"/>
+  <!-- Cou -->
+  <rect x="588" y="93" width="24" height="18" rx="4" class="body-fill" stroke="#7a5c3a" stroke-width="1"/>
+  <!-- Tronc dos -->
+  <path d="M555,110 Q530,130 525,200 Q520,260 530,290 Q550,300 600,302 Q650,300 670,290 Q680,260 675,200 Q670,130 645,110 Z" class="body-fill" stroke="#7a5c3a" stroke-width="1.5"/>
+  <!-- Trapèzes -->
+  <path d="M558,110 Q575,125 600,128 Q625,125 642,110 Q620,95 600,93 Q580,95 558,110 Z" fill="#fd79a8" class="muscle"/>
+  <!-- Grand dorsal G -->
+  <path d="M528,160 Q540,200 545,250 Q555,280 568,290 Q575,260 572,220 Q570,185 560,155 Z" fill="#1abc9c" class="muscle"/>
+  <!-- Grand dorsal D -->
+  <path d="M672,160 Q660,200 655,250 Q645,280 632,290 Q625,260 628,220 Q630,185 640,155 Z" fill="#1abc9c" class="muscle"/>
+  <!-- Érecteurs (colonne) -->
+  <rect x="589" y="145" width="10" height="130" rx="4" fill="#e67e22" class="muscle"/>
+  <rect x="601" y="145" width="10" height="130" rx="4" fill="#e67e22" class="muscle"/>
+  <!-- Bras G dos -->
+  <path d="M525,112 Q505,115 500,155 Q498,175 508,185 Q518,190 530,180 Q540,160 545,125 Z" class="body-fill" stroke="#7a5c3a" stroke-width="1.2"/>
+  <!-- Deltoïde G -->
+  <path d="M527,110 Q508,118 500,145 Q510,155 525,148 Q538,132 540,113 Z" fill="#f39c12" class="muscle"/>
+  <!-- Triceps G -->
+  <path d="M510,148 Q498,165 498,185 Q508,192 520,185 Q528,168 525,148 Z" fill="#e74c3c" class="muscle"/>
+  <!-- Bras D dos -->
+  <path d="M675,112 Q695,115 700,155 Q702,175 692,185 Q682,190 670,180 Q660,160 655,125 Z" class="body-fill" stroke="#7a5c3a" stroke-width="1.2"/>
+  <!-- Deltoïde D -->
+  <path d="M673,110 Q692,118 700,145 Q690,155 675,148 Q662,132 660,113 Z" fill="#f39c12" class="muscle"/>
+  <!-- Triceps D -->
+  <path d="M690,148 Q702,165 702,185 Q692,192 680,185 Q672,168 675,148 Z" fill="#e74c3c" class="muscle"/>
+  <!-- Avant-bras G dos -->
+  <path d="M508,185 Q495,195 488,230 Q487,250 498,255 Q510,255 518,240 Q525,215 518,188 Z" class="body-fill" stroke="#7a5c3a" stroke-width="1"/>
+  <!-- Avant-bras D dos -->
+  <path d="M692,185 Q705,195 712,230 Q713,250 702,255 Q690,255 682,240 Q675,215 682,188 Z" class="body-fill" stroke="#7a5c3a" stroke-width="1"/>
+  <!-- Mains -->
+  <ellipse cx="493" cy="265" rx="12" ry="15" class="body-fill" stroke="#7a5c3a" stroke-width="1"/>
+  <ellipse cx="707" cy="265" rx="12" ry="15" class="body-fill" stroke="#7a5c3a" stroke-width="1"/>
+  <!-- Bassin dos -->
+  <path d="M532,290 Q555,310 600,312 Q645,310 668,290 Q660,330 645,340 Q625,345 600,345 Q575,345 555,340 Q540,330 532,290 Z" fill="#d4a06a" stroke="#7a5c3a" stroke-width="1.2"/>
+  <!-- Grand fessier G -->
+  <path d="M534,292 Q546,320 560,340 Q570,345 580,342 Q575,318 565,296 Q555,285 540,287 Z" fill="#8e44ad" class="muscle"/>
+  <!-- Grand fessier D -->
+  <path d="M666,292 Q654,320 640,340 Q630,345 620,342 Q625,318 635,296 Q645,285 660,287 Z" fill="#8e44ad" class="muscle"/>
+  <!-- Cuisse arrière G -->
+  <path d="M545,340 Q530,360 525,410 Q523,430 535,440 Q548,444 558,430 Q568,410 568,360 Q565,340 555,338 Z" class="body-fill" stroke="#7a5c3a" stroke-width="1.2"/>
+  <!-- Ischio G -->
+  <path d="M530,345 Q518,370 516,415 Q525,432 540,430 Q554,420 558,390 Q560,362 548,342 Z" fill="#2980b9" class="muscle"/>
+  <!-- Cuisse arrière D -->
+  <path d="M655,340 Q670,360 675,410 Q677,430 665,440 Q652,444 642,430 Q632,410 632,360 Q635,340 645,338 Z" class="body-fill" stroke="#7a5c3a" stroke-width="1.2"/>
+  <!-- Ischio D -->
+  <path d="M670,345 Q682,370 684,415 Q675,432 660,430 Q646,420 642,390 Q640,362 652,342 Z" fill="#2980b9" class="muscle"/>
+  <!-- Jambe arrière G -->
+  <path d="M528,438 Q520,460 522,490 Q525,505 540,507 Q555,507 560,492 Q563,470 558,440 Z" class="body-fill" stroke="#7a5c3a" stroke-width="1.2"/>
+  <!-- Mollet G -->
+  <path d="M523,440 Q516,462 518,490 Q528,504 540,503 Q550,490 551,462 Q550,443 540,440 Z" fill="#27ae60" class="muscle"/>
+  <!-- Jambe arrière D -->
+  <path d="M672,438 Q680,460 678,490 Q675,505 660,507 Q645,507 640,492 Q637,470 642,440 Z" class="body-fill" stroke="#7a5c3a" stroke-width="1.2"/>
+  <!-- Mollet D -->
+  <path d="M677,440 Q684,462 682,490 Q672,504 660,503 Q650,490 649,462 Q650,443 660,440 Z" fill="#27ae60" class="muscle"/>
+  <!-- Pieds dos -->
+  <ellipse cx="540" cy="510" rx="20" ry="8" class="body-fill" stroke="#7a5c3a" stroke-width="1"/>
+  <ellipse cx="660" cy="510" rx="20" ry="8" class="body-fill" stroke="#7a5c3a" stroke-width="1"/>
+</svg>`,
+          points: [
+            { id: "grand-pectoral",   name: "Grand pectoral",     aliases: ["pectoral","pec","pecs"],           x: 13,  y: 25,  hint: "poitrine",   color: "#e84393",  desc: "Muscle de la poitrine" },
+            { id: "biceps",           name: "Biceps brachial",    aliases: ["biceps","bicep"],                  x: 2,   y: 38,  hint: "avant du bras", color: "#3498db", desc: "Fléchisseur du coude" },
+            { id: "abdominaux",       name: "Abdominaux",         aliases: ["abdo","abdos","abdominaux"],       x: 22,  y: 42,  hint: "ventre",     color: "#f39c12",  desc: "Fléchisseurs du tronc" },
+            { id: "obliques",         name: "Obliques",           aliases: ["oblique"],                         x: 5,   y: 52,  hint: "flancs",     color: "#e74c3c",  desc: "Rotation et flexion latérale" },
+            { id: "quadriceps",       name: "Quadriceps",         aliases: ["quadri","quads"],                  x: 12,  y: 75,  hint: "avant cuisse", color: "#9b59b6", desc: "Extension du genou (4 chefs)" },
+            { id: "tibial",           name: "Tibial antérieur",   aliases: ["tibial","tibia"],                  x: 20,  y: 88,  hint: "avant jambe", color: "#00b894",  desc: "Flexion dorsale du pied" },
+            { id: "trapeze",          name: "Trapèzes",           aliases: ["trapeze","trapèze"],               x: 58,  y: 22,  hint: "haut du dos", color: "#fd79a8",  desc: "Élévation des épaules" },
+            { id: "grand-dorsal",     name: "Grand dorsal",       aliases: ["dorsal","dos","latissimus"],       x: 48,  y: 48,  hint: "dos large",  color: "#1abc9c",  desc: "Extension et adduction du bras" },
+            { id: "deltoides",        name: "Deltoïde",           aliases: ["deltoides","delto"],               x: 48,  y: 28,  hint: "épaule",     color: "#f39c12",  desc: "Abduction du bras (3 faisceaux)" },
+            { id: "triceps",          name: "Triceps brachial",   aliases: ["triceps","tricep"],                x: 44,  y: 38,  hint: "arrière bras", color: "#e74c3c", desc: "Extension du coude (3 chefs)" },
+            { id: "grand-fessier",    name: "Grand fessier",      aliases: ["fessier","fessiers","glute","fesse"], x: 56, y: 62, hint: "fesses",   color: "#8e44ad",  desc: "Extension de la hanche" },
+            { id: "ischio",           name: "Ischio-jambiers",    aliases: ["ischio","ischios","biceps femoral"], x: 62, y: 75, hint: "arrière cuisse", color: "#2980b9", desc: "Flexion du genou (antagoniste quadriceps)" },
+            { id: "mollet",           name: "Triceps sural",      aliases: ["mollet","mollets","gastrocnemien","soléaire"], x: 56, y: 88, hint: "mollet", color: "#27ae60", desc: "Extension du pied (= mollet)" }
+          ]
+        }
+      }
+    ]
   }
 };
 
@@ -2408,6 +2661,7 @@ function showActivities(chIdx) {
     { id: 'mindmap', icon: '🗺️', name: 'Carte mentale', count: '1 schéma', color: '#00cec9' }
   ];
   if (ch.video) acts.push({ id: 'video', icon: '▶️', name: 'Vidéo', count: '1 vidéo', color: '#a29bfe' });
+  if (ch.schema) acts.push({ id: 'schema', icon: '🫀', name: 'Schéma', count: ch.schema.points.length + ' éléments', color: '#e17055' });
   acts.forEach(act => {
     const card = document.createElement('div');
     card.className = 'activity-card';
@@ -2427,6 +2681,7 @@ function startActivity(actId) {
   else if (actId === 'resume') showSummary(ch);
   else if (actId === 'mindmap') showMindmap(ch, subj.color);
   else if (actId === 'video') showVideo(ch);
+  else if (actId === 'schema') showSchema(ch);
 }
 
 // ── QUIZ ENGINE ──────────────────────────────────────────────
@@ -2603,6 +2858,101 @@ function stopSpeech() {
 function toggleTTS() {
   if (window.speechSynthesis && window.speechSynthesis.speaking) stopSpeech();
   else if (state.activity === 'resume') speakSummary();
+}
+
+// ── SCHEMA INTERACTIF ────────────────────────────────────────
+let schemaState = { mode: 'train', answers: {}, revealed: {} };
+
+function showSchema(ch) {
+  showScreen('screenSchema');
+  updateHeader('Schéma — ' + ch.title, true);
+  document.getElementById('schemaTitle').textContent = ch.schema.title || ch.title;
+  schemaState = { mode: 'train', answers: {}, revealed: {} };
+  document.getElementById('schemaModeBtn').textContent = '✏️ Mode entraînement';
+  document.getElementById('schemaScore').hidden = true;
+  document.getElementById('schemaLegend').hidden = true;
+  renderSchemaBody(ch.schema);
+  buildSchemaLegend(ch.schema);
+}
+
+function renderSchemaBody(schema) {
+  const body = document.getElementById('schemaBody');
+  body.innerHTML = '';
+  // SVG container
+  const svgWrap = document.createElement('div');
+  svgWrap.style.position = 'relative';
+  svgWrap.innerHTML = schema.svg;
+  body.appendChild(svgWrap);
+  // Place labels
+  schema.points.forEach(pt => {
+    const el = document.createElement('div');
+    el.className = 'muscle-label';
+    el.style.cssText = `position:absolute;left:${pt.x}%;top:${pt.y}%;transform:translateY(-50%)`;
+    el.id = 'lbl_' + pt.id;
+    if (schemaState.mode === 'train') {
+      el.innerHTML = `<input type="text" placeholder="${pt.hint||'?'}" id="inp_${pt.id}" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter')checkMuscle('${pt.id}')"><button class="check-btn" onclick="checkMuscle('${pt.id}')">✓</button>`;
+    } else {
+      el.innerHTML = `<span class="muscle-badge" style="background:${pt.color||'var(--accent)'}">${pt.name}</span>`;
+    }
+    svgWrap.appendChild(el);
+  });
+}
+
+function checkMuscle(id) {
+  const schema = DATA[state.subject].chapters[state.chapter].schema;
+  const pt = schema.points.find(p => p.id === id);
+  if (!pt) return;
+  const inp = document.getElementById('inp_' + id);
+  if (!inp || schemaState.revealed[id]) return;
+  const val = inp.value.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+  const answers = [pt.name, ...(pt.aliases||[])].map(a => a.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''));
+  if (answers.some(a => val === a || (val.length > 4 && a.includes(val)))) {
+    inp.classList.add('correct'); inp.disabled = true;
+    schemaState.answers[id] = 'correct';
+    showToast('✅ ' + pt.name);
+  } else {
+    inp.classList.add('wrong');
+    setTimeout(() => inp.classList.remove('wrong'), 800);
+    schemaState.answers[id] = 'wrong';
+  }
+  updateSchemaScore(schema);
+}
+
+function updateSchemaScore(schema) {
+  const total = schema.points.length;
+  const correct = Object.values(schemaState.answers).filter(v => v === 'correct').length;
+  const scoreEl = document.getElementById('schemaScore');
+  scoreEl.hidden = false;
+  scoreEl.textContent = `${correct} / ${total} muscles trouvés`;
+  if (correct === total) { scoreEl.textContent = '🏆 Parfait ! Tous les muscles trouvés !'; recordCompletion(state.subject + '_' + state.chapter + '_schema'); }
+}
+
+function toggleSchemaMode() {
+  const schema = DATA[state.subject].chapters[state.chapter].schema;
+  schemaState.mode = schemaState.mode === 'train' ? 'show' : 'train';
+  document.getElementById('schemaModeBtn').textContent = schemaState.mode === 'train' ? '✏️ Mode entraînement' : '👁️ Mode révision';
+  renderSchemaBody(schema);
+  buildSchemaLegend(schema);
+}
+
+function resetSchema() {
+  const schema = DATA[state.subject].chapters[state.chapter].schema;
+  schemaState.answers = {}; schemaState.revealed = {};
+  document.getElementById('schemaScore').hidden = true;
+  renderSchemaBody(schema);
+}
+
+function buildSchemaLegend(schema) {
+  const content = document.getElementById('schemaLegendContent');
+  content.innerHTML = `<div class="legend-grid">${schema.points.map(p =>
+    `<div class="legend-item"><strong>${p.name}</strong>${p.desc ? ' — ' + p.desc : ''}</div>`
+  ).join('')}</div>`;
+}
+
+function toggleSchemaLegend() {
+  const leg = document.getElementById('schemaLegend');
+  leg.hidden = !leg.hidden;
+  document.querySelector('.schema-show-legend').textContent = leg.hidden ? '📋 Voir la légende' : '📋 Masquer la légende';
 }
 
 // ── MINDMAP ──────────────────────────────────────────────────
