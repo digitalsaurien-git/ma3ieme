@@ -762,44 +762,257 @@ const DATA = {
         ]}
       },
       {
-        id: "premiere-guerre", title: "La Première Guerre mondiale", desc: "1914-1918 : la Grande Guerre",
+        id: "hist-reperes", title: "Repères de la 1ère Guerre mondiale", desc: "Alliances, attentat de Sarajevo et chronologie 1914-1919",
         quiz: [
-          { q: "Quel événement déclenche la Première Guerre mondiale ?", options: ["L'invasion de la Pologne","L'assassinat de François-Ferdinand à Sarajevo","La révolution russe","La crise du Maroc"], correct: 1, explanation: "L'assassinat de l'archiduc François-Ferdinand d'Autriche à Sarajevo le 28 juin 1914 déclenche un engrenage d'alliances." },
-          { q: "Quels sont les deux blocs en guerre ?", options: ["Triple Entente vs Triple Alliance","OTAN vs Pacte de Varsovie","Alliés vs Axe","France vs Allemagne"], correct: 0, explanation: "La Triple Entente (France, Russie, Royaume-Uni) affronte la Triple Alliance / Triplice (Allemagne, Autriche-Hongrie, Italie)." },
-          { q: "Qu'est-ce que la guerre de tranchées ?", options: ["Une guerre navale","Une guerre souterraine où les soldats creusent des tunnels","Une guerre de position avec des lignes de front fixes et des fossés défensifs","Une guerre en montagne"], correct: 2, explanation: "Dès 1914, les armées creusent des tranchées sur des centaines de km. La guerre de mouvement laisse place à une guerre d'usure." },
-          { q: "Quand se termine la Première Guerre mondiale ?", options: ["11 novembre 1918","8 mai 1945","28 juin 1919","1er janvier 1919"], correct: 0, explanation: "L'armistice est signé le 11 novembre 1918 à 11h. La paix est scellée par le traité de Versailles (28 juin 1919)." },
-          { q: "Qu'est-ce qu'un 'poilu' ?", options: ["Un officier supérieur","Un soldat français de la Grande Guerre","Un grade militaire","Un déserteur"], correct: 1, explanation: "Le 'poilu' est le surnom affectueux donné aux soldats français de la Première Guerre mondiale." }
+          { q: "Qui fait partie de la Triple Entente ?", options: ["Allemagne, Autriche-Hongrie, Italie","France, Royaume-Uni, Russie","France, Espagne, Belgique","USA, Japon, Italie"], correct: 1, explanation: "La Triple Entente regroupe la France, le Royaume-Uni et la Russie. Elle s'oppose à la Triple Alliance (Allemagne, Autriche-Hongrie, Italie)." },
+          { q: "Qui assassine l'archiduc François-Ferdinand à Sarajevo le 28 juin 1914 ?", options: ["Un soldat allemand","Un officier russe","Gavrilo Princip, nationaliste serbe","Un anarchiste français"], correct: 2, explanation: "Gavrilo Princip, nationaliste serbe bosniaque, assassine l'héritier du trône d'Autriche-Hongrie à Sarajevo. Cet attentat déclenche l'engrenage des alliances." },
+          { q: "Qu'est-ce que la guerre de mouvement ?", options: ["Une guerre sous-marine","Des déplacements rapides lors des offensives au début de la guerre","Une guerre de positions fixes","Un type de guerre aérienne"], correct: 1, explanation: "La guerre de mouvement (août-sept. 1914) désigne la phase initiale où les armées se déplacent rapidement. Elle se transforme en guerre de position (tranchées) après la Bataille de la Marne (sept. 1914)." },
+          { q: "Quand les États-Unis entrent-ils en guerre ?", options: ["Août 1914","Janvier 1915","Avril 1917","Novembre 1918"], correct: 2, explanation: "Les États-Unis entrent en guerre en avril 1917, après les attaques de sous-marins allemands sur leurs navires. Leur arrivée renforce les Alliés de manière décisive." },
+          { q: "Quand est signé l'armistice mettant fin à la 1ère Guerre mondiale ?", options: ["28 juin 1919","11 novembre 1918","8 mai 1918","2 septembre 1918"], correct: 1, explanation: "L'armistice est signé le 11 novembre 1918 à 5h du matin, effectif à 11h. La paix définitive est scellée par le Traité de Versailles le 28 juin 1919." }
         ],
         flashcards: [
-          { front: "Triple Entente", back: "Alliance France + Russie + Royaume-Uni (+ Italie en 1915, + États-Unis en 1917). Opposée à la Triple Alliance." },
-          { front: "Tranchées", back: "Fossés défensifs de centaines de km. Vie dans la boue, les rats, sous les obus. Symbolisent la guerre d'usure 1914-1918." },
-          { front: "Bataille de Verdun (1916)", back: "L'une des batailles les plus meurtrières : ~300 000 morts. Symbole du sacrifice des soldats français." },
-          { front: "Armistice du 11 novembre 1918", back: "Cessez-le-feu signé à 5h du matin, effectif à 11h. Met fin aux combats. Fête nationale française." },
-          { front: "Traité de Versailles (1919)", back: "Traité de paix imposé à l'Allemagne : pertes territoriales, réparations, clause de culpabilité de guerre (article 231)." },
-          { front: "Génocide arménien (1915)", back: "Massacre de la population arménienne par l'Empire ottoman. ~1 million de victimes. Premier génocide du XXe siècle." }
+          { front: "Triple Entente", back: "Alliance France + Royaume-Uni + Russie. Rejointe par l'Italie (1915) et les États-Unis (1917). S'oppose à la Triple Alliance." },
+          { front: "Triple Alliance", back: "Alliance Allemagne + Autriche-Hongrie + Italie. L'Italie reste neutre en 1914, puis rejoint la Triple Entente en 1915." },
+          { front: "Attentat de Sarajevo (28 juin 1914)", back: "Gavrilo Princip assassine l'archiduc François-Ferdinand d'Autriche-Hongrie. Déclenche l'engrenage des alliances → guerre mondiale." },
+          { front: "Guerre de mouvement → guerre de position", back: "Début de guerre : avancées rapides. Après la Bataille de la Marne (sept. 1914) : front stabilisé sur 700 km. Début des tranchées." },
+          { front: "Bataille de Verdun (fév.–déc. 1916)", back: "Offensive allemande pour « saigner » l'armée française. ~300 000 morts et 400 000 blessés. Symbole du sacrifice et de la résistance." },
+          { front: "Armistice et Traité de Versailles", back: "Armistice : 11 novembre 1918 — fin des combats. Traité de Versailles : 28 juin 1919 — paix imposée à l'Allemagne (article 231 : culpabilité de guerre)." }
         ],
-        summary: `<h2>La Première Guerre mondiale (1914-1918)</h2>
-<h3>1. Les causes</h3>
-<p>Un système d'<strong>alliances</strong> rigides transforme un conflit local en guerre mondiale. L'assassinat de <em>François-Ferdinand</em> à Sarajevo (28 juin 1914) sert de détonateur.</p>
-<ul><li>Triple Entente : France, Russie, Royaume-Uni</li><li>Triple Alliance : Allemagne, Autriche-Hongrie, (Italie)</li></ul>
-<h3>2. La guerre de tranchées</h3>
-<p>Après l'échec du plan Schlieffen, les armées creusent des <strong>tranchées</strong> sur 700 km. La vie des <em>poilus</em> : boue, rats, gaz, obus, assauts meurtriers.</p>
-<div class="date-box">⚔️ Bataille de Verdun (fév.–déc. 1916) : ~300 000 morts. Symbole de l'horreur des tranchées.</div>
-<h3>3. Une guerre totale</h3>
+        summary: `<h2>Repères de la 1ère Guerre mondiale</h2>
+<h3>1. Les alliances en 1914</h3>
+<table style="width:100%;border-collapse:collapse;font-size:0.9em">
+  <tr style="background:var(--card2)"><th>Triple Entente</th><th>Triple Alliance</th></tr>
+  <tr><td>France, Royaume-Uni, Russie</td><td>Allemagne, Autriche-Hongrie, Italie*</td></tr>
+  <tr><td colspan="2" style="font-size:0.85em;color:var(--text2)">* L'Italie reste neutre en 1914 puis rejoint la Triple Entente en 1915</td></tr>
+</table>
+<h3>2. L'attentat de Sarajevo — 28 juin 1914</h3>
+<p><strong>Gavrilo Princip</strong>, nationaliste serbe, assassine l'archiduc <strong>François-Ferdinand</strong>, héritier du trône d'Autriche-Hongrie. L'engrenage des alliances déclenche la guerre mondiale en quelques semaines.</p>
+<h3>3. Chronologie essentielle</h3>
 <ul>
-<li><strong>Mobilisation économique</strong> : usines reconverties, femmes au travail</li>
-<li><strong>Propagande</strong> : contrôle de l'information, moral des troupes</li>
-<li><strong>Nouvelles armes</strong> : gaz, chars, avions, sous-marins</li>
-<li><strong>Génocide arménien</strong> (1915) : premier génocide du XXe siècle</li>
+<li><strong>Août–sept. 1914</strong> : guerre de mouvement → Bataille de la Marne — les Allemands sont arrêtés</li>
+<li><strong>1914–1918</strong> : guerre de position — 700 km de tranchées de la Manche à la Suisse</li>
+<li><strong>Fév.–déc. 1916</strong> : Bataille de Verdun — ~300 000 morts, 400 000 blessés</li>
+<li><strong>Avril 1917</strong> : entrée en guerre des États-Unis</li>
+<li><strong>11 novembre 1918</strong> : Armistice</li>
+<li><strong>28 juin 1919</strong> : Traité de Versailles</li>
 </ul>
-<h3>4. La fin et ses conséquences</h3>
-<p>L'armistice est signé le <strong>11 novembre 1918</strong>. Le traité de <strong>Versailles</strong> (1919) impose à l'Allemagne des réparations lourdes et une clause de culpabilité → germe de la WWII.</p>
-<p>Bilan : <strong>~10 millions de morts militaires</strong>, 7 millions de civils, géographies européennes redessinées.</p>`,
-        mindmap: { center: "1ère Guerre mondiale", branches: [
-          { label: "Causes", color: "#e94560", children: ["Alliances rigides","Assassinat Sarajevo","Nationalisme","Colonialisme"] },
-          { label: "La guerre", color: "#0984e3", children: ["Tranchées","Poilus","Batailles (Verdun)","Nouvelles armes"] },
-          { label: "Guerre totale", color: "#6c5ce7", children: ["Mobilisation éco.","Femmes au travail","Propagande","Génocide arménien"] },
-          { label: "Fin", color: "#00b894", children: ["Armistice 11/11/1918","Traité Versailles 1919","10M de morts","Désillusion"] }
+<div class="date-box">🗓️ Attentat de Sarajevo : 28 juin 1914 → Armistice : 11 novembre 1918 → Traité de Versailles : 28 juin 1919</div>`,
+        mindmap: { center: "Repères 1GM", branches: [
+          { label: "Alliances", color: "#0984e3", children: ["Triple Entente","Triple Alliance","Italie neutre 1914","USA 1917"] },
+          { label: "Déclenchement", color: "#e94560", children: ["28 juin 1914","Attentat Sarajevo","Gavrilo Princip","François-Ferdinand"] },
+          { label: "La guerre", color: "#6c5ce7", children: ["Guerre de mouvement","Bataille Marne sept. 1914","Tranchées 700 km","Verdun fév-déc 1916"] },
+          { label: "Fin", color: "#00b894", children: ["Armistice 11/11/1918","Traité Versailles 1919","Art. 231 culpabilité","Réparations"] }
+        ]}
+      },
+      {
+        id: "hist-verdun", title: "Combattants dans une guerre industrielle", desc: "Les conditions de vie dans les tranchées — Verdun 1916",
+        quiz: [
+          { q: "Comment appelle-t-on les soldats français de la 1ère Guerre mondiale ?", options: ["Les grognards","Les poilus","Les soldats de l'an II","Les zouaves"], correct: 1, explanation: "Les « poilus » est le surnom affectueux des soldats français de la Grande Guerre. Ce surnom évoque leur barbe laissée pousser dans les tranchées." },
+          { q: "Quelles sont les conditions de vie dans les tranchées ?", options: ["Confortables avec des abris chauffés","Boue, poux, faim, manque de sommeil, rats, promiscuité","Bonnes, avec des rotations fréquentes","Difficiles uniquement en hiver"], correct: 1, explanation: "Les soldats vivent dans des conditions effroyables : boue, poux, faim, manque de sommeil, odeurs insupportables, rats, obus permanents. Un traumatisme physique et psychologique." },
+          { q: "Quelle quantité d'obus était tirée par jour à Verdun ?", options: ["10 000","100 000","Plus d'1 million","500 000"], correct: 2, explanation: "À la Bataille de Verdun, plus d'1 million d'obus étaient tirés par jour. Ce déluge de feu symbolise l'industrialisation de la guerre." },
+          { q: "Qu'est-ce que la mutinerie de 1917 ?", options: ["Une grève des usines d'armement","Un refus collectif de soldats d'obéir aux ordres après des offensives meurtrières","La reddition de l'Allemagne","Une révolte dans les colonies"], correct: 1, explanation: "En 1917, épuisés par les offensives meurtrières inutiles (ex. : Chemin des Dames), des soldats français refusent de monter à l'assaut. Ces mutineries sont réprimées mais montrent le bout de l'endurance." },
+          { q: "Quel est le bilan humain de la Bataille de Verdun ?", options: ["10 000 morts","50 000 morts","~300 000 morts et 400 000 blessés","1 million de morts"], correct: 2, explanation: "La Bataille de Verdun (fév.–déc. 1916) coûte ~300 000 morts et 400 000 blessés aux deux camps. Elle dure 300 jours et 300 nuits." }
+        ],
+        flashcards: [
+          { front: "Poilu", back: "Surnom des soldats français de la 1GM. Vie dans les tranchées : boue, poux, rats, obus, assauts meurtriers, peu de sommeil." },
+          { front: "Tranchées", back: "Fossés défensifs creusés sur 700 km. Trois lignes : ligne de feu, de soutien, de réserve. Vie : boue, promiscuité, poux, rats, faim." },
+          { front: "Nouvelles armes de la 1GM", back: "Canons lourds, mitrailleuses, gaz de combat (moutarde, chlore), lance-flammes, chars d'assaut (1916), avions de chasse, sous-marins." },
+          { front: "Bataille de Verdun (fév.–déc. 1916)", back: "300 jours et 300 nuits de combat. Plus d'1 million d'obus/jour. ~300 000 morts, 400 000 blessés. Symbole de la résistance française." },
+          { front: "Mutineries de 1917", back: "Après l'échec du Chemin des Dames, des régiments français refusent de monter à l'assaut. Environ 50 exécutions. Pétain améliore les conditions et les permissions." },
+          { front: "Guerre industrielle", back: "La 1GM mobilise l'économie entière : usines d'armement, acier, obus, chars, avions. La guerre d'usure vise à épuiser l'ennemi en hommes et en ressources." }
+        ],
+        summary: `<h2>Combattants dans une guerre industrielle</h2>
+<h3>1. La vie dans les tranchées</h3>
+<p>Les <strong>poilus</strong> (soldats français) vivent dans des conditions épouvantables :</p>
+<ul>
+<li>Boue, humidité permanente, pieds gelés</li>
+<li>Poux, rats, odeurs de cadavres</li>
+<li>Faim, manque de sommeil, promiscuité</li>
+<li>Bruit assourdissant des obus, traumatismes psychologiques</li>
+</ul>
+<h3>2. Une guerre industrielle</h3>
+<p>Pour la première fois, l'industrie est totalement mobilisée pour la guerre :</p>
+<ul>
+<li><strong>Canons et mitrailleuses</strong> : feu nourri en continu</li>
+<li><strong>Gaz de combat</strong> (chlore, gaz moutarde) : arme redoutable et cruelle</li>
+<li><strong>Lance-flammes</strong>, chars d'assaut (1916), avions</li>
+<li>À Verdun : <strong>plus d'1 million d'obus/jour</strong></li>
+</ul>
+<div class="date-box">⚔️ Verdun (fév.–déc. 1916) : 300 jours et nuits de combats → ~300 000 morts, 400 000 blessés. Symbole absolu de la Grande Guerre.</div>
+<h3>3. Le moral des soldats</h3>
+<p>Face à l'épuisement, des <strong>mutineries</strong> éclatent en 1917 après l'échec du Chemin des Dames. Des soldats refusent de monter à l'assaut. Pétain améliore les conditions : permissions, ravitaillement, repos.</p>`,
+        mindmap: { center: "Guerre industrielle", branches: [
+          { label: "Les poilus", color: "#0984e3", children: ["Tranchées (700 km)","Boue, poux, rats","Manque sommeil","Traumatismes"] },
+          { label: "Armes nouvelles", color: "#e94560", children: ["Canons, mitrailleuses","Gaz de combat","Lance-flammes","Chars, avions (1916)"] },
+          { label: "Verdun 1916", color: "#6c5ce7", children: ["300 jours et nuits","1M d'obus/jour","~300 000 morts","400 000 blessés"] },
+          { label: "Moral", color: "#fdcb6e", children: ["Mutineries 1917","Chmin des Dames","Pétain améliore","Censure / propagande"] }
+        ]}
+      },
+      {
+        id: "hist-armenie", title: "Le génocide des Arméniens (1915)", desc: "Premier génocide du XXe siècle : définition et mécanismes",
+        quiz: [
+          { q: "Qui est responsable du génocide des Arméniens ?", options: ["L'Empire austro-hongrois","Le gouvernement ottoman des Jeunes-Turcs","La Russie tsariste","L'Empire allemand"], correct: 1, explanation: "Le génocide des Arméniens est organisé par le gouvernement ottoman des Jeunes-Turcs (Comité Union et Progrès). Ils visent à éliminer la population arménienne chrétienne." },
+          { q: "Qu'est-ce qu'un génocide ?", options: ["Un massacre de soldats en temps de guerre","L'extermination programmée par des autorités d'un groupe défini","Une guerre civile","Une épidémie qui décime une population"], correct: 1, explanation: "Un génocide est l'extermination programmée et systématique, par des autorités, d'un groupe désigné (ethnique, religieux, national). Le terme est créé par Raphael Lemkin en 1944." },
+          { q: "Combien de victimes le génocide arménien a-t-il fait ?", options: ["100 000","500 000","1,2 à 1,5 million","3 millions"], correct: 2, explanation: "Le génocide des Arméniens (1915-1916) fait entre 1,2 et 1,5 million de victimes. Les Arméniens sont déportés vers le désert syrien et massacrés." },
+          { q: "Quand commence le génocide arménien ?", options: ["1914","1915","1916","1917"], correct: 1, explanation: "Le génocide commence en 1915, pendant la 1ère Guerre mondiale. L'Empire ottoman utilise la guerre comme couverture pour exterminer la minorité arménienne." },
+          { q: "Que signifie « déportation » dans le contexte du génocide ?", options: ["L'expulsion vers un autre pays avec protection","Le transfert forcé de populations vers des zones de mort (déserts, camps)","Un échange de prisonniers","L'exil volontaire pour fuir la guerre"], correct: 1, explanation: "Les Arméniens sont déportés de force vers le désert syrien (marches de la mort). Sans eau ni nourriture, des centaines de milliers meurent d'épuisement, de faim ou sont massacrés." }
+        ],
+        flashcards: [
+          { front: "Génocide", back: "Extermination programmée par des autorités d'un groupe défini (ethnic, religieux, national). Terme créé par Raphael Lemkin (1944). Crime contre l'humanité." },
+          { front: "Génocide arménien (1915)", back: "Organisé par les Jeunes-Turcs (Empire ottoman) contre la population arménienne chrétienne. Déportations et massacres : 1,2 à 1,5 million de victimes." },
+          { front: "Les Jeunes-Turcs", back: "Gouvernement nationaliste de l'Empire ottoman (Comité Union et Progrès). Accusent les Arméniens de collaboration avec la Russie ennemie pour justifier les massacres." },
+          { front: "Marches de la mort", back: "Les Arméniens déportés sont contraints de marcher vers le désert syrien sans eau ni nourriture. Des centaines de milliers meurent d'épuisement ou sont tués en route." },
+          { front: "Reconnaissance du génocide", back: "La France reconnaît le génocide arménien en 2001 et en fait un jour de commémoration le 24 avril. De nombreux pays l'ont reconnu ; la Turquie le conteste toujours." },
+          { front: "Différence : guerre / génocide", back: "Guerre : soldats contre soldats. Génocide : extermination systématique de civils d'un groupe précis par l'État. Intentionnalité + ciblage d'un groupe = génocide." }
+        ],
+        summary: `<h2>Le génocide des Arméniens (1915)</h2>
+<h3>1. Qu'est-ce qu'un génocide ?</h3>
+<p>Un <strong>génocide</strong> est l'extermination programmée et systématique, par des autorités, d'un groupe défini par son origine ethnique, sa religion ou sa nationalité. Le terme est créé par Raphael Lemkin en 1944.</p>
+<h3>2. Le génocide arménien</h3>
+<p>En <strong>1915</strong>, le gouvernement ottoman des <strong>Jeunes-Turcs</strong> organise l'extermination de la minorité arménienne chrétienne :</p>
+<ul>
+<li>Arrestations et exécutions des notables arméniens (24 avril 1915)</li>
+<li><strong>Déportations</strong> vers le désert syrien : marches de la mort</li>
+<li>Massacres, privations, maladies</li>
+<li>Bilan : <strong>1,2 à 1,5 million de victimes</strong></li>
+</ul>
+<div class="date-box">📅 24 avril 1915 : début des déportations organisées. Journée de commémoration du génocide arménien.</div>
+<h3>3. Contexte et reconnaissance</h3>
+<p>L'Empire ottoman utilise la <strong>1GM comme couverture</strong> pour agir. Le monde est trop occupé par la guerre pour réagir. La France reconnaît officiellement le génocide en 2001 (loi Glavany). La Turquie le conteste toujours.</p>`,
+        mindmap: { center: "Génocide arménien", branches: [
+          { label: "Qui ?", color: "#e94560", children: ["Jeunes-Turcs","Empire ottoman","Comité Union & Progrès","Contexte 1GM"] },
+          { label: "Comment ?", color: "#6c5ce7", children: ["Arrestations notables","Déportations","Marches de la mort","Désert syrien"] },
+          { label: "Bilan", color: "#0984e3", children: ["1,2 à 1,5 million morts","1915–1916","Minorité chrétienne","Crime contre l'humanité"] },
+          { label: "Définition génocide", color: "#00b894", children: ["Extermination programmée","Groupe ciblé","Autorités d'État","Terme Lemkin 1944"] }
+        ]}
+      },
+      {
+        id: "hist-guerretotale", title: "Une guerre totale", desc: "Mobilisation de toute la société : femmes, colonies, industrie, propagande",
+        quiz: [
+          { q: "Pourquoi la 1ère Guerre mondiale est-elle appelée « guerre totale » ?", options: ["Parce qu'elle touche tous les continents","Parce qu'elle mobilise toute la société (économie, femmes, colonies, propagande)","Parce qu'elle dure très longtemps","Parce qu'elle utilise des armes atomiques"], correct: 1, explanation: "La guerre totale mobilise la société entière : l'économie est reconvertie, les femmes remplacent les hommes dans les usines, les colonies fournissent des soldats et des ressources, et la propagande contrôle l'opinion." },
+          { q: "Quel rôle jouent les femmes pendant la 1GM ?", options: ["Elles restent à la maison sans rôle public","Elles remplacent les hommes dans les usines, les transports, les hôpitaux","Elles combattent aux côtés des soldats","Elles dirigent le gouvernement"], correct: 1, explanation: "Les femmes prennent la place des hommes partis au front : usines d'armement (chez Renault, les femmes passent de 3,8% à 31,6% des effectifs), transports, agriculture, infirmières." },
+          { q: "Quelle est la contribution des colonies françaises à la guerre ?", options: ["Aucune contribution","Uniquement des ressources naturelles","Environ 600 000 soldats et de nombreuses ressources","Un soutien moral uniquement"], correct: 2, explanation: "L'Empire colonial français fournit ~600 000 soldats (tirailleurs sénégalais, maghrébins, indochinois…) et de nombreuses matières premières (coton, caoutchouc, charbon)." },
+          { q: "Qu'est-ce que le « bourrage de crâne » ?", options: ["Une technique de combat","La propagande pour maintenir le moral et cacher la réalité de la guerre","Un type d'entraînement militaire","Une maladie des soldats dans les tranchées"], correct: 1, explanation: "Le « bourrage de crâne » désigne la propagande de guerre : censure des mauvaises nouvelles, glorification des combats, dénigrement de l'ennemi. Les journaux sont soumis à censure." },
+          { q: "Que se passe-t-il dans l'économie pendant la guerre totale ?", options: ["L'économie s'effondre","Les usines civiles sont reconverties en usines d'armement, toute l'économie est au service de la guerre","Le commerce international continue normalement","Les entreprises sont nationalisées définitivement"], correct: 1, explanation: "L'économie est entièrement reconvertie : usines d'automobiles font des camions et obus, textiles font des uniformes, chimie fait des explosifs. L'État dirige la production de guerre." }
+        ],
+        flashcards: [
+          { front: "Guerre totale", back: "Conflit qui mobilise toute la société : économie reconvertie, femmes au travail, colonies mobilisées, propagande, censure. La frontière civil/militaire s'efface." },
+          { front: "Femmes pendant la 1GM", back: "Remplacent les hommes au travail : usines (Renault : 3,8%→31,6% de femmes), agriculture, transports, infirmières. Contribuent à l'effort de guerre." },
+          { front: "Colonies et guerre", back: "~600 000 soldats coloniaux (tirailleurs sénégalais, maghrébins, indochinois). Ressources naturelles (caoutchouc, coton, charbon). Contribution souvent peu reconnue." },
+          { front: "Propagande et censure", back: "Les gouvernements contrôlent l'information : censure de la presse, glorification des soldats, dénigrement de l'ennemi. « Bourrage de crâne » : la réalité des tranchées est cachée." },
+          { front: "Reconversion industrielle", back: "Usines civiles reconverties pour produire des armes (obus, canons, chars, avions). Femmes et étrangers remplacent les ouvriers mobilisés. L'État coordonne toute l'économie de guerre." },
+          { front: "Union sacrée", back: "En France, trêve politique entre tous les partis pour soutenir l'effort de guerre (août 1914). Les socialistes et les catholiques s'unissent. Se fissure à partir de 1917." }
+        ],
+        summary: `<h2>Une guerre totale (1914-1918)</h2>
+<h3>1. La mobilisation de l'économie</h3>
+<p>Les usines civiles sont reconverties pour fabriquer des armes :</p>
+<ul>
+<li>Obus, canons, mitrailleuses, chars d'assaut, avions</li>
+<li>L'État organise et dirige toute la production de guerre</li>
+<li>Pénuries alimentaires pour les civils</li>
+</ul>
+<h3>2. Les femmes dans la guerre</h3>
+<p>Les femmes remplacent les hommes partis au front :</p>
+<ul>
+<li><strong>Usines d'armement</strong> : chez Renault, les femmes passent de <strong>3,8% à 31,6%</strong> des effectifs</li>
+<li>Agriculture, transports, factrice, infirmière</li>
+<li>Elles contribuent à la victoire tout en revendiquant leurs droits</li>
+</ul>
+<h3>3. La mobilisation des colonies</h3>
+<p>L'Empire colonial fournit environ <strong>600 000 soldats</strong> : tirailleurs sénégalais, maghrébins, indochinois, malgaches. Ils combattent sur tous les fronts. Leurs sacrifices restent souvent méconnus.</p>
+<h3>4. La propagande</h3>
+<p>Les gouvernements contrôlent l'information : censure de la presse, glorification du combat, dénigrement de l'ennemi. C'est le <strong>« bourrage de crâne »</strong>. Les lettres des soldats sont censurées.</p>
+<div class="date-box">📊 Renault : femmes = 3,8% (1914) → 31,6% (1918). Chiffre clé de la mobilisation féminine.</div>`,
+        mindmap: { center: "Guerre totale", branches: [
+          { label: "Économie", color: "#0984e3", children: ["Usines reconverties","Obus, chars, avions","État coordonne","Pénuries civils"] },
+          { label: "Femmes", color: "#e84393", children: ["Remplacent hommes","Usines (Renault)","3,8%→31,6%","Infirmières, agricultrices"] },
+          { label: "Colonies", color: "#6c5ce7", children: ["~600 000 soldats","Tirailleurs sénégalais","Ressources naturelles","Sacrifice méconnu"] },
+          { label: "Propagande", color: "#fdcb6e", children: ["Censure presse","Bourrage de crâne","Glorification soldats","Dénigrement ennemi"] }
+        ]}
+      },
+      {
+        id: "hist-russes", title: "Les révolutions russes de 1917", desc: "Révolution de Février et d'Octobre — naissance de l'URSS",
+        quiz: [
+          { q: "Que se passe-t-il lors de la révolution de Février 1917 en Russie ?", options: ["Les bolcheviks prennent le pouvoir","Des femmes et ouvriers manifestent à Petrograd, le tsar Nicolas II abdique","L'armée russe lance une grande offensive","La Russie signe l'armistice avec l'Allemagne"], correct: 1, explanation: "En février 1917, des femmes et ouvriers de Petrograd manifestent contre la faim et la guerre. L'armée refuse de tirer. Le tsar Nicolas II abdique. Un gouvernement provisoire est formé." },
+          { q: "Qui mène la révolution d'Octobre 1917 ?", options: ["Les mencheviks","Les socialistes modérés","Les bolcheviks, dirigés par Lénine et Trotski","Le gouvernement provisoire"], correct: 2, explanation: "Les bolcheviks (communistes) de Lénine et Trotski renversent le gouvernement provisoire en octobre 1917. Ils s'emparent du pouvoir lors d'un coup d'État (la « Révolution d'Octobre »)." },
+          { q: "Que font les bolcheviks par rapport à la 1GM ?", options: ["Ils continuent la guerre jusqu'à la victoire","Ils signent un armistice séparé avec l'Allemagne (traité de Brest-Litovsk, mars 1918)","Ils ouvrent un nouveau front","Ils rejoignent les Alliés contre l'Allemagne"], correct: 1, explanation: "Les bolcheviks signent le traité de Brest-Litovsk (mars 1918) avec l'Allemagne, accordant d'immenses territoires en échange de la paix. La Russie sort de la guerre." },
+          { q: "Quelle est la différence entre la révolution de Février et celle d'Octobre 1917 ?", options: ["Il n'y a qu'une seule révolution en 1917","Février : le tsar abdique ; Octobre : les bolcheviks prennent le pouvoir","Février : bolcheviks au pouvoir ; Octobre : tsar revient","Février : révolution à Moscou ; Octobre : à Petrograd"], correct: 1, explanation: "Deux révolutions distinctes : Février 1917 = chute du tsar (révolution libérale-démocrate) → gouvernement provisoire. Octobre 1917 = coup d'État bolchevik contre ce gouvernement → dictature du prolétariat." },
+          { q: "Quand est créée l'URSS ?", options: ["1917","1918","1919","1922"], correct: 3, explanation: "L'URSS (Union des Républiques Socialistes Soviétiques) est officiellement créée le 30 décembre 1922, regroupant la Russie et les républiques soviétiques sous le pouvoir du Parti communiste." }
+        ],
+        flashcards: [
+          { front: "Révolution de Février 1917", back: "Petrograd : femmes et ouvriers manifestent (faim + guerre). L'armée refuse de tirer. Nicolas II abdique. Gouvernement provisoire (Kerenski) prend le pouvoir. Fin du tsarisme." },
+          { front: "Révolution d'Octobre 1917", back: "Les bolcheviks (Lénine + Trotski) renversent le gouvernement provisoire. Prise du Palais d'Hiver. Instauration de la dictature du prolétariat. Début de l'État soviétique." },
+          { front: "Bolcheviks", back: "Parti communiste russe dirigé par Lénine. Prônent la révolution violente, la dictature du prolétariat, la fin de la guerre, la redistribution des terres." },
+          { front: "Lénine", back: "Chef des bolcheviks. Revient en Russie depuis la Suisse en avril 1917 (train plombé, payé par l'Allemagne). Proclame : Paix, Terre, Pain. Dirige la révolution d'Octobre." },
+          { front: "Traité de Brest-Litovsk (mars 1918)", back: "Paix séparée entre la Russie soviétique et l'Allemagne. La Russie cède d'immenses territoires (Ukraine, pays Baltes, Pologne) mais sort de la 1GM." },
+          { front: "URSS (1922)", back: "Union des Républiques Socialistes Soviétiques. Premier État communiste de l'histoire. Créé le 30 décembre 1922 sous la direction de Lénine puis Staline." }
+        ],
+        summary: `<h2>Les révolutions russes de 1917</h2>
+<h3>1. La révolution de Février 1917</h3>
+<p>À <strong>Petrograd</strong>, des femmes et ouvriers manifestent contre la faim et les sacrifices de la guerre. L'armée fraternise avec les manifestants et refuse de tirer. Le tsar <strong>Nicolas II abdique</strong> (mars 1917). Un gouvernement provisoire est formé.</p>
+<h3>2. La révolution d'Octobre 1917</h3>
+<p>Le gouvernement provisoire (Kerenski) décide de continuer la guerre : c'est son erreur fatale. Les <strong>bolcheviks</strong> de <strong>Lénine</strong> et <strong>Trotski</strong> renversent ce gouvernement en octobre 1917 et s'emparent du pouvoir.</p>
+<div class="date-box">🔑 Slogan bolchevik : « Paix, Terre, Pain » — trois promesses simples qui séduisent les masses épuisées par la guerre et la faim.</div>
+<h3>3. La sortie de la guerre</h3>
+<p>Les bolcheviks signent le <strong>traité de Brest-Litovsk</strong> (mars 1918) avec l'Allemagne : la Russie cède d'immenses territoires mais sort de la 1GM. Cela libère des troupes allemandes pour le front Ouest.</p>
+<h3>4. La création de l'URSS</h3>
+<p>Après une guerre civile (1918-1921) contre les « Armées blanches », les bolcheviks consolident leur pouvoir. L'<strong>URSS</strong> est officiellement créée le <strong>30 décembre 1922</strong>.</p>`,
+        mindmap: { center: "Révolutions russes 1917", branches: [
+          { label: "Révolution Février", color: "#0984e3", children: ["Manifestations Petrograd","Femmes et ouvriers","Nicolas II abdique","Gouvernement Kerenski"] },
+          { label: "Révolution Octobre", color: "#e94560", children: ["Bolcheviks (Lénine/Trotski)","Prise du Palais d'Hiver","Dictature prolétariat","Fin du gouvernement provisoire"] },
+          { label: "Sortie de la guerre", color: "#6c5ce7", children: ["Traité Brest-Litovsk","Mars 1918","Cession de territoires","Russie quitte la 1GM"] },
+          { label: "Création URSS", color: "#00b894", children: ["Guerre civile 1918-21","URSS 30 déc. 1922","1er État communiste","Lénine → Staline"] }
+        ]}
+      },
+      {
+        id: "hist-bilan", title: "Le bilan de la Grande Guerre", desc: "Traité de Versailles et conséquences humaines, économiques, géopolitiques",
+        quiz: [
+          { q: "Que prévoit l'article 231 du Traité de Versailles ?", options: ["Le retour de l'Alsace-Moselle à la France","La limitation de l'armée allemande","L'Allemagne est déclarée responsable de la guerre et doit payer des réparations","La création de la Société des Nations"], correct: 2, explanation: "L'article 231 (clause de la « culpabilité de guerre ») déclare l'Allemagne et ses alliés responsables de tous les dommages causés par la guerre. Les Allemands appellent ce traité un « diktat »." },
+          { q: "Qu'appelle-t-on les « gueules cassées » ?", options: ["Des soldats qui refusent d'obéir","Des mutilés de guerre défigurés au visage","Des prisonniers de guerre","Des vétérans qui souffrent de dépression"], correct: 1, explanation: "Les « gueules cassées » sont les soldats défigurés par les blessures à la tête (éclats d'obus, gaz). Leurs visages détruits symbolisent les séquelles visibles de la guerre. Ils fondent une association en 1921." },
+          { q: "Quel est le bilan humain total de la 1ère Guerre mondiale ?", options: ["1 million de morts","5 millions de morts militaires","~10 millions de morts militaires et 7 millions de civils","50 millions de morts"], correct: 2, explanation: "La 1GM fait ~10 millions de morts militaires et 7 millions de civils. La grippe espagnole (1918-1919) tue en plus 20 à 40 millions de personnes dans le monde." },
+          { q: "Pourquoi l'Allemagne considère-t-elle le Traité de Versailles comme un « diktat » ?", options: ["Car ils n'ont pas participé aux négociations","Car ils ont été contraints de signer sans pouvoir négocier les conditions, ressenties comme humiliantes","Car le traité les protège trop","Car ils ont perdu trop peu de territoires"], correct: 1, explanation: "L'Allemagne est exclue des négociations de paix. Le traité lui impose des conditions humiliantes : culpabilité de guerre, réparations énormes, perte de territoires, armée limitée à 100 000 hommes. Hitler exploitera ce ressentiment." },
+          { q: "Quelle zone géographique est dévastée en France après la guerre ?", options: ["La Bretagne","Le Sud de la France","La France du Nord (500 km de zone dévastée)","La région parisienne"], correct: 2, explanation: "La France du Nord (de la Meuse à la mer du Nord) est une zone de 500 km de long complètement dévastée : villes et villages rasés, terres agricoles détruites, industries anéanties." }
+        ],
+        flashcards: [
+          { front: "Traité de Versailles (28 juin 1919)", back: "Traité de paix avec l'Allemagne : Art.51 retour Alsace-Moselle, Art.160 armée limitée à 100 000 hommes, Art.231 culpabilité de guerre, Art.232 réparations. Signé dans la galerie des Glaces." },
+          { front: "Article 231 — diktat", back: "L'Allemagne déclare seule responsable de la guerre. Réparations énormes. Les Allemands appellent cela un « diktat » (paix imposée). Source de rancoeur nationaliste → Hitler." },
+          { front: "Gueules cassées", back: "Soldats défigurés par les blessures à la tête (éclats d'obus, balles, gaz). Symboles des séquelles visibles de la guerre. Association fondée en 1921. Blaise Diagne fut parmi les fondateurs." },
+          { front: "Bilan humain de la 1GM", back: "~70 millions mobilisés · ~10 millions de morts militaires · 7 millions de civils · Grippe espagnole (1918-19) : 20-40 millions de morts supplémentaires." },
+          { front: "Bilan économique", back: "France du Nord : zone dévastée sur 500 km. Déclin économique de l'Europe. Dettes envers les États-Unis. Inflation, chômage. Les USA deviennent la première puissance économique mondiale." },
+          { front: "Grippe espagnole (1918-1919)", back: "Pandémie mondiale qui suit la fin de la 1GM. 20 à 40 millions de morts (certaines estimations : 50 à 100 millions). Touche surtout les jeunes adultes affaiblis par la guerre." }
+        ],
+        summary: `<h2>Le bilan de la Grande Guerre</h2>
+<h3>1. Le Traité de Versailles (28 juin 1919)</h3>
+<p>Signé dans la galerie des Glaces de Versailles, 5 ans jour pour jour après l'attentat de Sarajevo :</p>
+<ul>
+<li><strong>Art. 51</strong> : retour de l'Alsace-Moselle à la France</li>
+<li><strong>Art. 160</strong> : armée allemande limitée à 100 000 hommes</li>
+<li><strong>Art. 231</strong> : l'Allemagne est déclarée responsable de la guerre (<em>clause de culpabilité</em>)</li>
+<li><strong>Art. 232</strong> : l'Allemagne doit payer d'énormes réparations</li>
+</ul>
+<p>Les Allemands appellent ce traité un <strong>« diktat »</strong> — une paix imposée, accablante. Von Bülow : « paix dictée, accablante et ignominieuse ».</p>
+<h3>2. Bilan humain</h3>
+<ul>
+<li><strong>~70 millions</strong> d'hommes mobilisés dans le monde</li>
+<li><strong>~10 millions</strong> de morts militaires</li>
+<li><strong>7 millions</strong> de civils tués</li>
+<li>20 millions de blessés graves</li>
+<li>Les <strong>« gueules cassées »</strong> : mutilés défigurés au visage</li>
+<li><strong>Grippe espagnole</strong> (1918-1919) : 20 à 40 millions de morts supplémentaires</li>
+</ul>
+<div class="date-box">💀 Bilan global : la guerre tue plus en 4 ans que toutes les guerres européennes des deux siècles précédents.</div>
+<h3>3. Bilan économique et géopolitique</h3>
+<ul>
+<li>France du Nord dévastée sur <strong>500 km</strong> : villes rasées, terres détruites</li>
+<li>Déclin économique de l'Europe</li>
+<li>Les <strong>États-Unis</strong> deviennent la première puissance mondiale</li>
+<li>Le ressentiment allemand envers le diktat de Versailles prépare le terrain pour <strong>Hitler et la 2GM</strong></li>
+</ul>`,
+        mindmap: { center: "Bilan Grande Guerre", branches: [
+          { label: "Traité Versailles", color: "#0984e3", children: ["Art.51 Alsace-Moselle","Art.160 armée 100k","Art.231 culpabilité","Art.232 réparations"] },
+          { label: "Diktat", color: "#e94560", children: ["Paix imposée","Von Bülow","Ressentiment allemand","Germe Hitler & 2GM"] },
+          { label: "Bilan humain", color: "#6c5ce7", children: ["~10M morts militaires","7M civils","Gueules cassées","Grippe espagnole 20-40M"] },
+          { label: "Bilan éco & géopo", color: "#fdcb6e", children: ["France Nord dévastée","Déclin Europe","USA 1ère puissance","Reconstruction difficile"] }
         ]}
       },
       {
@@ -1399,6 +1612,107 @@ Les pommes que nous avons mangées → COD avant → <strong>accord féminin plu
           { label: "République fr.", back: "La France", color: "#e17055", children: ["Liberté Égalité Fraternité","Constitution 1958","Art. 1 laïque sociale","DDHC 1789"] },
           { label: "Laïcité", color: "#0984e3", children: ["Loi 1905","Liberté conscience","Neutralité État","Pluralisme religieux"] },
           { label: "Citoyen", color: "#00b894", children: ["Droits fondamentaux","Droit de vote","Devoirs civiques","Participation démocratique"] }
+        ]}
+      },
+      {
+        id: "emc-constitution", title: "La Constitution de la Ve République", desc: "Les institutions françaises et la répartition des pouvoirs selon la Constitution de 1958",
+        quiz: [
+          { q: "Que dit l'article 1 de la Constitution de 1958 sur la France ?", options: ["La France est une monarchie constitutionnelle","La France est une République indivisible, laïque, démocratique et sociale","La France est une fédération d'États","La France est gouvernée par un directoire"], correct: 1, explanation: "L'article 1 de la Constitution de 1958 définit la France comme une « République indivisible, laïque, démocratique et sociale ». Ces quatre principes fondamentaux caractérisent le régime français." },
+          { q: "À qui appartient la souveraineté selon l'article 3 de la Constitution ?", options: ["Au Président de la République","Au gouvernement","Au peuple","Au Parlement"], correct: 2, explanation: "L'article 3 dispose que « la souveraineté nationale appartient au peuple ». Le peuple l'exerce par ses représentants et par la voie du référendum (démocratie représentative + directe)." },
+          { q: "Qu'est-ce que le Parlement français ?", options: ["L'Assemblée nationale uniquement","Le Sénat uniquement","L'Assemblée nationale + le Sénat","Le Président + le Premier ministre"], correct: 2, explanation: "Selon l'article 24, le Parlement comprend l'Assemblée nationale et le Sénat. Il vote les lois et contrôle le gouvernement." },
+          { q: "Le Président peut-il dissoudre le Sénat ?", options: ["Oui, en cas de crise politique","Oui, après un référendum","Non, le Président ne peut dissoudre que l'Assemblée nationale","Oui, avec l'accord du Premier ministre"], correct: 2, explanation: "L'article 12 permet au Président de la République de dissoudre l'Assemblée nationale, mais PAS le Sénat. Le Sénat est une chambre permanente qui représente les collectivités territoriales." },
+          { q: "Quel est le rôle du Conseil constitutionnel ?", options: ["Il gouverne en cas de crise","Il vérifie que les lois votées par le Parlement respectent la Constitution","Il nomme les ministres","Il juge les criminels"], correct: 1, explanation: "Le Conseil constitutionnel (article 61) vérifie la conformité des lois à la Constitution. C'est le gardien de la Constitution : une loi inconstitutionnelle ne peut pas s'appliquer." }
+        ],
+        flashcards: [
+          { front: "Constitution de 1958", back: "Loi fondamentale de la Ve République. Adoptée sous de Gaulle. Article 1 : France « indivisible, laïque, démocratique et sociale ». Norme suprême au-dessus de toutes les lois." },
+          { front: "Article 1 — définition de la France", back: "« La France est une République indivisible, laïque, démocratique et sociale. Elle assure l'égalité devant la loi de tous les citoyens. » Sa devise : Liberté, Égalité, Fraternité." },
+          { front: "Article 3 — souveraineté", back: "« La souveraineté nationale appartient au peuple qui l'exerce par ses représentants et par la voie du référendum. » Fondement de la démocratie représentative française." },
+          { front: "Article 12 — dissolution", back: "Le Président peut dissoudre l'Assemblée nationale (pas le Sénat). Permet de sortir d'une crise politique en appelant les électeurs à trancher." },
+          { front: "Le Parlement (article 24)", back: "Assemblée nationale (577 députés élus au suffrage direct) + Sénat (348 sénateurs élus par les grands électeurs). Vote les lois, vote le budget, contrôle le gouvernement." },
+          { front: "Conseil constitutionnel (article 61)", back: "9 membres nommés pour 9 ans. Vérifie la conformité des lois à la Constitution. Gardien de la Constitution. Peut invalider une loi inconstitutionnelle." },
+          { front: "Article 49-3", back: "Permet au gouvernement d'adopter un texte sans vote de l'Assemblée nationale. Controversé car contourne le débat parlementaire. Le Parlement peut y répondre par une motion de censure." },
+          { front: "Article 15 — le Président chef des armées", back: "Le Président de la République est le chef des armées. Il dirige la politique de défense nationale et peut engager les forces armées." }
+        ],
+        summary: `<h2>La Constitution de la Ve République (1958)</h2>
+<h3>1. La loi suprême</h3>
+<p>La <strong>Constitution</strong> est la loi fondamentale qui organise les pouvoirs. Toutes les autres lois doivent lui être conformes. Elle a été adoptée en <strong>1958</strong> sous de Gaulle.</p>
+<h3>2. Les articles fondamentaux</h3>
+<table style="width:100%;border-collapse:collapse;font-size:0.9em">
+  <tr style="background:var(--card2)"><th>Article</th><th>Contenu</th></tr>
+  <tr><td><strong>Art. 1</strong></td><td>France = République indivisible, laïque, démocratique et sociale</td></tr>
+  <tr><td><strong>Art. 3</strong></td><td>La souveraineté appartient au peuple</td></tr>
+  <tr><td><strong>Art. 8</strong></td><td>Le Président nomme le Premier ministre</td></tr>
+  <tr><td><strong>Art. 12</strong></td><td>Le Président peut dissoudre l'Assemblée nationale (pas le Sénat)</td></tr>
+  <tr><td><strong>Art. 15</strong></td><td>Le Président est chef des armées</td></tr>
+  <tr><td><strong>Art. 24</strong></td><td>Parlement = Assemblée nationale + Sénat</td></tr>
+  <tr><td><strong>Art. 49-3</strong></td><td>Adoption d'une loi sans vote (controversé)</td></tr>
+  <tr><td><strong>Art. 50</strong></td><td>Motion de censure → démission du Premier ministre</td></tr>
+  <tr><td><strong>Art. 61</strong></td><td>Conseil constitutionnel vérifie la conformité des lois</td></tr>
+  <tr><td><strong>Art. 64</strong></td><td>Président = garant de l'indépendance judiciaire</td></tr>
+</table>
+<h3>3. La séparation des pouvoirs</h3>
+<ul>
+<li><strong>Exécutif</strong> : Président + gouvernement (Premier ministre)</li>
+<li><strong>Législatif</strong> : Parlement (Assemblée nationale + Sénat)</li>
+<li><strong>Judiciaire</strong> : tribunaux indépendants, Conseil constitutionnel</li>
+</ul>
+<div class="date-box">🏛️ La Constitution garantit que le pouvoir ne se concentre pas dans les mains d'une seule personne. Chaque pouvoir contrôle les autres.</div>`,
+        mindmap: { center: "Constitution 1958", branches: [
+          { label: "Exécutif", color: "#fdcb6e", children: ["Président (Art.8,12,15)","Premier ministre","Gouvernement","Chef des armées"] },
+          { label: "Législatif", color: "#0984e3", children: ["Assemblée nationale","Sénat (Art.24)","Vote les lois","Contrôle gouvernement"] },
+          { label: "Articles clés", color: "#e94560", children: ["Art.1 : définition","Art.3 : souveraineté","Art.49-3 : sans vote","Art.61 : Conseil constit."] },
+          { label: "Contrôle", color: "#00b894", children: ["Conseil constitutionnel","Indépendance judiciaire","Motion de censure","Dissolution Assemblée"] }
+        ]}
+      },
+      {
+        id: "emc-democratie", title: "Démocratie et régimes politiques", desc: "Caractéristiques d'une démocratie — comparaison avec les régimes non-démocratiques",
+        quiz: [
+          { q: "Laquelle de ces caractéristiques n'est PAS une condition de la démocratie ?", options: ["Vote libre et pluripartisme","Liberté de la presse","Un seul parti autorisé au pouvoir","Séparation des pouvoirs"], correct: 2, explanation: "Un régime à parti unique est un régime autoritaire ou totalitaire, pas une démocratie. La démocratie exige le pluripartisme : plusieurs partis peuvent s'affronter librement lors d'élections." },
+          { q: "La Russie est-elle une démocratie ?", options: ["Oui, elle a des élections régulières","Non, les élections ne sont pas libres et l'opposition est muselée","Oui, car il y a plusieurs partis","Oui, car la presse est libre"], correct: 1, explanation: "La Russie organise des élections mais elles ne sont pas libres ni équitables : l'opposition est arrêtée ou tuée, les médias sont contrôlés par l'État, et Poutine maintient le pouvoir sans réelle concurrence." },
+          { q: "Qu'est-ce qu'une monarchie absolue ?", options: ["Une monarchie où le roi partage le pouvoir avec un parlement","Un régime où un roi détient seul tous les pouvoirs, sans constitution ni parlement","Un régime républicain avec un Président","Une démocratie dirigée par une famille royale"], correct: 1, explanation: "Dans une monarchie absolue (ex : Arabie Saoudite), le roi détient tous les pouvoirs (exécutif, législatif, parfois judiciaire) sans partage avec un parlement élu ni constitution limitant son pouvoir." },
+          { q: "Quelles sont les 6 caractéristiques essentielles d'une démocratie ?", options: ["Vote, armée forte, économie libérale, laïcité, territoiree, constitution","Vote, pluripartisme, liberté d'expression et de presse, débat contradictoire, séparation des pouvoirs, droits et libertés respectés","Vote, roi, parlement, premier ministre, sénat, conseil constit.","Vote, pétition, référendum, manifestation, élection, procédure"], correct: 1, explanation: "Les 6 caractéristiques d'une démocratie : (1) vote libre et régulier, (2) pluripartisme, (3) liberté d'expression et de presse, (4) débat contradictoire, (5) séparation des pouvoirs, (6) droits et libertés respectés." },
+          { q: "Comment classe-t-on le Royaume-Uni ?", options: ["Monarchie absolue non-démocratique","Régime autoritaire","Monarchie parlementaire — démocratie","République présidentielle"], correct: 2, explanation: "Le Royaume-Uni est une monarchie parlementaire : le roi/la reine est chef d'État symbolique mais le vrai pouvoir appartient au Parlement élu et au Premier ministre. C'est une démocratie à part entière." }
+        ],
+        flashcards: [
+          { front: "Les 6 critères d'une démocratie", back: "1. Vote libre et régulier\n2. Pluripartisme\n3. Liberté d'expression et de presse\n4. Débat contradictoire\n5. Séparation des pouvoirs\n6. Droits et libertés respectés" },
+          { front: "Monarchie parlementaire", back: "Le roi/la reine est chef d'État symbolique. Le vrai pouvoir appartient au Parlement élu et au Premier ministre. Exemple : Royaume-Uni. C'est une démocratie." },
+          { front: "Monarchie absolue", back: "Le roi détient seul tous les pouvoirs sans partage, sans constitution limitant son autorité. Exemple : Arabie Saoudite. Régime non-démocratique." },
+          { front: "Régime autoritaire", back: "Les libertés civiles sont limitées, les élections ne sont pas libres, l'opposition est réprimée. Exemple : Russie de Poutine, Chine de Xi Jinping. Un seul parti ou candidat domine." },
+          { front: "Régime totalitaire", back: "Le parti unique contrôle tous les aspects de la vie (politique, économique, social, culturel). Propagande massive. Exemple : URSS stalinienne, Corée du Nord, Allemagne nazie." },
+          { front: "République (France)", back: "Le chef de l'État (Président) est élu par le peuple. Il n'est pas héréditaire. La France est une République représentative : les citoyens élisent leurs représentants." }
+        ],
+        summary: `<h2>Démocratie et régimes politiques</h2>
+<h3>1. Les 6 caractéristiques d'une démocratie</h3>
+<ul>
+<li><strong>Vote libre et régulier</strong> : élections avec suffrage universel</li>
+<li><strong>Pluripartisme</strong> : plusieurs partis politiques en concurrence</li>
+<li><strong>Liberté d'expression et de presse</strong> : médias indépendants de l'État</li>
+<li><strong>Débat contradictoire</strong> : l'opposition peut s'exprimer librement</li>
+<li><strong>Séparation des pouvoirs</strong> : exécutif, législatif, judiciaire indépendants</li>
+<li><strong>Droits et libertés respectés</strong> : État de droit</li>
+</ul>
+<h3>2. Tableau des régimes politiques</h3>
+<table style="width:100%;border-collapse:collapse;font-size:0.9em">
+  <tr style="background:var(--card2)"><th>Régime</th><th>Exemple</th><th>Démocratie ?</th></tr>
+  <tr><td>République</td><td>France</td><td>✅ Oui</td></tr>
+  <tr><td>Monarchie parlementaire</td><td>Royaume-Uni</td><td>✅ Oui</td></tr>
+  <tr><td>Régime autoritaire</td><td>Russie</td><td>❌ Non</td></tr>
+  <tr><td>Régime totalitaire</td><td>Chine</td><td>❌ Non</td></tr>
+  <tr><td>Monarchie absolue</td><td>Arabie Saoudite</td><td>❌ Non</td></tr>
+</table>
+<h3>3. Démocratie vs régimes non-démocratiques</h3>
+<ul>
+<li><strong>Démocratie</strong> : le peuple choisit ses dirigeants librement, les libertés sont garanties</li>
+<li><strong>Régime autoritaire</strong> : élections non libres, opposition réprimée, presse contrôlée</li>
+<li><strong>Régime totalitaire</strong> : contrôle de tous les aspects de la vie par le parti unique, propagande</li>
+<li><strong>Monarchie absolue</strong> : tout le pouvoir appartient au roi héréditaire, sans constitution</li>
+</ul>
+<div class="date-box">⚖️ Le Royaume-Uni est une monarchie MAIS c'est une démocratie : le pouvoir réel appartient au Parlement élu, pas au roi.</div>`,
+        mindmap: { center: "Régimes politiques", branches: [
+          { label: "Démocraties", color: "#00b894", children: ["République (France)","Monarchie parl. (UK)","Vote libre","Liberté presse"] },
+          { label: "6 critères démocratie", color: "#0984e3", children: ["Vote libre","Pluripartisme","Liberté expression","Séparation pouvoirs"] },
+          { label: "Régimes non-démo", color: "#e94560", children: ["Autoritaire (Russie)","Totalitaire (Chine)","Monarchie absolue (AS)","Parti unique"] },
+          { label: "Différences clés", color: "#fdcb6e", children: ["Élections libres ?","Opposition tolérée ?","Presse indépendante ?","Droits respectés ?"] }
         ]}
       }
     ]
