@@ -1533,6 +1533,154 @@ Les pommes que nous avons mangées → COD avant → <strong>accord féminin plu
     emoji: "⚗️", name: "Physique-Chimie", color: "#e17055",
     chapters: [
       {
+        id: "atomes-molecules", title: "Atomes et molécules", desc: "Modèle particulaire, états de la matière, corps purs et mélanges",
+        quiz: [
+          { q: "Qu'est-ce qu'un atome ?", options: ["Un assemblage de plusieurs molécules","La plus petite particule de matière qui ne peut pas se diviser","Un mélange de protons et d'électrons libres","Une molécule très petite"], correct: 1, explanation: "Un atome est la plus petite particule de matière qui ne peut pas se diviser par procédé chimique. Une molécule est un assemblage d'atomes." },
+          { q: "Dans l'état gazeux, les molécules sont :", options: ["Ordonnées et compactes","Désordonnées mais compactes","Désordonnées et dispersées","Immobiles"], correct: 2, explanation: "Dans l'état gazeux, les molécules sont désordonnées et dispersées. Dans le solide elles sont ordonnées et compactes, dans le liquide désordonnées mais compactes." },
+          { q: "Un corps pur est composé :", options: ["D'au moins deux espèces chimiques","D'une seule espèce chimique","D'un mélange homogène","De molécules uniquement, sans atomes"], correct: 1, explanation: "Un corps pur est composé d'une seule espèce chimique (ex : eau pure H₂O). Un mélange en contient au moins deux." },
+          { q: "La formule H₂O nous indique :", options: ["2 molécules d'hydrogène et 1 oxygène","1 atome d'oxygène et 2 atomes d'hydrogène par molécule","2 atomes d'oxygène et 1 hydrogène","3 atomes d'hydrogène"], correct: 1, explanation: "La formule chimique donne la nature et le nombre d'atomes. H₂O = 1 atome O et 2 atomes H. Le symbole O est central, entouré de 2 H." },
+          { q: "Quelle est la différence entre un mélange homogène et hétérogène ?", options: ["Un mélange homogène contient plus d'espèces","Un mélange homogène est en une seule phase, hétérogène en plusieurs","Un mélange homogène est toujours liquide","Il n'y a pas de différence"], correct: 1, explanation: "Mélange homogène : une seule phase (ex : eau sucrée). Mélange hétérogène : plusieurs phases visibles (ex : eau et huile, eau et sable)." }
+        ],
+        flashcards: [
+          { front: "Atome", back: "Plus petite particule de matière indivisible chimiquement.\nPossède un noyau (protons + neutrons) entouré d'électrons.\nEx : H (hydrogène), C (carbone), O (oxygène), N (azote)" },
+          { front: "Molécule", back: "Assemblage d'atomes liés entre eux, plus stable que les atomes seuls.\nReprésentée par une formule chimique.\nEx : H₂O (eau), CO₂ (dioxyde de carbone), O₂ (dioxygène)" },
+          { front: "États de la matière", back: "Solide : molécules ordonnées et compactes\nLiquide : molécules désordonnées mais compactes\nGaz : molécules désordonnées et dispersées\nUne transformation physique change l'état, pas la nature chimique." },
+          { front: "Corps pur / Mélange", back: "Corps pur : une seule espèce chimique (ex : NaCl pur)\nMélange homogène : plusieurs espèces, une seule phase (ex : eau salée)\nMélange hétérogène : plusieurs espèces, plusieurs phases (ex : eau + huile)" },
+          { front: "Formule chimique", back: "Donne la nature et le nombre d'atomes d'une molécule.\nLes symboles sont en ordre alphabétique.\nEx : H₂O = 2 H + 1 O ; CO₂ = 1 C + 2 O ; CH₄ = 1 C + 4 H" },
+          { front: "Atomes à connaître", back: "H (Hydrogène) — sphère blanche\nC (Carbone) — sphère noire\nO (Oxygène) — sphère rouge\nN (Azote) — sphère bleue\nFe (Fer), Na (Sodium), Cl (Chlore)..." }
+        ],
+        summary: `<h2>Atomes et molécules</h2>
+<h3>1. Le modèle particulaire</h3>
+<p>La matière est constituée de <strong>particules</strong> : des <strong>atomes</strong> ou des <strong>molécules</strong>.</p>
+<ul>
+<li><strong>Atome</strong> : plus petite particule de matière indivisible chimiquement</li>
+<li><strong>Molécule</strong> : assemblage d'atomes liés entre eux</li>
+</ul>
+<h3>2. Les trois états de la matière</h3>
+<ul>
+<li><strong>Solide</strong> : molécules ordonnées et compactes</li>
+<li><strong>Liquide</strong> : molécules désordonnées mais compactes</li>
+<li><strong>Gaz</strong> : molécules désordonnées et dispersées</li>
+</ul>
+<p>Une <strong>transformation physique</strong> (changement d'état) ne change pas la nature des espèces chimiques.</p>
+<h3>3. Corps purs et mélanges</h3>
+<ul>
+<li><strong>Corps pur</strong> : une seule espèce chimique (ex : eau distillée H₂O)</li>
+<li><strong>Mélange homogène</strong> : plusieurs espèces, une seule phase visible (ex : eau + sucre)</li>
+<li><strong>Mélange hétérogène</strong> : plusieurs phases visibles (ex : eau + huile)</li>
+</ul>
+<h3>4. Formules et modèles</h3>
+<p>La <strong>formule chimique</strong> donne la nature et le nombre d'atomes. Symboles par ordre alphabétique.</p>
+<ul>
+<li>H₂O : 1 atome O + 2 atomes H (eau)</li>
+<li>CO₂ : 1 atome C + 2 atomes O (dioxyde de carbone)</li>
+<li>O₂ : 2 atomes O (dioxygène)</li>
+<li>N₂ : 2 atomes N (diazote)</li>
+</ul>`,
+        mindmap: { center: "Atomes & Molécules", branches: [
+          { label: "Modèle particulaire", color: "#e17055", children: ["Atome : indivisible","Molécule : assemblage","Formule chimique","Ordre alphabétique"] },
+          { label: "États de la matière", color: "#0984e3", children: ["Solide : ordonné compact","Liquide : désordonné compact","Gaz : désordonné dispersé","Transformation physique"] },
+          { label: "Corps & Mélanges", color: "#00b894", children: ["Corps pur : 1 espèce","Mélange homogène : 1 phase","Mélange hétérogène : 2+ phases"] },
+          { label: "Atomes à connaître", color: "#6c5ce7", children: ["H blanc","C noir","O rouge","N bleu","Fe fer"] }
+        ]}
+      },
+      {
+        id: "transformations-chimiques", title: "Transformations chimiques", desc: "Réactifs, produits, équations de réaction, conservation de la masse",
+        quiz: [
+          { q: "Comment identifier une transformation chimique ?", options: ["Par un changement d'état uniquement","Par l'apparition d'une nouvelle espèce (couleur, gaz) et/ou un changement de température","Par le fait que les molécules changent d'état","Par une augmentation du volume"], correct: 1, explanation: "Une transformation chimique produit de nouvelles espèces (changement de couleur, apparition d'un gaz) et/ou un changement de température. Une transformation physique n'est qu'un changement d'état." },
+          { q: "Dans une équation de réaction, les réactifs sont :", options: ["À droite de la flèche","À gauche de la flèche","Des deux côtés","Seuls sans produits"], correct: 1, explanation: "Réactifs (molécules de départ) à gauche → Produits (molécules obtenues) à droite. Ex : C + O₂ → CO₂." },
+          { q: "Qu'est-ce qu'une équation ajustée ?", options: ["Une équation avec un seul réactif","Une équation où chaque atome est présent en même nombre de chaque côté","Une équation sans coefficient","Une équation avec un seul produit"], correct: 1, explanation: "Équation ajustée : chaque atome est présent en même nombre des deux côtés de la flèche. Loi de conservation de la matière." },
+          { q: "Lors d'une transformation chimique, la masse est :", options: ["Augmentée","Diminuée","Conservée : m_réactifs = m_produits","Variable selon la réaction"], correct: 2, explanation: "Loi de conservation de la masse : m_réactifs = m_produits. Si on fait réagir 50g de C avec 50g de O₂, on obtient 100g de CO₂." },
+          { q: "L'équation CH₄ + 2O₂ → CO₂ + 2H₂O est-elle ajustée ?", options: ["Non, il manque des atomes","Oui : 1C, 4H, 4O de chaque côté","Non, il y a trop d'oxygène","Impossible à vérifier"], correct: 1, explanation: "Vérification : C: 1=1 ✓ / H: 4=2×2=4 ✓ / O: 2×2=4 de gauche, 2+2×1=4 de droite ✓. L'équation est bien ajustée." }
+        ],
+        flashcards: [
+          { front: "Transformation chimique", back: "Des espèces disparaissent, de nouvelles apparaissent (réarrangement d'atomes).\nSignes : changement de couleur, apparition de gaz, changement de température.\nEx : rouille du fer, caramelisation du sucre, combustion" },
+          { front: "Transformation physique", back: "Simple changement d'état : solide ↔ liquide ↔ gaz.\nLes espèces chimiques sont identiques avant et après.\nEx : eau qui bout (liquide → gaz), glace qui fond" },
+          { front: "Réactifs et Produits", back: "Réactifs : espèces chimiques au début (gauche de la flèche)\nProduits : espèces chimiques obtenues (droite de la flèche)\nEx : C + O₂ → CO₂\nRéactifs : C et O₂ / Produit : CO₂" },
+          { front: "Équation ajustée", back: "Loi : chaque atome est en même nombre de chaque côté.\nEx : 2C + O₂ → 2CO\nGauche : 2C et 2O / Droite : 2C et 2O ✓\nSinon, on ajoute des coefficients devant les formules." },
+          { front: "Conservation de la masse", back: "m_réactifs = m_produits\nLors d'une transformation chimique, la masse totale est conservée.\nEx : 50g C + 50g O₂ → 100g CO₂" },
+          { front: "Combustion du méthane", back: "CH₄ + 2O₂ → CO₂ + 2H₂O\nVérification : C: 1=1, H: 4=4, O: 4=4 ✓\nRéactifs : méthane + dioxygène\nProduits : dioxyde de carbone + eau" }
+        ],
+        summary: `<h2>Transformations chimiques</h2>
+<h3>1. Transformation chimique vs physique</h3>
+<p><strong>Transformation chimique</strong> : nouvelles espèces apparaissent</p>
+<ul>
+<li>Indices : changement de couleur, apparition d'un gaz, changement de température</li>
+<li>Ex : rouille (Fe + O₂ → Fe₂O₃), caramélisation, combustion</li>
+</ul>
+<p><strong>Transformation physique</strong> : changement d'état uniquement, espèces identiques</p>
+<ul><li>Ex : eau qui bout (H₂O liquide → H₂O gaz)</li></ul>
+<h3>2. Équation de réaction</h3>
+<p><strong>Réactifs → Produits</strong> (à gauche → à droite de la flèche)</p>
+<p>Exemple : C + O₂ → CO₂</p>
+<h3>3. Les deux lois</h3>
+<p><strong>Loi 1 — Équation ajustée</strong> : chaque atome est en même nombre de chaque côté</p>
+<ul>
+<li>Ex : 2C + O₂ → 2CO (2C et 2O de chaque côté ✓)</li>
+<li>Ex : CH₄ + 2O₂ → CO₂ + 2H₂O (C: 1=1, H: 4=4, O: 4=4 ✓)</li>
+</ul>
+<p><strong>Loi 2 — Conservation de la masse</strong> : m_réactifs = m_produits</p>
+<ul><li>50g C + 50g O₂ → 100g CO₂</li></ul>`,
+        mindmap: { center: "Transformations chimiques", branches: [
+          { label: "Identifier", color: "#e17055", children: ["Changement de couleur","Apparition d'un gaz","Changement de température","Nouvelle espèce"] },
+          { label: "Équation", color: "#0984e3", children: ["Réactifs (gauche)","Produits (droite)","Flèche de réaction","Coefficients stœchiométriques"] },
+          { label: "Loi 1 : Ajustée", color: "#00b894", children: ["Même nombre d'atomes","De chaque côté","Ajouter coefficients","Vérifier atome par atome"] },
+          { label: "Loi 2 : Masse", color: "#6c5ce7", children: ["m_réactifs = m_produits","Masse conservée","Atomes réarrangés","Pas créés ni détruits"] }
+        ]}
+      },
+      {
+        id: "structure-atome", title: "Structure de l'atome", desc: "Noyau, protons, neutrons, électrons, numéro atomique Z, nombre de masse A",
+        quiz: [
+          { q: "Le noyau d'un atome est composé de :", options: ["Protons et électrons","Protons et neutrons (nucléons)","Neutrons et électrons","Électrons seulement"], correct: 1, explanation: "Le noyau contient les nucléons : protons (charge positive) et neutrons (charge neutre). Les électrons (négatifs) gravitent autour dans le cortège électronique." },
+          { q: "Un atome est électriquement neutre car :", options: ["Il n'a pas de charges","Il possède autant de protons que d'électrons","Il a plus d'électrons que de protons","Ses neutrons annulent tout"], correct: 1, explanation: "Atome neutre = autant de charges + (protons) que de charges − (électrons). Ex : le carbone a 6 protons et 6 électrons." },
+          { q: "Dans la représentation ᴬzX, que représente Z ?", options: ["Le nombre de masse (nucléons)","Le numéro atomique (nombre de protons)","Le nombre de neutrons","Le nombre d'électrons de valence"], correct: 1, explanation: "Z = numéro atomique = nombre de protons = nombre d'électrons (atome neutre). A = nombre de masse = nombre de nucléons (protons + neutrons)." },
+          { q: "L'atome de fer a Z=26 et A=56. Combien de neutrons possède-t-il ?", options: ["26","30","56","82"], correct: 1, explanation: "Nombre de neutrons = A − Z = 56 − 26 = 30. L'atome de fer possède 26 protons, 30 neutrons et 26 électrons." },
+          { q: "Qui a découvert l'électron en 1897 ?", options: ["Rutherford","Thomson","Mendeleïev","Bohr"], correct: 1, explanation: "Thomson a découvert l'électron en 1897 et proposé un modèle de l'atome. En 1911, Rutherford a mis en évidence l'existence du noyau et des protons." }
+        ],
+        flashcards: [
+          { front: "Composition de l'atome", back: "Noyau central : protons (+) et neutrons (neutres)\nCortège électronique : électrons (−) autour du noyau\nL'atome est électriquement neutre : nb protons = nb électrons" },
+          { front: "Numéro atomique Z et nombre de masse A", back: "Z = numéro atomique = nombre de protons = nombre d'électrons\nA = nombre de masse = nombre de nucléons (protons + neutrons)\nNombre de neutrons = A − Z" },
+          { front: "Représentation symbolique ᴬzX", back: "A en haut (nombre de nucléons)\nZ en bas (nombre de protons)\nX = symbole de l'élément\nEx : ¹²₆C → carbone, 6 protons, 12 nucléons, 6 neutrons" },
+          { front: "Atome de fer (Fe)", back: "Z = 26 protons → 26 électrons\nA = 56 nucléons → 56 − 26 = 30 neutrons\nDiamètre atome ≈ 10⁻¹⁰ m\nDiamètre noyau ≈ 10⁻¹⁵ m (100 000× plus petit !)" },
+          { front: "Isotopes", back: "Deux atomes d'un même élément chimique peuvent avoir des masses différentes mais le même nombre de protons Z.\nEx : ¹²C et ¹⁴C : tous les deux 6 protons, mais 6 ou 8 neutrons." },
+          { front: "Histoire de l'atome", back: "1897 : Thomson découvre l'électron\n1904 : Thomson propose modèle (sphère + avec e−)\n1911 : Rutherford → existence du noyau et du proton\n1920 : découverte du neutron et des isotopes" }
+        ],
+        summary: `<h2>Structure de l'atome</h2>
+<h3>1. Composition</h3>
+<ul>
+<li><strong>Noyau</strong> : protons (+) + neutrons (neutres) → nucléons</li>
+<li><strong>Cortège électronique</strong> : électrons (−) autour du noyau</li>
+<li>Atome <strong>électriquement neutre</strong> : nb protons = nb électrons</li>
+</ul>
+<h3>2. Numéro atomique Z et nombre de masse A</h3>
+<p>Représentation : <strong>ᴬ<sub>Z</sub>X</strong></p>
+<ul>
+<li><strong>Z</strong> = numéro atomique = nombre de protons (= nombre d'électrons)</li>
+<li><strong>A</strong> = nombre de masse = nombre de nucléons</li>
+<li><strong>Nb neutrons</strong> = A − Z</li>
+</ul>
+<p>Ex : le fer <sup>56</sup><sub>26</sub>Fe → Z=26 protons, A=56 nucléons, 56−26=<strong>30 neutrons</strong></p>
+<h3>3. Le tableau périodique (Mendeleïev, 1869)</h3>
+<ul>
+<li>Classe tous les éléments selon leur numéro atomique Z et leurs propriétés</li>
+<li>Les éléments d'une même colonne ont les mêmes propriétés chimiques</li>
+<li>Donne : symbole, A et Z de chaque élément</li>
+</ul>
+<h3>4. L'origine des éléments</h3>
+<ul>
+<li>Éléments légers (H, He) : formés après le Big Bang</li>
+<li>Éléments jusqu'au fer : synthétisés dans les étoiles</li>
+<li>Éléments lourds : formés lors des supernovas</li>
+<li>Hubert Reeves : <em>« Nous sommes tous des poussières d'étoiles »</em></li>
+</ul>`,
+        mindmap: { center: "Structure de l'atome", branches: [
+          { label: "Composition", color: "#e17055", children: ["Noyau : p+ et n0","Cortège : électrons e−","Neutre : p = e","Nucléons = p + n"] },
+          { label: "Nombres Z et A", color: "#0984e3", children: ["Z = nb protons","A = nb nucléons","Neutrons = A−Z","Représentation ᴬzX"] },
+          { label: "Tableau périodique", color: "#00b894", children: ["Mendeleïev 1869","Classé par Z","Même colonne = mêmes propriétés","118 éléments connus"] },
+          { label: "Origine des éléments", color: "#fdcb6e", children: ["Big Bang : H, He","Étoiles : jusqu'au Fe","Supernovas : éléments lourds","Poussières d'étoiles"] }
+        ]}
+      },
+      {
         id: "electricite", title: "Circuits électriques", desc: "Tension, intensité, résistance (loi d'Ohm)",
         quiz: [
           { q: "Que mesure un voltmètre ?", options: ["L'intensité du courant","La résistance","La tension électrique (différence de potentiel)","La puissance"], correct: 2, explanation: "Un voltmètre mesure la tension (en volts, V). Il se branche en dérivation (parallèle) aux bornes du composant." },
