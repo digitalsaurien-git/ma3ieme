@@ -1488,6 +1488,92 @@ Les pommes que nous avons mangées → COD avant → <strong>accord féminin plu
     emoji: "🧬", name: "SVT", color: "#00cec9",
     chapters: [
       {
+        id: "classification", title: "Classification du vivant", desc: "Attributs, groupes emboîtés et classification phylogénétique",
+        quiz: [
+          { q: "Qu'est-ce qu'un attribut en classification ?", options: ["Un nom scientifique d'espèce","Une structure biologique partagée par plusieurs espèces","La couleur d'un animal","Le régime alimentaire d'un être vivant"], correct: 1, explanation: "Un attribut est une structure biologique (ex : poils, plumes, 3 paires de pattes) qui peut être partagée par plusieurs espèces et sert à les regrouper." },
+          { q: "Les groupes emboîtés signifient que :", options: ["Chaque espèce est unique et séparée","Chaque groupe est inclus dans un groupe plus grand","Les espèces forment des groupes égaux","Les animaux vivent en groupe"], correct: 1, explanation: "La classification est organisée en groupes emboîtés : un groupe plus petit est entièrement inclus dans un groupe plus grand. Ex : les Mammifères sont dans les Vertébrés." },
+          { q: "Quel attribut partagent l'homme, la souris et le pigeon ?", options: ["Les poils","Les plumes","Un squelette interne","3 paires de pattes"], correct: 2, explanation: "Un squelette interne est partagé par tous les Vertébrés : mammifères, oiseaux, reptiles, poissons, amphibiens." },
+          { q: "L'araignée (épeire) se distingue des insectes par :", options: ["L'absence de tête","4 paires de pattes (8 pattes) au lieu de 3","Sa taille","Son régime alimentaire"], correct: 1, explanation: "Les araignées (arachnides) ont 4 paires de pattes (8 pattes), tandis que les insectes ont 3 paires de pattes (6 pattes)." },
+          { q: "La classification phylogénétique regroupe les êtres vivants selon :", options: ["Leurs ressemblances physiques uniquement","Leur milieu de vie","Leurs attributs hérités d'un ancêtre commun","Leur taille et leur masse"], correct: 2, explanation: "La classification phylogénétique regroupe les êtres vivants selon les attributs issus d'un ancêtre commun, reflétant leur histoire évolutive." }
+        ],
+        flashcards: [
+          { front: "Attribut", back: "Structure biologique portée par un être vivant.\nPermet de regrouper des espèces partageant cet attribut.\nEx : poils + mamelles (Mammifères), plumes (Oiseaux), 3 paires de pattes (Insectes)" },
+          { front: "Groupes emboîtés", back: "Principe de classification : chaque groupe est inclus dans un groupe plus grand.\nEx : Homme → Primates → Mammifères → Vertébrés → Animaux\nUn groupe emboîté partage tous les attributs du groupe qui le contient." },
+          { front: "Principaux groupes à connaître", back: "Vertébrés : squelette interne\n• Mammifères : poils + mamelles\n• Oiseaux : plumes + bec\n• Reptiles : écailles\nArthropodes : squelette externe\n• Insectes : 3 paires de pattes\n• Arachnides : 4 paires de pattes" },
+          { front: "Classification phylogénétique", back: "Classe les êtres vivants selon leur histoire évolutive commune.\nDeux espèces sont dans le même groupe si elles partagent un attribut hérité d'un ancêtre commun.\nDifférent de la classification par ressemblance (ancienne méthode)." },
+          { front: "Espèce", back: "Groupe d'individus capables de se reproduire entre eux et de donner des descendants fertiles.\nNommée en latin : Genre espèce (ex : Homo sapiens)\nL'espèce est le groupe de base de la classification." },
+          { front: "Exemple de groupes emboîtés", back: "Coccinelle : tête + yeux + bouche / squelette externe / 3 paires de pattes\n→ Insecte → Arthropode → Animal\nPigeon : squelette interne / plumes\n→ Oiseau → Vertébré → Animal\nHomme : squelette interne / poils + mamelles\n→ Mammifère → Vertébré → Animal" }
+        ],
+        summary: `<h2>Classification du vivant</h2>
+<p>Classer les êtres vivants, c'est les regrouper selon des <strong>attributs</strong> partagés, reflétant leur histoire évolutive commune.</p>
+<h3>📌 Les attributs</h3>
+<p>Un <strong>attribut</strong> est une structure biologique portée par un être vivant (ex : poils, plumes, squelette interne, 3 paires de pattes). Pour qu'il serve à la classification, il doit être hérité d'un <strong>ancêtre commun</strong>.</p>
+<h3>🔲 Les groupes emboîtés</h3>
+<p>La classification est organisée en <strong>groupes emboîtés</strong> : chaque groupe plus petit est entièrement inclus dans un groupe plus grand. Tous les membres d'un groupe partagent les attributs de ce groupe.</p>
+<table style="width:100%;border-collapse:collapse;font-size:0.9em;">
+<tr style="background:var(--accent);color:#fff;"><th style="padding:6px">Groupe</th><th style="padding:6px">Attributs clés</th><th style="padding:6px">Exemples</th></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px"><strong>Vertébrés</strong></td><td style="padding:6px">Squelette interne</td><td style="padding:6px">Homme, pigeon, souris</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px"><strong>Mammifères</strong></td><td style="padding:6px">Poils + mamelles</td><td style="padding:6px">Homme, souris</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px"><strong>Oiseaux</strong></td><td style="padding:6px">Plumes + bec</td><td style="padding:6px">Pigeon, pinson</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px"><strong>Arthropodes</strong></td><td style="padding:6px">Squelette externe + pattes</td><td style="padding:6px">Araignée, insectes</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px"><strong>Insectes</strong></td><td style="padding:6px">3 paires de pattes</td><td style="padding:6px">Pyrrhocore, coccinelle</td></tr>
+<tr><td style="padding:6px"><strong>Arachnides</strong></td><td style="padding:6px">4 paires de pattes</td><td style="padding:6px">Épeire diadème</td></tr>
+</table>
+<h3>🌳 Classification phylogénétique</h3>
+<p>La classification moderne est <strong>phylogénétique</strong> : elle regroupe les espèces selon leur histoire évolutive et leur ancêtre commun, pas seulement leur ressemblance physique. Exemple : la chauve-souris et la baleine sont deux mammifères malgré leurs modes de vie très différents.</p>`,
+        mindmap: { center: "Classification du vivant", branches: [
+          { label: "Attribut", color: "#00cec9", children: ["Structure biologique","Hérité d'un ancêtre","Ex : poils, plumes, pattes"] },
+          { label: "Groupes emboîtés", color: "#0984e3", children: ["Groupe ⊂ groupe plus grand","Attributs communs","Du général au particulier"] },
+          { label: "Vertébrés", color: "#00b894", children: ["Squelette interne","Mammifères : poils","Oiseaux : plumes","Reptiles : écailles"] },
+          { label: "Arthropodes", color: "#6c5ce7", children: ["Squelette externe","Insectes : 3 paires","Arachnides : 4 paires"] }
+        ]}
+      },
+      {
+        id: "evolution", title: "Évolution des espèces", desc: "Crises biologiques, théories de Lamarck et Darwin, sélection naturelle",
+        quiz: [
+          { q: "Que s'est-il passé il y a environ 65 Ma (crise Crétacé/Tertiaire) ?", options: ["Apparition des mammifères","Extinction massive des dinosaures et des ammonites","Explosion du nombre d'espèces d'oiseaux","Début de l'ère glaciaire"], correct: 1, explanation: "À −65 Ma, une crise biologique majeure a provoqué l'extinction des dinosaures (non-aviens) et des ammonites. Elle aurait été causée par une météorite et/ou un volcanisme intense." },
+          { q: "Quelle est la principale différence entre les théories de Lamarck et de Darwin ?", options: ["Lamarck parle d'espèces, Darwin de populations","Pour Lamarck les individus se transforment, pour Darwin c'est la sélection des individus les mieux adaptés","Darwin pense que les espèces ne changent pas","Lamarck a travaillé sur les pinsons"], correct: 1, explanation: "Lamarck : les individus se modifient (organes utilisés se développent) et transmettent ces modifications. Darwin : les individus varient naturellement ; les plus adaptés survivent et se reproduisent davantage (sélection naturelle)." },
+          { q: "Quelle observation a inspiré Darwin pour élaborer sa théorie ?", options: ["Les girafes qui allongent leur cou","Les différences de bec entre pinsons des îles Galapagos","La taille des éléphants en Afrique","La couleur des panthères"], correct: 1, explanation: "Darwin a observé que les pinsons des Galapagos avaient des becs différents selon les îles, adaptés aux ressources alimentaires disponibles. C'est de cette diversité qu'il a tiré l'idée de la sélection naturelle." },
+          { q: "La sélection naturelle, selon Darwin, c'est :", options: ["Les humains qui choisissent les animaux les plus forts","La survie et reproduction préférentielle des individus les mieux adaptés","Les animaux qui s'entraînent à survivre","La disparition de toutes les espèces fragiles"], correct: 1, explanation: "La sélection naturelle = les individus dont les variations sont les plus avantageuses dans un milieu survivent mieux et se reproduisent plus, transmettant ces variations à leur descendance." },
+          { q: "Pourquoi la théorie de Darwin est-elle préférée à celle de Lamarck ?", options: ["Darwin était plus célèbre","La théorie de Lamarck n'a jamais existé","Les caractères acquis au cours de la vie ne se transmettent pas aux descendants","Darwin a travaillé plus longtemps"], correct: 2, explanation: "La génétique moderne a montré que les caractères acquis (muscles développés par l'entraînement, par exemple) ne modifient pas l'ADN et ne se transmettent pas à la descendance. La sélection naturelle de Darwin est validée." }
+        ],
+        flashcards: [
+          { front: "Crise biologique", back: "Disparition brutale d'un grand nombre d'espèces en un temps géologique court.\nEx : crise Crétacé/Tertiaire (−65 Ma) : extinction des dinosaures et ammonites.\nCauses probables : météorite de Chicxulub (cratère 200 km) + volcanisme en Inde." },
+          { front: "Théorie de Lamarck (transformisme)", back: "• Les organismes se transforment au cours de leur vie\n• Un organe utilisé se développe (ex : cou de la girafe)\n• Les caractères acquis se transmettent aux descendants\n❌ Invalidée : les modifications d'un organe ne modifient pas l'ADN" },
+          { front: "Théorie de Darwin (sélection naturelle)", back: "• Les individus d'une espèce présentent des variations naturelles\n• Certaines variations sont avantageuses dans un milieu\n• Les individus les mieux adaptés survivent et se reproduisent plus\n• Les variations avantageuses se transmettent à la descendance\n✅ Théorie actuellement admise" },
+          { front: "Les pinsons de Darwin (Galapagos)", back: "Darwin observe que les pinsons des îles Galapagos ont des becs différents selon les îles.\nBec puissant → graines dures (granivore)\nBec fin → insectes et nectar (insectivore)\nTous descendent d'une population originelle d'Amérique du Sud.\nLa diversité vient de la sélection naturelle sur chaque île." },
+          { front: "Sélection naturelle", back: "Mécanisme de l'évolution proposé par Darwin.\nDéfinition : conservation des variations favorables, destruction des nuisibles.\nRésultat : les espèces s'adaptent progressivement à leur milieu.\nÀ l'échelle de millions d'années → apparition de nouvelles espèces." },
+          { front: "Preuves de l'évolution", back: "• Fossiles : traces d'espèces disparues ou transformées\n• Anatomie comparée : membres similaires (homologues) dans des espèces différentes\n• Génétique : ADN proche entre espèces apparentées\n• Biogéographie : Darwin et les pinsons des Galapagos\n• Sélection artificielle : races de chiens, plantes cultivées" }
+        ],
+        summary: `<h2>Évolution des espèces</h2>
+<p>Les espèces changent au cours du temps géologique. Deux grandes théories ont tenté d'expliquer ce phénomène.</p>
+<h3>🦕 Les crises biologiques</h3>
+<p>Une <strong>crise biologique</strong> est une extinction massive d'espèces sur un temps court. La plus connue est la crise <strong>Crétacé/Tertiaire (−65 Ma)</strong> : disparition des dinosaures et des ammonites. Deux causes possibles :</p>
+<ul>
+<li><strong>Météorite</strong> : cratère de Chicxulub (Mexique), diamètre 200 km, météorite de 10 km</li>
+<li><strong>Volcanisme</strong> : 2 millions de km³ de lave émis en Inde (Trapps du Deccan)</li>
+</ul>
+<p>Après la crise, les mammifères et les oiseaux ont explosé en nombre de familles.</p>
+<h3>🦒 Théorie de Lamarck (transformisme)</h3>
+<p>Lamarck (naturaliste français) propose que les individus se transforment au cours de leur vie en réponse à leur environnement, et transmettent ces modifications à leur descendance. Exemple : la girafe allonge son cou en cherchant à atteindre les feuilles hautes.</p>
+<p><strong>❌ Invalidée :</strong> les caractères acquis ne se transmettent pas (un sportif musclé n'aura pas d'enfant musclé automatiquement).</p>
+<h3>🐦 Théorie de Darwin (sélection naturelle)</h3>
+<p>Darwin observe les pinsons des Galapagos : tous descendants d'une population d'Amérique du Sud, mais avec des becs différents adaptés à chaque île. Il propose la <strong>sélection naturelle</strong> :</p>
+<ol>
+<li>Il existe des <strong>variations naturelles</strong> au sein d'une population</li>
+<li>Certaines variations sont <strong>avantageuses</strong> dans un milieu</li>
+<li>Les individus avantagés <strong>survivent et se reproduisent plus</strong></li>
+<li>Les variations avantageuses se <strong>transmettent à la descendance</strong></li>
+</ol>
+<p><strong>✅ Théorie actuelle :</strong> la génétique moderne a confirmé que les variations sont des mutations de l'ADN, transmissibles.</p>`,
+        mindmap: { center: "Évolution des espèces", branches: [
+          { label: "Crises biologiques", color: "#e17055", children: ["−65 Ma Crétacé/Tertiaire","Extinc. dinosaures","Météorite Chicxulub","Volcanisme Inde"] },
+          { label: "Lamarck ❌", color: "#fdcb6e", children: ["Transformisme","Organe utilisé → développé","Caractères acquis transmis","Invalidé par génétique"] },
+          { label: "Darwin ✅", color: "#00b894", children: ["Variations naturelles","Sélection naturelle","+ adapté → + de descendants","Pinsons Galapagos"] },
+          { label: "Preuves évolution", color: "#6c5ce7", children: ["Fossiles","Anatomie comparée","ADN proche","Biogéographie"] }
+        ]}
+      },
+      {
         id: "genetique", title: "Génétique et hérédité", desc: "ADN, chromosomes et transmission des caractères",
         quiz: [
           { q: "Où se trouve l'ADN dans la cellule ?", options: ["Dans les mitochondries uniquement","Dans le noyau (et les mitochondries)","Dans le cytoplasme","Dans la membrane cellulaire"], correct: 1, explanation: "L'ADN est essentiellement dans le noyau (chromosomes), mais on en trouve aussi dans les mitochondries et les chloroplastes." },
