@@ -428,6 +428,11 @@ body {
 .mindmap-wrap { overflow-x: auto; }
 .mindmap-svg { display: block; margin: 0 auto; max-width: 100%; }
 
+/* VIDEO */
+.video-title { font-size: 0.95rem; color: var(--text2); margin-bottom: 12px; text-align: center; }
+.video-frame-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius); background: #000; }
+.video-frame-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
 /* TOAST */
 .toast {
   position: fixed;
@@ -660,6 +665,11 @@ body {
   <div class="mindmap-wrap">
     <svg class="mindmap-svg" id="mindmapSvg"></svg>
   </div>
+</div>
+
+<!-- SCREEN: VIDEO -->
+<div class="screen" id="screenVideo">
+  <div id="videoWrap"></div>
 </div>
 
 </div><!-- end main-area -->
@@ -1327,95 +1337,149 @@ Les pommes que nous avons mangées → COD avant → <strong>accord féminin plu
     emoji: "📐", name: "Mathématiques", color: "#00b894",
     chapters: [
       {
-        id: "pythagore-thales", title: "Pythagore et Thalès", desc: "Théorèmes fondamentaux de géométrie",
+        id: "maths-arithmetique", title: "Arithmétique et nombres premiers", desc: "Division euclidienne, PGCD, PPCM et fractions irréductibles",
+        video: { url: "https://www.youtube.com/embed/h8Q5vYdSK10", title: "Déterminer les diviseurs d'un nombre (YouTube)" },
         quiz: [
-          { q: "Que dit le théorème de Pythagore ?", options: ["Dans tout triangle rectangle, la somme des angles est 180°","Dans tout triangle rectangle, le carré de l'hypoténuse est égal à la somme des carrés des deux autres côtés","Deux droites parallèles ont la même pente","Le produit des diagonales d'un rectangle est constant"], correct: 1, explanation: "Pythagore : dans un triangle rectangle (angle droit en C), AC² + BC² = AB² (AB est l'hypoténuse)." },
-          { q: "Comment reconnaît-on un triangle rectangle avec Pythagore ?", options: ["Si la somme des angles est 90°","Si le plus grand côté est la somme des deux autres","Si AB² = AC² + BC² (AB le plus grand)","Si les deux petits côtés sont égaux"], correct: 2, explanation: "La réciproque de Pythagore : si AB² = AC² + BC², alors le triangle est rectangle en C (angle droit opposé au plus grand côté)." },
-          { q: "Que dit le théorème de Thalès ?", options: ["Les diagonales d'un parallélogramme se coupent en leur milieu","Si deux droites sont coupées par des parallèles, les rapports des segments sont égaux","La somme des angles d'un triangle est 180°","Les côtés d'un triangle isocèle sont égaux"], correct: 1, explanation: "Thalès : si (DE) // (BC), alors AD/AB = AE/AC = DE/BC (proportionnalité des segments)." },
-          { q: "Dans un triangle ABC, si (DE) // (BC) avec D sur AB et E sur AC, et AD=3, AB=9, AE=4, quelle est la valeur de AC ?", options: ["6","12","8","3"], correct: 1, explanation: "Par Thalès : AD/AB = AE/AC → 3/9 = 4/AC → AC = 4×9/3 = 12." },
-          { q: "Dans un triangle rectangle, l'hypoténuse est :", options: ["Le côté adjacent à l'angle droit","Le côté le plus court","Le côté opposé à l'angle droit (le plus long)","N'importe quel côté"], correct: 2, explanation: "L'hypoténuse est toujours le côté opposé à l'angle droit. C'est le côté le plus long du triangle rectangle." }
+          { q: "Qu'est-ce que la division euclidienne de a par b ?", options: ["a = b × q − r avec r < b","a = b × q + r avec 0 ≤ r < b","a = b + q × r","a × b = q + r"], correct: 1, explanation: "La division euclidienne de a par b donne un quotient q et un reste r tels que a = b × q + r avec 0 ≤ r < b. Ex : 187 = 13 × 14 + 5." },
+          { q: "Un nombre est divisible par 3 si :", options: ["Il se termine par 0 ou 3","La somme de ses chiffres est un multiple de 3","Il est pair","Son dernier chiffre est 3 ou 6"], correct: 1, explanation: "Critère de divisibilité par 3 : la somme des chiffres est un multiple de 3. Ex : 915 → 9+1+5=15, multiple de 3 ✓." },
+          { q: "Qu'est-ce qu'un nombre premier ?", options: ["Un nombre divisible par 2","Un nombre qui n'a que 1 et lui-même comme diviseurs","Un nombre négatif","Un nombre impair"], correct: 1, explanation: "Un nombre premier est un entier supérieur à 1 qui n'admet que deux diviseurs : 1 et lui-même. Ex : 2, 3, 5, 7, 11, 13, 17, 19, 23, 29..." },
+          { q: "Le PGCD de 48 et 36 est :", options: ["6","12","24","4"], correct: 1, explanation: "On cherche le Plus Grand Commun Diviseur. 48 = 2⁴ × 3, 36 = 2² × 3² → PGCD = 2² × 3 = 12. Vérification : 48/12=4 et 36/12=3." },
+          { q: "La fraction 14/21 simplifiée est :", options: ["7/10","1/3","2/3","3/7"], correct: 2, explanation: "PGCD(14, 21) = 7 car 14 = 7×2 et 21 = 7×3. Donc 14/21 = (14÷7)/(21÷7) = 2/3. La fraction irréductible est 2/3." }
         ],
         flashcards: [
-          { front: "Théorème de Pythagore", back: "Dans un triangle rectangle en C : AC² + BC² = AB²\n(AB = hypoténuse, côté opposé à l'angle droit)" },
-          { front: "Réciproque de Pythagore", back: "Si AB² = AC² + BC², alors le triangle ABC est rectangle en C. Permet de vérifier si un triangle est rectangle." },
-          { front: "Hypoténuse", back: "Côté opposé à l'angle droit dans un triangle rectangle. C'est toujours le plus grand côté. Noté généralement AB ou c." },
-          { front: "Théorème de Thalès", back: "Si (DE) // (BC) dans un triangle ABC : AD/AB = AE/AC = DE/BC\nRapports des longueurs égaux." },
-          { front: "Réciproque de Thalès", back: "Si AD/AB = AE/AC, alors (DE) // (BC). Permet de prouver que deux droites sont parallèles." },
-          { front: "Agrandissement / réduction", back: "Si k = AD/AB, alors DE = k × BC. Thalès permet de calculer les dimensions d'une figure similaire." }
+          { front: "Division euclidienne", back: "a = b × q + r avec 0 ≤ r < b\na : dividende, b : diviseur, q : quotient, r : reste\nEx : 187 = 13 × 14 + 5" },
+          { front: "Critères de divisibilité", back: "÷2 : dernier chiffre pair (0,2,4,6,8)\n÷3 : somme des chiffres multiple de 3\n÷5 : se termine par 0 ou 5\n÷9 : somme des chiffres multiple de 9" },
+          { front: "Nombre premier", back: "Entier > 1 n'ayant que 2 diviseurs : 1 et lui-même.\nListe : 2, 3, 5, 7, 11, 13, 17, 19, 23, 29...\nPour tester n, vérifier les premiers jusqu'à √n" },
+          { front: "Décomposition en facteurs premiers", back: "Tout entier > 1 se décompose de façon unique en produit de facteurs premiers.\nEx : 60 = 2² × 3 × 5\nEx : 45 = 3² × 5" },
+          { front: "PGCD (Plus Grand Commun Diviseur)", back: "Plus grand entier divisant à la fois a et b.\nMéthode : décomposer en facteurs premiers, prendre les facteurs communs avec le plus petit exposant.\nEx : PGCD(48, 36) = 12" },
+          { front: "Fraction irréductible", back: "Une fraction a/b est irréductible si PGCD(a, b) = 1.\nPour simplifier : diviser numérateur et dénominateur par leur PGCD.\nEx : 18/24 → PGCD=6 → 3/4" }
         ],
-        summary: `<h2>Pythagore et Thalès</h2>
-<h3>1. Le théorème de Pythagore</h3>
-<p>Dans un triangle rectangle en C : <strong>AC² + BC² = AB²</strong></p>
+        summary: `<h2>Arithmétique et nombres premiers</h2>
+<h3>1. Division euclidienne</h3>
+<p>Pour tout entier <strong>a</strong> et <strong>b</strong> (b ≠ 0) : <strong>a = b × q + r</strong> avec 0 ≤ r &lt; b</p>
+<p>• <em>q</em> est le quotient, <em>r</em> est le reste</p>
+<p>• Si r = 0, alors b divise a (a est un multiple de b)</p>
+<p>Exemple : 187 = 13 × 14 + 5 (quotient 14, reste 5)</p>
+<h3>2. Critères de divisibilité</h3>
 <ul>
-<li>AB est l'<strong>hypoténuse</strong> (côté opposé à l'angle droit, le plus long)</li>
-<li>Permet de calculer un côté manquant</li>
+<li>Par <strong>2</strong> : dernier chiffre = 0, 2, 4, 6 ou 8</li>
+<li>Par <strong>3</strong> : somme des chiffres multiple de 3</li>
+<li>Par <strong>4</strong> : les deux derniers chiffres divisibles par 4</li>
+<li>Par <strong>5</strong> : dernier chiffre = 0 ou 5</li>
+<li>Par <strong>9</strong> : somme des chiffres multiple de 9</li>
 </ul>
-<p><em>Exemple</em> : AC = 3, BC = 4 → AB² = 9 + 16 = 25 → AB = 5</p>
-<h3>2. La réciproque de Pythagore</h3>
-<p>Si <strong>AB² = AC² + BC²</strong>, alors le triangle est rectangle en C.</p>
-<p><em>Exemple</em> : AB = 5, AC = 3, BC = 4 → 25 = 9 + 16 ✓ → rectangle en C</p>
-<h3>3. Le théorème de Thalès</h3>
-<p>Dans un triangle ABC, si (DE) // (BC) avec D ∈ [AB] et E ∈ [AC] :</p>
-<p><strong>AD/AB = AE/AC = DE/BC</strong></p>
-<p><em>Exemple</em> : AD = 2, AB = 6, AE = 3 → DE/BC = 2/6 = 1/3 → DE = BC/3</p>
-<h3>4. La réciproque de Thalès</h3>
-<p>Si AD/AB = AE/AC, alors (DE) // (BC).</p>
-<h3>5. Méthode de calcul</h3>
-<ul>
-<li>Identifier les données et ce qu'on cherche</li>
-<li>Écrire la relation (Pythagore ou Thalès)</li>
-<li>Remplacer par les valeurs connues</li>
-<li>Résoudre (calculer la racine carrée si Pythagore)</li>
-</ul>`,
-        mindmap: { center: "Pythagore & Thalès", branches: [
-          { label: "Pythagore", color: "#00b894", children: ["Triangle rectangle","AC²+BC²=AB²","Hypoténuse","Calculer un côté"] },
-          { label: "Réciproque Pyth.", color: "#0984e3", children: ["AB²=AC²+BC²?","→ Triangle rectangle","Vérification"] },
-          { label: "Thalès", color: "#6c5ce7", children: ["(DE)//(BC)","AD/AB = AE/AC","Rapports égaux","Agrandissement/réduction"] },
-          { label: "Réciproque Thalès", color: "#e17055", children: ["Rapports égaux?","→ Droites parallèles","Démonstration"] }
+<p>Ex : 915 → divisible par 3 (9+1+5=15) et par 5, mais pas par 2, 4 ou 9.</p>
+<h3>3. Nombres premiers</h3>
+<p>Un nombre est <strong>premier</strong> s'il n'a que deux diviseurs : 1 et lui-même.</p>
+<p>Liste de début : 2, 3, 5, 7, 11, 13, 17, 19, 23, 29...</p>
+<p>Tout entier > 1 se décompose de façon unique en produit de facteurs premiers.</p>
+<p>Ex : 45 = 3² × 5 ; 60 = 2² × 3 × 5 ; 231 = 3 × 7 × 11</p>
+<h3>4. PGCD et fractions irréductibles</h3>
+<p>Le <strong>PGCD</strong> (Plus Grand Commun Diviseur) est le plus grand entier divisant deux nombres.</p>
+<p>Méthode : décomposer en facteurs premiers, prendre les facteurs communs au plus petit exposant.</p>
+<p>Ex : 48 = 2⁴×3 et 36 = 2²×3² → PGCD = 2²×3 = 12</p>
+<p>Une fraction <strong>a/b est irréductible</strong> quand PGCD(a,b) = 1 (on ne peut plus simplifier).</p>
+<p>Pour simplifier : diviser numérateur et dénominateur par leur PGCD.</p>
+<p>Ex : 882/1134 → PGCD = 126 → 882÷126 = 7, 1134÷126 = 9 → fraction irréductible = <strong>7/9</strong></p>`,
+        mindmap: { center: "Arithmétique", branches: [
+          { label: "Division euclidienne", color: "#00b894", children: ["a = b×q + r","Reste r < b","Multiples et diviseurs"] },
+          { label: "Critères divisibilité", color: "#0984e3", children: ["÷2 : chiffre pair","÷3 : somme chiffres","÷5 : 0 ou 5","÷9 : somme chiffres"] },
+          { label: "Nombres premiers", color: "#6c5ce7", children: ["2 diviseurs seulement","2,3,5,7,11,13...","Décomposition unique","Crible d'Ératosthène"] },
+          { label: "PGCD & Fractions", color: "#e17055", children: ["Facteurs communs","Fraction irréductible","PGCD(a,b)=1","Simplification"] }
         ]}
       },
       {
-        id: "calcul-litteral", title: "Calcul littéral et équations", desc: "Développer, factoriser, résoudre",
+        id: "maths-pythagore", title: "Théorème de Pythagore", desc: "Calcul de longueurs, réciproque et contraposée dans le triangle rectangle",
+        video: { url: "https://tube-sciences-technologies.apps.education.fr/videos/embed/4ayHQLCvGcHvUVudTD1tXU", title: "Les maths en 3 min ! Théorème de Pythagore" },
         quiz: [
-          { q: "Que vaut (a + b)² ?", options: ["a² + b²","a² + 2ab + b²","a² - b²","2a + 2b"], correct: 1, explanation: "(a+b)² = a² + 2ab + b² — première identité remarquable. On développe : (a+b)(a+b) = a²+ab+ab+b²." },
-          { q: "Que vaut (a - b)(a + b) ?", options: ["a² + b²","a² - 2ab + b²","a² - b²","(a-b)²"], correct: 2, explanation: "(a-b)(a+b) = a² - b² — troisième identité remarquable. Produit d'une somme par une différence." },
-          { q: "Factoriser 4x² - 9", options: ["(2x-3)(2x+3)","(4x-3)(x+3)","(2x-9)(2x+1)","(x-3)(x+3)"], correct: 0, explanation: "4x² - 9 = (2x)² - 3² → utiliser a² - b² = (a-b)(a+b) → (2x-3)(2x+3)." },
-          { q: "Résoudre 3x + 7 = 22", options: ["x = 5","x = 7","x = 3","x = 10"], correct: 0, explanation: "3x + 7 = 22 → 3x = 22 - 7 = 15 → x = 15/3 = 5." },
-          { q: "Développer (2x - 1)²", options: ["4x² - 1","4x² - 2x + 1","4x² - 4x + 1","4x² + 4x - 1"], correct: 2, explanation: "(a-b)² = a² - 2ab + b² → (2x-1)² = 4x² - 2×2x×1 + 1 = 4x² - 4x + 1." }
+          { q: "Dans un triangle rectangle en A, quelle relation lie les côtés ?", options: ["AB² + AC² = BC²","BC² = AB² + AC²","AB² = BC² + AC²","AC² = AB² − BC²"], correct: 1, explanation: "Dans un triangle rectangle, le carré de l'hypoténuse = somme des carrés des deux autres côtés. L'hypoténuse est le côté opposé à l'angle droit. Ici rectangle en A, donc BC (hypoténuse) → BC² = AB² + AC²." },
+          { q: "Le triangle ALE est rectangle en A, avec AL = 9 cm et AE = 12 cm. Quelle est la longueur EL ?", options: ["9 cm","15 cm","21 cm","√63 cm"], correct: 1, explanation: "EL² = AL² + AE² = 9² + 12² = 81 + 144 = 225 → EL = √225 = 15 cm. (Triangle 9-12-15 = triple du 3-4-5)." },
+          { q: "La réciproque de Pythagore permet de :", options: ["Calculer la longueur d'un côté","Vérifier qu'un triangle est rectangle","Trouver l'angle droit","Calculer l'aire du triangle"], correct: 1, explanation: "La réciproque : si c² = a² + b², alors le triangle est rectangle. Elle permet de VÉRIFIER si un triangle est rectangle sans mesurer les angles." },
+          { q: "On a AB = 5, AC = 3, BC = 4. Le triangle ABC est-il rectangle ?", options: ["Oui, en B","Oui, en C (car AB² = AC² + BC²)","Non, la relation n'est pas vérifiée","Oui, en A"], correct: 1, explanation: "AB est le plus grand côté (5). On vérifie : AC² + BC² = 3² + 4² = 9 + 16 = 25 = AB². La relation est vérifiée → triangle rectangle en C (angle droit opposé à l'hypoténuse AB)." },
+          { q: "La contraposée de Pythagore dit : si le triangle n'est pas rectangle, alors :", options: ["c² = a² + b²","c² ≠ a² + b²","c > a + b","Les angles sont différents de 90°"], correct: 1, explanation: "La contraposée : si le triangle n'est PAS rectangle, alors c² ≠ a² + b². On l'utilise pour PROUVER qu'un triangle n'est pas rectangle." }
         ],
         flashcards: [
-          { front: "(a + b)²", back: "= a² + 2ab + b²\n1ère identité remarquable. Penser : le carré du premier + 2× premier × second + le carré du second." },
-          { front: "(a - b)²", back: "= a² - 2ab + b²\n2ème identité remarquable. Même structure que (a+b)² mais le terme du milieu est négatif." },
-          { front: "(a - b)(a + b)", back: "= a² - b²\n3ème identité remarquable (différence de carrés). Très utile pour factoriser." },
-          { front: "Développer", back: "Transformer un produit en une somme. Utiliser la distributivité : k(a+b) = ka + kb, ou les identités remarquables." },
-          { front: "Factoriser", back: "Transformer une somme en un produit. Chercher un facteur commun ou reconnaître une identité remarquable." },
-          { front: "Résolution d'équation", back: "Isoler l'inconnue. Règle : ce qu'on fait d'un côté, on le fait de l'autre (addition, soustraction, multiplication, division)." }
+          { front: "Théorème de Pythagore", back: "Dans tout triangle rectangle, le carré de l'hypoténuse = somme des carrés des deux autres côtés.\nc² = a² + b²\nEx : ALE rectangle en A → EL² = AL² + AE²" },
+          { front: "Hypoténuse", back: "Côté opposé à l'angle droit. C'est le PLUS GRAND côté du triangle rectangle.\nToujours noté c dans la formule c² = a² + b²." },
+          { front: "Réciproque de Pythagore", back: "Si c² = a² + b², alors le triangle est rectangle (angle droit opposé au côté c).\nPermet de VÉRIFIER qu'un triangle est rectangle.\nEx : 3-4-5 → 25 = 9+16 ✓ → rectangle" },
+          { front: "Contraposée de Pythagore", back: "Si c² ≠ a² + b², alors le triangle N'EST PAS rectangle.\nPermet de PROUVER qu'un triangle n'est pas rectangle." },
+          { front: "Triples pythagoriciens classiques", back: "3-4-5 (vérifier : 9+16=25 ✓)\n5-12-13 (25+144=169 ✓)\n6-8-10 (double de 3-4-5)\n9-12-15 (triple de 3-4-5)" },
+          { front: "Méthode : calculer un côté", back: "1. Identifier le triangle rectangle et son angle droit\n2. Repérer l'hypoténuse (côté opposé à l'angle droit)\n3. Écrire la relation c² = a² + b²\n4. Remplacer les valeurs connues\n5. Isoler le côté inconnu et prendre la racine √" }
         ],
-        summary: `<h2>Calcul littéral et équations</h2>
-<h3>1. Les identités remarquables</h3>
+        summary: `<h2>Théorème de Pythagore</h2>
+<h3>1. Le théorème</h3>
+<p>Dans un triangle rectangle, le <strong>carré de l'hypoténuse</strong> est égal à la <strong>somme des carrés</strong> des deux autres côtés.</p>
+<p style="text-align:center;font-size:1.2em"><strong>c² = a² + b²</strong></p>
+<p>L'hypoténuse <em>c</em> est le côté opposé à l'angle droit (le plus grand côté).</p>
+<h3>2. Application : calculer un côté</h3>
+<p><strong>Exemple 1</strong> : Triangle ALE rectangle en A, AL = 9 cm, AE = 12 cm, chercher EL.</p>
+<p>EL² = AL² + AE² = 9² + 12² = 81 + 144 = 225 → <strong>EL = 15 cm</strong></p>
+<p><strong>Exemple 2</strong> : Triangle MNP rectangle en P, MN = 6,6 cm, MP = 3,3 cm, chercher PN.</p>
+<p>MN² = MP² + PN² → 6,6² = 3,3² + PN² → 43,56 − 10,89 = PN² → <strong>PN ≈ 5,7 cm</strong></p>
+<h3>3. La réciproque</h3>
+<p>Si AB² = AC² + BC², alors le triangle ABC est <strong>rectangle en C</strong>.</p>
+<p>Méthode : calculer c² et a² + b², comparer. Si égaux → rectangle.</p>
+<p>Ex : AB=5, AC=3, BC=4 → 25 = 9+16 ✓ → <strong>rectangle en C</strong></p>
+<h3>4. La contraposée</h3>
+<p>Si c² ≠ a² + b², alors le triangle <strong>n'est PAS rectangle</strong>.</p>
+<h3>5. Triples pythagoriciens à connaître</h3>
+<p>3-4-5 | 5-12-13 | 6-8-10 | 8-15-17 | 9-12-15</p>`,
+        mindmap: { center: "Pythagore", branches: [
+          { label: "Théorème", color: "#00b894", children: ["c² = a² + b²","Hypoténuse = côté opposé à 90°","Triangle rectangle","Calculer un côté"] },
+          { label: "Réciproque", color: "#0984e3", children: ["c² = a² + b² ?","→ Triangle rectangle","Angle droit en C","Vérification"] },
+          { label: "Contraposée", color: "#6c5ce7", children: ["c² ≠ a² + b²","→ Pas rectangle","Prouver l'absence d'angle droit"] },
+          { label: "Méthode", color: "#e17055", children: ["Identifier angle droit","Repérer hypoténuse","Écrire la relation","Calculer √"] }
+        ]}
+      },
+      {
+        id: "maths-trigonometrie", title: "Trigonométrie", desc: "Cosinus, sinus et tangente dans le triangle rectangle",
+        quiz: [
+          { q: "Dans un triangle rectangle en B, cos(Â) est égal à :", options: ["BC/AC","AB/AC","BC/AB","AC/AB"], correct: 1, explanation: "cos(angle) = côté adjacent / hypoténuse. L'angle Â est en A, le côté adjacent est AB, l'hypoténuse est AC (côté opposé à l'angle droit B). Donc cos(Â) = AB/AC." },
+          { q: "Dans un triangle rectangle en B, sin(Â) est égal à :", options: ["AB/AC","BC/AB","BC/AC","AB/BC"], correct: 2, explanation: "sin(angle) = côté opposé / hypoténuse. Pour l'angle Â : le côté opposé est BC, l'hypoténuse est AC. Donc sin(Â) = BC/AC." },
+          { q: "Dans un triangle rectangle en B, tan(Â) est égal à :", options: ["AC/AB","BC/AC","AB/BC","BC/AB"], correct: 3, explanation: "tan(angle) = côté opposé / côté adjacent. Pour l'angle Â : opposé = BC, adjacent = AB. Donc tan(Â) = BC/AB. Astuce : tan = sin/cos." },
+          { q: "Dans un triangle rectangle, si cos(Â) = 0,6 et l'hypoténuse AC = 10 cm, quelle est la longueur AB ?", options: ["16,7 cm","0,06 cm","6 cm","8 cm"], correct: 2, explanation: "cos(Â) = AB/AC → 0,6 = AB/10 → AB = 0,6 × 10 = 6 cm." },
+          { q: "Quelle formule permet de retrouver un angle quand on connaît deux côtés ?", options: ["sin(x) = adjacent/hypoténuse","arccos, arcsin ou arctan (fonctions inverses)","Pythagore uniquement","La somme des angles = 180°"], correct: 1, explanation: "Pour trouver un angle : utiliser arccos, arcsin ou arctan (touches cos⁻¹, sin⁻¹, tan⁻¹ sur la calculatrice). Ex : cos(Â) = 0,6 → Â = arccos(0,6) ≈ 53,1°." }
+        ],
+        flashcards: [
+          { front: "Cosinus d'un angle", back: "Dans un triangle rectangle :\ncos(angle) = côté adjacent / hypoténuse\nEx : cos(Â) = AB/AC\nLa valeur est toujours entre 0 et 1." },
+          { front: "Sinus d'un angle", back: "Dans un triangle rectangle :\nsin(angle) = côté opposé / hypoténuse\nEx : sin(Â) = BC/AC\nLa valeur est toujours entre 0 et 1." },
+          { front: "Tangente d'un angle", back: "Dans un triangle rectangle :\ntan(angle) = côté opposé / côté adjacent\nEx : tan(Â) = BC/AB\nAstuce : tan = sin/cos" },
+          { front: "Moyen mnémotechnique", back: "SOH-CAH-TOA\nSin = Opposé / Hypoténuse\nCos = Adjacent / Hypoténuse\nTan = Opposé / Adjacent" },
+          { front: "Calculer un côté avec trigo", back: "1. Identifier l'angle connu et les côtés\n2. Choisir sin, cos ou tan selon les côtés\n3. Écrire l'équation et résoudre\nEx : cos(35°) = AB/10 → AB = 10 × cos(35°) ≈ 8,2 cm" },
+          { front: "Calculer un angle avec trigo", back: "Utiliser les fonctions inverses :\narccos, arcsin, arctan (touches cos⁻¹, sin⁻¹, tan⁻¹)\nEx : cos(Â) = 0,75 → Â = arccos(0,75) ≈ 41,4°" }
+        ],
+        summary: `<h2>Trigonométrie</h2>
+<h3>1. Les trois formules fondamentales</h3>
+<p>Dans un triangle rectangle, pour un angle aigu <strong>α</strong> :</p>
 <ul>
-<li><strong>(a + b)² = a² + 2ab + b²</strong></li>
-<li><strong>(a - b)² = a² - 2ab + b²</strong></li>
-<li><strong>(a - b)(a + b) = a² - b²</strong></li>
+<li><strong>cos(α) = côté adjacent / hypoténuse</strong></li>
+<li><strong>sin(α) = côté opposé / hypoténuse</strong></li>
+<li><strong>tan(α) = côté opposé / côté adjacent</strong></li>
 </ul>
-<p>Astuce : pour mémoriser, penser «carré du premier + 2× produit + carré du second».</p>
-<h3>2. Développer et réduire</h3>
-<p>Développer = multiplier (distributivité) → transformer un produit en somme.</p>
-<p>Ex : <em>3(2x + 5) = 6x + 15</em></p>
-<p>Ex : <em>(x + 3)(x - 2) = x² - 2x + 3x - 6 = x² + x - 6</em></p>
-<h3>3. Factoriser</h3>
-<p>Factoriser = trouver le facteur commun ou utiliser une identité remarquable.</p>
-<p>Ex : <em>6x + 15 = 3(2x + 5)</em></p>
-<p>Ex : <em>x² - 9 = (x-3)(x+3)</em></p>
-<h3>4. Résoudre une équation</h3>
-<p>Isoler l'inconnue en effectuant les mêmes opérations des deux côtés.</p>
-<p>Ex : <em>2x - 5 = 11 → 2x = 16 → x = 8</em></p>
-<p>Vérification : toujours remplacer x par la solution trouvée.</p>`,
-        mindmap: { center: "Calcul littéral", branches: [
-          { label: "Identités remarquables", color: "#00b894", children: ["(a+b)²","(a-b)²","(a-b)(a+b)=a²-b²"] },
-          { label: "Développer", color: "#0984e3", children: ["Distributivité","k(a+b)=ka+kb","Réduire les termes"] },
-          { label: "Factoriser", color: "#6c5ce7", children: ["Facteur commun","Identités remarquables","Vérification"] },
-          { label: "Équations", color: "#e17055", children: ["Isoler l'inconnue","Même opération des 2 côtés","Vérification"] }
+<p>Moyen mémo : <strong>SOH-CAH-TOA</strong> (Sin=Opp/Hyp, Cos=Adj/Hyp, Tan=Opp/Adj)</p>
+<h3>2. Calculer un côté inconnu</h3>
+<p>On connaît un angle et un côté, on cherche l'autre côté.</p>
+<p><strong>Exemple</strong> : Triangle rectangle en B, angle Â = 40°, AC = 8 cm. Trouver AB.</p>
+<p>cos(40°) = AB/AC → AB = AC × cos(40°) = 8 × 0,766 ≈ <strong>6,1 cm</strong></p>
+<h3>3. Calculer un angle inconnu</h3>
+<p>On connaît deux côtés, on cherche l'angle. Utiliser les fonctions inverses.</p>
+<p><strong>Exemple</strong> : Triangle rectangle en B, AB = 6 cm, BC = 4 cm. Trouver l'angle Â.</p>
+<p>tan(Â) = BC/AB = 4/6 ≈ 0,667 → Â = arctan(0,667) ≈ <strong>33,7°</strong></p>
+<h3>4. Choisir la bonne formule</h3>
+<ul>
+<li>On connaît <em>adjacent + hyp</em> → utiliser <strong>cos</strong></li>
+<li>On connaît <em>opposé + hyp</em> → utiliser <strong>sin</strong></li>
+<li>On connaît <em>opposé + adjacent</em> → utiliser <strong>tan</strong></li>
+</ul>
+<h3>5. Valeurs à retenir</h3>
+<p>cos(30°) ≈ 0,866 | sin(30°) = 0,5 | tan(30°) ≈ 0,577</p>
+<p>cos(45°) ≈ 0,707 | sin(45°) ≈ 0,707 | tan(45°) = 1</p>
+<p>cos(60°) = 0,5 | sin(60°) ≈ 0,866 | tan(60°) ≈ 1,732</p>`,
+        mindmap: { center: "Trigonométrie", branches: [
+          { label: "Cosinus", color: "#00b894", children: ["Adjacent / Hypoténuse","cos(Â) = AB/AC","Entre 0 et 1","arccos pour l'angle"] },
+          { label: "Sinus", color: "#0984e3", children: ["Opposé / Hypoténuse","sin(Â) = BC/AC","Entre 0 et 1","arcsin pour l'angle"] },
+          { label: "Tangente", color: "#6c5ce7", children: ["Opposé / Adjacent","tan = sin/cos","arctan pour l'angle","tan(45°) = 1"] },
+          { label: "SOH-CAH-TOA", color: "#e17055", children: ["Mémo : Sin-Opp-Hyp","Cos-Adj-Hyp","Tan-Opp-Adj","Calculatrice : cos⁻¹ sin⁻¹ tan⁻¹"] }
         ]}
       }
     ]
@@ -2109,6 +2173,7 @@ function showActivities(chIdx) {
     { id: 'flashcards', icon: '🃏', name: 'Flashcards', count: ch.flashcards.length + ' cartes', color: '#fdcb6e' },
     { id: 'mindmap', icon: '🗺️', name: 'Carte mentale', count: '1 schéma', color: '#00cec9' }
   ];
+  if (ch.video) acts.push({ id: 'video', icon: '▶️', name: 'Vidéo', count: '1 vidéo', color: '#a29bfe' });
   acts.forEach(act => {
     const card = document.createElement('div');
     card.className = 'activity-card';
@@ -2127,6 +2192,7 @@ function startActivity(actId) {
   else if (actId === 'flashcards') startFlash(ch);
   else if (actId === 'resume') showSummary(ch);
   else if (actId === 'mindmap') showMindmap(ch, subj.color);
+  else if (actId === 'video') showVideo(ch);
 }
 
 // ── QUIZ ENGINE ──────────────────────────────────────────────
@@ -2272,6 +2338,19 @@ function showSummary(ch) {
   document.getElementById('summaryContent').innerHTML = ch.summary;
   recordCompletion(state.subject + '_' + state.chapter + '_summary');
 }
+// ── VIDEO ─────────────────────────────────────────────────────
+function showVideo(ch) {
+  showScreen('screenVideo');
+  updateHeader('Vidéo — ' + ch.title, true);
+  const wrap = document.getElementById('videoWrap');
+  wrap.innerHTML = `
+    <p class="video-title">${ch.video.title}</p>
+    <div class="video-frame-wrap">
+      <iframe src="${ch.video.url}" allowfullscreen loading="lazy" allow="autoplay; fullscreen"></iframe>
+    </div>`;
+  recordCompletion(state.subject + '_' + state.chapter + '_video');
+}
+
 function speakSummary() {
   if (!('speechSynthesis' in window)) { showToast('Synthèse vocale non supportée'); return; }
   stopSpeech();
