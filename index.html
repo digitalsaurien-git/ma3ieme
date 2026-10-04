@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiSWxpYW4gLSBNZXMgQ291cnMiLCJzaG9ydF9uYW1lIjoiTWVzIENvdXJzIiwic3RhcnRfdXJsIjoiLiIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiMxYTFhMmUiLCJ0aGVtZV9jb2xvciI6IiMxYTFhMmUifQ==">
+<title>Ilian - Mes Cours</title>
+<style>
+:root {
+  --bg: #1a1a2e;
+  --bg2: #16213e;
+  --card: #0f3460;
+  --card2: #0a2540;
+  --accent: #e94560;
+  --text: #eee;
+  --text2: #aaa;
+  --green: #00b894;
+  --blue: #0984e3;
+  --purple: #6c5ce7;
+  --orange: #e17055;
+  --yellow: #fdcb6e;
+  --teal: #00cec9;
+  --pink: #e84393;
+  --red: #e94560;
+  --radius: 12px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100%;
+  padding: env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);
+}
+
+/* HEADER */
+.app-header {
+  background: var(--bg2);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: sticky;
+  top: env(safe-area-inset-top,0px);
+  z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.app-header h1 { font-size: 1.1rem; font-weight: 700; flex: 1; }
+.back-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  display: none;
+  align-items: center;
+}
+.back-btn.visible { display: flex; }
+.header-actions { display: flex; gap: 8px; }
+.icon-btn {
+  background: none;
+  border: none;
+  color: var(--text2);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.icon-btn:hover { background: rgba(255,255,255,0.1); }
+
+/* SCREENS */
+.screen { display: none; padding: 16px; max-width: 900px; margin: 0 auto; }
+.screen.active { display: block; }
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 24px 16px;
+  background: linear-gradient(135deg, var(--bg2), var(--card));
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+}
+.hero h2 { font-size: 1.4rem; margin: 12px 0 4px; }
+.hero p { color: var(--text2); font-size: 0.95rem; }
+#koalaHero { display: inline-block; }
+
+/* STREAK BAR */
+.streak-bar {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.streak-bar .streak-icon { font-size: 1.4rem; }
+.streak-info { flex: 1; }
+.streak-info .streak-label { font-size: 0.8rem; color: var(--text2); }
+.streak-info .streak-count { font-size: 1.1rem; font-weight: 700; color: var(--yellow); }
+.streak-dots { display: flex; gap: 6px; }
+.streak-dot {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--card);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem;
+}
+.streak-dot.done { background: var(--yellow); color: #222; }
+
+/* SUBJECTS GRID */
+.subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+@media (min-width: 640px) {
+  .subjects-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1024px) {
+  .subjects-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.subject-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.18s, box-shadow 0.18s;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+.subject-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--subj-color, #fff);
+  opacity: 0.07;
+  transition: opacity 0.18s;
+}
+.subject-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.subject-card:hover::before { opacity: 0.12; }
+.subject-card .emoji { font-size: 2rem; display: block; margin-bottom: 8px; }
+.subject-card .name { font-size: 0.9rem; font-weight: 600; }
+.subject-card .chapter-count { font-size: 0.75rem; color: var(--text2); margin-top: 4px; }
+.badge {
+  position: absolute;
+  top: 8px; right: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 20px;
+}
+
+/* CHAPTERS LIST */
+.chapter-list { display: flex; flex-direction: column; gap: 10px; }
+.chapter-item {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.15s;
+  border-left: 4px solid var(--ch-color, var(--accent));
+}
+.chapter-item:hover { transform: translateX(4px); }
+.chapter-item .ch-num {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--ch-color, var(--accent));
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.85rem;
+  flex-shrink: 0;
+  color: #fff;
+}
+.chapter-item .ch-info { flex: 1; min-width: 0; }
+.chapter-item .ch-title { font-weight: 600; font-size: 0.95rem; }
+.chapter-item .ch-desc { font-size: 0.78rem; color: var(--text2); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chapter-item .ch-progress { font-size: 0.75rem; color: var(--text2); }
+.ch-done-icon { color: var(--green); font-size: 1.1rem; }
+
+/* ACTIVITIES */
+.activities-header {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.activities-header .koala-wrap { flex-shrink: 0; }
+.activities-header .ch-meta h3 { font-size: 1rem; font-weight: 700; }
+.activities-header .ch-meta p { font-size: 0.82rem; color: var(--text2); margin-top: 4px; }
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+@media (min-width: 640px) {
+  .activities-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.activity-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  border: 2px solid transparent;
+}
+.activity-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--act-color, var(--accent)); }
+.activity-card .act-icon { font-size: 2rem; display: block; margin-bottom: 8px; }
+.activity-card .act-name { font-size: 0.85rem; font-weight: 600; }
+.activity-card .act-count { font-size: 0.75rem; color: var(--text2); margin-top: 4px; }
+.activity-card.done .act-icon::after { content: ' ✓'; font-size: 0.8rem; }
+
+/* QUIZ */
+.quiz-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.quiz-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--card);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.quiz-progress-bar .fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+.quiz-progress span { font-size: 0.82rem; color: var(--text2); }
+.question-card {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.question-text { font-size: 1rem; font-weight: 600; line-height: 1.5; margin-bottom: 4px; }
+.question-hint { font-size: 0.8rem; color: var(--text2); margin-bottom: 16px; }
+.options-list { display: flex; flex-direction: column; gap: 10px; }
+.option-btn {
+  background: var(--card);
+  border: 2px solid transparent;
+  color: var(--text);
+  border-radius: 10px;
+  padding: 12px 16px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.18s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.option-btn:hover:not(:disabled) { border-color: var(--blue); background: rgba(9,132,227,0.15); }
+.option-btn.correct { border-color: var(--green); background: rgba(0,184,148,0.18); }
+.option-btn.wrong { border-color: var(--red); background: rgba(233,69,96,0.18); }
+.option-btn:disabled { cursor: default; }
+.option-letter {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.78rem; font-weight: 700;
+  flex-shrink: 0;
+}
+.option-btn.correct .option-letter { background: var(--green); color: #fff; }
+.option-btn.wrong .option-letter { background: var(--red); color: #fff; }
+.explanation-box {
+  background: rgba(0,184,148,0.12);
+  border: 1px solid var(--green);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-top: 14px;
+  font-size: 0.85rem;
+  display: none;
+}
+.explanation-box.wrong-exp { background: rgba(233,69,96,0.12); border-color: var(--red); }
+.explanation-box.visible { display: block; }
+.next-btn {
+  display: none;
+  width: 100%;
+  margin-top: 12px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.next-btn:hover { opacity: 0.88; }
+.next-btn.visible { display: block; }
+.quiz-score {
+  text-align: center;
+  padding: 32px 16px;
+}
+.score-circle {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  font-size: 1.8rem; font-weight: 800;
+}
+.score-msg { font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; }
+.score-sub { color: var(--text2); font-size: 0.88rem; margin-bottom: 24px; }
+.score-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.btn {
+  background: var(--card);
+  color: var(--text);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.btn:hover { background: var(--card2); }
+.btn-accent { background: var(--accent); color: #fff; }
+.btn-accent:hover { background: #c73652; }
+.btn-green { background: var(--green); color: #fff; }
+.btn-green:hover { background: #00a381; }
+
+/* FLASHCARDS */
+.fc-progress { text-align: right; font-size: 0.82rem; color: var(--text2); margin-bottom: 12px; }
+.flashcard-wrap {
+  perspective: 1000px;
+  height: 220px;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+.flashcard {
+  width: 100%; height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+  border-radius: var(--radius);
+}
+.flashcard.flipped { transform: rotateY(180deg); }
+.fc-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: var(--radius);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+.fc-front {
+  background: var(--card);
+  border: 2px solid rgba(255,255,255,0.1);
+}
+.fc-back {
+  background: var(--card2);
+  border: 2px solid var(--blue);
+  transform: rotateY(180deg);
+}
+.fc-label { font-size: 0.72rem; color: var(--text2); margin-bottom: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+.fc-text { font-size: 1rem; font-weight: 600; line-height: 1.5; }
+.fc-hint { font-size: 0.78rem; color: var(--text2); margin-top: 6px; }
+.fc-nav { display: flex; gap: 10px; align-items: center; justify-content: center; }
+.fc-nav button {
+  background: var(--card);
+  border: none; color: var(--text);
+  padding: 10px 18px; border-radius: 10px;
+  cursor: pointer; font-size: 0.88rem;
+  transition: background 0.15s;
+}
+.fc-nav button:hover { background: var(--card2); }
+.fc-nav button:disabled { opacity: 0.4; cursor: default; }
+.fc-counter { color: var(--text2); font-size: 0.82rem; }
+.fc-known-btns { display: flex; gap: 10px; margin-top: 12px; }
+.fc-known-btns button {
+  flex: 1; padding: 10px; border: none; border-radius: 10px;
+  font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: opacity 0.15s;
+}
+.fc-known-btns .btn-yes { background: var(--green); color: #fff; }
+.fc-known-btns .btn-no { background: var(--card2); color: var(--text2); }
+.fc-known-btns button:hover { opacity: 0.85; }
+.fc-complete { text-align: center; padding: 24px; display: none; }
+
+/* SUMMARY */
+.summary-actions { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.summary-content {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  padding: 20px;
+  line-height: 1.7;
+}
+.summary-content h2 { font-size: 1.2rem; margin-bottom: 16px; color: var(--accent); }
+.summary-content h3 { font-size: 1rem; margin: 14px 0 8px; color: var(--yellow); }
+.summary-content h4 { font-size: 0.9rem; margin: 10px 0 6px; color: var(--blue); }
+.summary-content p { font-size: 0.9rem; margin-bottom: 10px; color: var(--text); }
+.summary-content ul { margin: 6px 0 10px 20px; }
+.summary-content li { font-size: 0.88rem; margin-bottom: 4px; }
+.summary-content strong { color: var(--yellow); }
+.summary-content em { color: var(--teal); }
+.summary-content .date-box {
+  background: var(--card);
+  border-left: 3px solid var(--accent);
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin: 8px 0;
+  font-size: 0.85rem;
+}
+.reading-active { border-left: 3px solid var(--green); }
+
+/* MINDMAP */
+.mindmap-wrap { overflow-x: auto; }
+.mindmap-svg { display: block; margin: 0 auto; max-width: 100%; }
+
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: calc(20px + env(safe-area-inset-bottom,0px));
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--text);
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 999;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* RESOURCES OVERLAY */
+.resources-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 200;
+  display: none;
+  align-items: flex-end;
+}
+.resources-overlay.open { display: flex; }
+.resources-panel {
+  background: var(--bg2);
+  border-radius: 20px 20px 0 0;
+  padding: 20px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+.res-header { display: flex; align-items: center; margin-bottom: 16px; }
+.res-header h3 { flex: 1; font-size: 1rem; }
+.res-close {
+  background: none; border: none; color: var(--text2);
+  font-size: 1.5rem; cursor: pointer; padding: 4px 8px;
+}
+.res-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+.res-tab {
+  background: var(--card);
+  border: none; color: var(--text2);
+  padding: 8px 14px; border-radius: 8px;
+  cursor: pointer; font-size: 0.82rem;
+  transition: all 0.15s;
+}
+.res-tab.active { background: var(--accent); color: #fff; }
+.res-content { font-size: 0.85rem; line-height: 1.8; }
+.res-content h4 { color: var(--yellow); margin: 12px 0 6px; font-size: 0.9rem; }
+.res-content ul { margin-left: 16px; }
+.res-content li { margin-bottom: 4px; }
+.copy-btn {
+  background: var(--card);
+  border: none; color: var(--text);
+  padding: 8px 16px; border-radius: 8px;
+  cursor: pointer; font-size: 0.8rem;
+  margin-top: 12px; display: flex; align-items: center; gap: 6px;
+}
+.copy-btn:hover { background: var(--card2); }
+
+/* LARGE SCREEN SIDEBAR */
+@media (min-width: 1024px) {
+  body { display: flex; min-height: 100vh; }
+  .sidebar {
+    width: 260px;
+    background: var(--bg2);
+    border-right: 1px solid rgba(255,255,255,0.07);
+    padding: 20px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  .sidebar-title {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text2);
+    padding: 8px 12px;
+    margin-bottom: 4px;
+  }
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    transition: background 0.15s;
+    color: var(--text2);
+  }
+  .sidebar-item:hover { background: var(--card); color: var(--text); }
+  .sidebar-item.active { background: var(--card); color: var(--text); font-weight: 600; }
+  .sidebar-emoji { font-size: 1.1rem; }
+  .main-area { flex: 1; min-width: 0; }
+  .app-header { top: 0; }
+}
+@media (min-width: 1400px) {
+  .screen { max-width: 1100px; }
+  .activities-grid { grid-template-columns: repeat(4, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR (desktop) -->
+<nav class="sidebar" id="sidebar" style="display:none">
+  <div class="sidebar-title">Matières</div>
+  <div id="sidebarItems"></div>
+</nav>
+
+<div class="main-area" id="mainArea">
+<!-- HEADER -->
+<header class="app-header">
+  <button class="back-btn" id="backBtn" onclick="goBack()">&#8249;</button>
+  <h1 id="headerTitle">Ilian - Mes Cours</h1>
+  <div class="header-actions">
+    <button class="icon-btn" onclick="openResources()" title="Ressources">📋</button>
+    <button class="icon-btn" onclick="toggleTTS()" id="ttsBtn" title="Lecture">🔊</button>
+  </div>
+</header>
+
+<!-- SCREEN: SUBJECTS -->
+<div class="screen active" id="screenSubjects">
+  <div class="hero">
+    <div id="koalaHero"></div>
+    <h2>Salut Ilian ! 🎓</h2>
+    <p>Quelle matière révises-tu aujourd'hui&nbsp;?</p>
+  </div>
+  <div class="streak-bar">
+    <span class="streak-icon">🔥</span>
+    <div class="streak-info">
+      <div class="streak-label">Série du jour</div>
+      <div class="streak-count" id="streakCount">0 activité</div>
+    </div>
+    <div class="streak-dots" id="streakDots"></div>
+  </div>
+  <div class="subjects-grid" id="subjectsGrid"></div>
+</div>
+
+<!-- SCREEN: CHAPTERS -->
+<div class="screen" id="screenChapters">
+  <div class="chapter-list" id="chapterList"></div>
+</div>
+
+<!-- SCREEN: ACTIVITIES -->
+<div class="screen" id="screenActivities">
+  <div class="activities-header">
+    <div class="koala-wrap" id="koalaActivity"></div>
+    <div class="ch-meta">
+      <h3 id="actChapterTitle"></h3>
+      <p id="actChapterDesc"></p>
+    </div>
+  </div>
+  <div class="activities-grid" id="activitiesGrid"></div>
+</div>
+
+<!-- SCREEN: QUIZ -->
+<div class="screen" id="screenQuiz">
+  <div class="quiz-progress">
+    <div class="quiz-progress-bar"><div class="fill" id="quizFill"></div></div>
+    <span id="quizProgressLabel">0/0</span>
+  </div>
+  <div id="quizContent"></div>
+</div>
+
+<!-- SCREEN: FLASHCARDS -->
+<div class="screen" id="screenFlash">
+  <div class="fc-progress" id="fcProgress"></div>
+  <div class="flashcard-wrap" onclick="flipCard()">
+    <div class="flashcard" id="flashcard">
+      <div class="fc-face fc-front">
+        <div>
+          <div class="fc-label">Mot / Concept</div>
+          <div class="fc-text" id="fcFront"></div>
+          <div class="fc-hint">Tape pour retourner</div>
+        </div>
+      </div>
+      <div class="fc-face fc-back">
+        <div>
+          <div class="fc-label">Définition / Explication</div>
+          <div class="fc-text" id="fcBack"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fc-known-btns" id="fcKnownBtns">
+    <button class="btn-no" onclick="fcMark(false)">❌ À revoir</button>
+    <button class="btn-yes" onclick="fcMark(true)">✓ Je sais !</button>
+  </div>
+  <div class="fc-nav">
+    <button onclick="fcNav(-1)" id="fcPrev">← Précédent</button>
+    <span class="fc-counter" id="fcCounter"></span>
+    <button onclick="fcNav(1)" id="fcNext">Suivant →</button>
+  </div>
+  <div class="fc-complete" id="fcComplete">
+    <div style="font-size:2rem">🎉</div>
+    <div style="font-weight:700;margin:8px 0">Toutes les cartes vues !</div>
+    <div style="color:var(--text2);font-size:0.88rem;margin-bottom:16px" id="fcScore"></div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn-accent" onclick="restartFlash()">Recommencer</button>
+      <button class="btn btn-green" onclick="goBack()">← Retour</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN: SUMMARY -->
+<div class="screen" id="screenSummary">
+  <div class="summary-actions">
+    <button class="btn" onclick="speakSummary()" id="speakBtn">🔊 Écouter</button>
+    <button class="btn" onclick="stopSpeech()">⏹ Stop</button>
+  </div>
+  <div class="summary-content" id="summaryContent"></div>
+</div>
+
+<!-- SCREEN: MINDMAP -->
+<div class="screen" id="screenMindmap">
+  <div class="mindmap-wrap">
+    <svg class="mindmap-svg" id="mindmapSvg"></svg>
+  </div>
+</div>
+
+</div><!-- end main-area -->
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- RESOURCES OVERLAY -->
+<div class="resources-overlay" id="resourcesOverlay" onclick="closeResIfOutside(event)">
+  <div class="resources-panel">
+    <div class="res-header">
+      <h3>📋 Ressources pédagogiques</h3>
+      <button class="res-close" onclick="closeResources()">×</button>
+    </div>
+    <div class="res-tabs">
+      <button class="res-tab active" onclick="switchResTab('docs',this)">Fiches mémo</button>
+      <button class="res-tab" onclick="switchResTab('programme',this)">Programme 3e</button>
+    </div>
+    <div class="res-content" id="resContent"></div>
+  </div>
+</div>
+
+<script>
+// ── KOALA SVG ──────────────────────────────────────────────
+function getKoalaSVG(size, mood) {
+  const s = size || 90;
+  const starBurst = mood === 'star' ? `<circle cx="68" cy="18" r="10" fill="#fdcb6e" opacity="0.8"/><text x="68" y="22" text-anchor="middle" font-size="12">⭐</text>` : '';
+  const happyMouth = (mood === 'happy' || mood === 'star')
+    ? `<path d="M38 60 Q45 68 52 60" stroke="#4a4a4a" stroke-width="2" fill="none" stroke-linecap="round"/>`
+    : `<path d="M38 60 Q45 65 52 60" stroke="#4a4a4a" stroke-width="2" fill="none" stroke-linecap="round"/>`;
+  return `<svg width="${s}" height="${s}" viewBox="0 0 90 95" fill="none" xmlns="http://www.w3.org/2000/svg">
+  ${starBurst}
+  <ellipse cx="18" cy="32" rx="14" ry="13" fill="#9e9e9e"/>
+  <ellipse cx="72" cy="32" rx="14" ry="13" fill="#9e9e9e"/>
+  <ellipse cx="18" cy="32" rx="9" ry="8" fill="#b0bec5"/>
+  <ellipse cx="72" cy="32" rx="9" ry="8" fill="#b0bec5"/>
+  <ellipse cx="45" cy="50" rx="30" ry="32" fill="#9e9e9e"/>
+  <ellipse cx="45" cy="48" rx="26" ry="28" fill="#b0bec5"/>
+  <ellipse cx="45" cy="58" rx="14" ry="12" fill="#e0e0e0"/>
+  <ellipse cx="45" cy="32" rx="9" ry="10" fill="#616161"/>
+  <circle cx="41" cy="43" r="4" fill="#fff"/>
+  <circle cx="49" cy="43" r="4" fill="#fff"/>
+  <circle cx="41" cy="43" r="2.5" fill="#263238"/>
+  <circle cx="49" cy="43" r="2.5" fill="#263238"/>
+  <circle cx="42" cy="42" r="1" fill="#fff"/>
+  <circle cx="50" cy="42" r="1" fill="#fff"/>
+  ${happyMouth}
+  <circle cx="42" cy="56" r="1.5" fill="#bdbdbd"/>
+  <circle cx="48" cy="56" r="1.5" fill="#bdbdbd"/>
+  </svg>`;
+}
+
+// ── DATA ────────────────────────────────────────────────────
+const DATA = {
+  histoire: {
+    emoji: "🏛️", name: "Histoire-Géo", color: "#0984e3",
+    chapters: [
+      {
+        id: "iiie-republique", title: "La IIIe République", desc: "Naissance et consolidation (1870-1914)",
+        quiz: [
+          { q: "Quand est proclamée la IIIe République ?", options: ["1870","1848","1882","1905"], correct: 0, explanation: "La IIIe République est proclamée le 4 septembre 1870, après la défaite de Sedan face à la Prusse." },
+          { q: "Quelle loi de 1905 est fondamentale pour la IIIe République ?", options: ["La loi Jules Ferry","La loi de séparation de l'Église et de l'État","La loi Waldeck-Rousseau","La loi sur la liberté de la presse"], correct: 1, explanation: "La loi du 9 décembre 1905 sépare l'Église de l'État, instituant la laïcité en France." },
+          { q: "Jules Ferry est associé à quelle réforme majeure ?", options: ["Le droit de vote des femmes","L'école gratuite, laïque et obligatoire","La liberté de la presse","Les congés payés"], correct: 1, explanation: "Jules Ferry impose l'école primaire gratuite (1881), laïque et obligatoire (1882)." },
+          { q: "Qu'est-ce que l'affaire Dreyfus ?", options: ["Un scandale financier","Un officier juif accusé faussement de trahison","Une grève ouvrière","Une crise diplomatique avec l'Allemagne"], correct: 1, explanation: "Alfred Dreyfus, officier juif, est accusé à tort d'espionnage en 1894. L'affaire divise la France et révèle l'antisémitisme." },
+          { q: "La Commune de Paris a lieu en quelle année ?", options: ["1870","1871","1875","1880"], correct: 1, explanation: "La Commune de Paris (mars-mai 1871) est un gouvernement insurrectionnel écrasé dans la 'Semaine sanglante'." }
+        ],
+        flashcards: [
+          { front: "IIIe République", back: "Régime républicain de 1870 à 1940. Consolide la démocratie en France malgré des crises (Boulangisme, affaire Dreyfus)." },
+          { front: "Lois Jules Ferry (1881-1882)", back: "École primaire gratuite, laïque et obligatoire. Fondent l'instruction républicaine et la formation des citoyens." },
+          { front: "Laïcité", back: "Principe de séparation de l'Église et de l'État. Inscrit dans la loi de 1905. L'État est neutre vis-à-vis des religions." },
+          { front: "Affaire Dreyfus (1894-1906)", back: "Officier juif accusé faussement de trahison. Divise la France entre dreyfusards (Zola, 'J'accuse') et antidreyfusards." },
+          { front: "Commune de Paris (1871)", back: "Gouvernement insurrectionnel de Paris (18 mars – 28 mai 1871), écrasé par le gouvernement de Versailles. ~10 000 morts." },
+          { front: "Colonisation", back: "La IIIe République étend l'empire colonial (Afrique, Asie). Justifiée par la 'mission civilisatrice', critiquée comme impérialisme." }
+        ],
+        summary: `<h2>La IIIe République (1870-1940)</h2>
+<h3>1. La naissance de la République (1870-1875)</h3>
+<p>La IIIe République naît le <strong>4 septembre 1870</strong> après la défaite de Napoléon III à Sedan face à la Prusse. La France perd l'Alsace-Lorraine (traité de Francfort, 1871).</p>
+<div class="date-box">🗓️ 1871 : Commune de Paris — insurrection ouvrière et patriote, réprimée dans la "Semaine sanglante" (~10 000 morts)</div>
+<p>Les lois constitutionnelles de <strong>1875</strong> organisent la République : Sénat, Chambre des députés, Président de la République.</p>
+<h3>2. La consolidation républicaine</h3>
+<p>Les <strong>lois Jules Ferry</strong> (1881-1882) créent l'école gratuite, laïque et obligatoire. L'instruction civique forme des <em>citoyens républicains</em>.</p>
+<ul>
+<li><strong>Liberté de la presse</strong> (1881) — journaux libres de critiquer le pouvoir</li>
+<li><strong>Liberté syndicale</strong> (1884) — les ouvriers peuvent s'organiser</li>
+<li><strong>Séparation Église/État</strong> (1905) — la laïcité est institutionnalisée</li>
+</ul>
+<h3>3. Les crises de la République</h3>
+<p>L'<strong>affaire Dreyfus</strong> (1894-1906) : le capitaine Alfred Dreyfus, juif, est accusé à tort d'espionnage. Zola publie <em>«J'accuse»</em> (1898). Il est réhabilité en 1906. L'affaire révèle l'antisémitisme et renforce les laïques.</p>
+<h3>4. Mots-clés</h3>
+<ul>
+<li><strong>République</strong> : régime où le chef de l'État est élu</li>
+<li><strong>Laïcité</strong> : neutralité de l'État en matière de religion</li>
+<li><strong>Colonisation</strong> : domination d'un territoire étranger (Afrique, Asie)</li>
+</ul>`,
+        mindmap: { center: "IIIe République", branches: [
+          { label: "Fondation", color: "#0984e3", children: ["1870 : défaite Sedan","1871 : Commune","1875 : Lois constit."] },
+          { label: "Réformes", color: "#00b894", children: ["École Ferry 1882","Liberté de presse 1881","Laïcité 1905"] },
+          { label: "Crises", color: "#e94560", children: ["Affaire Dreyfus","Boulangisme","Antisémitisme"] },
+          { label: "Colonies", color: "#6c5ce7", children: ["Afrique du Nord","Indochine","'Mission civilisatrice'"] }
+        ]}
+      },
+      {
+        id: "premiere-guerre", title: "La Première Guerre mondiale", desc: "1914-1918 : la Grande Guerre",
+        quiz: [
+          { q: "Quel événement déclenche la Première Guerre mondiale ?", options: ["L'invasion de la Pologne","L'assassinat de François-Ferdinand à Sarajevo","La révolution russe","La crise du Maroc"], correct: 1, explanation: "L'assassinat de l'archiduc François-Ferdinand d'Autriche à Sarajevo le 28 juin 1914 déclenche un engrenage d'alliances." },
+          { q: "Quels sont les deux blocs en guerre ?", options: ["Triple Entente vs Triple Alliance","OTAN vs Pacte de Varsovie","Alliés vs Axe","France vs Allemagne"], correct: 0, explanation: "La Triple Entente (France, Russie, Royaume-Uni) affronte la Triple Alliance / Triplice (Allemagne, Autriche-Hongrie, Italie)." },
+          { q: "Qu'est-ce que la guerre de tranchées ?", options: ["Une guerre navale","Une guerre souterraine où les soldats creusent des tunnels","Une guerre de position avec des lignes de front fixes et des fossés défensifs","Une guerre en montagne"], correct: 2, explanation: "Dès 1914, les armées creusent des tranchées sur des centaines de km. La guerre de mouvement laisse place à une guerre d'usure." },
+          { q: "Quand se termine la Première Guerre mondiale ?", options: ["11 novembre 1918","8 mai 1945","28 juin 1919","1er janvier 1919"], correct: 0, explanation: "L'armistice est signé le 11 novembre 1918 à 11h. La paix est scellée par le traité de Versailles (28 juin 1919)." },
+          { q: "Qu'est-ce qu'un 'poilu' ?", options: ["Un officier supérieur","Un soldat français de la Grande Guerre","Un grade militaire","Un déserteur"], correct: 1, explanation: "Le 'poilu' est le surnom affectueux donné aux soldats français de la Première Guerre mondiale." }
+        ],
+        flashcards: [
+          { front: "Triple Entente", back: "Alliance France + Russie + Royaume-Uni (+ Italie en 1915, + États-Unis en 1917). Opposée à la Triple Alliance." },
+          { front: "Tranchées", back: "Fossés défensifs de centaines de km. Vie dans la boue, les rats, sous les obus. Symbolisent la guerre d'usure 1914-1918." },
+          { front: "Bataille de Verdun (1916)", back: "L'une des batailles les plus meurtrières : ~300 000 morts. Symbole du sacrifice des soldats français." },
+          { front: "Armistice du 11 novembre 1918", back: "Cessez-le-feu signé à 5h du matin, effectif à 11h. Met fin aux combats. Fête nationale française." },
+          { front: "Traité de Versailles (1919)", back: "Traité de paix imposé à l'Allemagne : pertes territoriales, réparations, clause de culpabilité de guerre (article 231)." },
+          { front: "Génocide arménien (1915)", back: "Massacre de la population arménienne par l'Empire ottoman. ~1 million de victimes. Premier génocide du XXe siècle." }
+        ],
+        summary: `<h2>La Première Guerre mondiale (1914-1918)</h2>
+<h3>1. Les causes</h3>
+<p>Un système d'<strong>alliances</strong> rigides transforme un conflit local en guerre mondiale. L'assassinat de <em>François-Ferdinand</em> à Sarajevo (28 juin 1914) sert de détonateur.</p>
+<ul><li>Triple Entente : France, Russie, Royaume-Uni</li><li>Triple Alliance : Allemagne, Autriche-Hongrie, (Italie)</li></ul>
+<h3>2. La guerre de tranchées</h3>
+<p>Après l'échec du plan Schlieffen, les armées creusent des <strong>tranchées</strong> sur 700 km. La vie des <em>poilus</em> : boue, rats, gaz, obus, assauts meurtriers.</p>
+<div class="date-box">⚔️ Bataille de Verdun (fév.–déc. 1916) : ~300 000 morts. Symbole de l'horreur des tranchées.</div>
+<h3>3. Une guerre totale</h3>
+<ul>
+<li><strong>Mobilisation économique</strong> : usines reconverties, femmes au travail</li>
+<li><strong>Propagande</strong> : contrôle de l'information, moral des troupes</li>
+<li><strong>Nouvelles armes</strong> : gaz, chars, avions, sous-marins</li>
+<li><strong>Génocide arménien</strong> (1915) : premier génocide du XXe siècle</li>
+</ul>
+<h3>4. La fin et ses conséquences</h3>
+<p>L'armistice est signé le <strong>11 novembre 1918</strong>. Le traité de <strong>Versailles</strong> (1919) impose à l'Allemagne des réparations lourdes et une clause de culpabilité → germe de la WWII.</p>
+<p>Bilan : <strong>~10 millions de morts militaires</strong>, 7 millions de civils, géographies européennes redessinées.</p>`,
+        mindmap: { center: "1ère Guerre mondiale", branches: [
+          { label: "Causes", color: "#e94560", children: ["Alliances rigides","Assassinat Sarajevo","Nationalisme","Colonialisme"] },
+          { label: "La guerre", color: "#0984e3", children: ["Tranchées","Poilus","Batailles (Verdun)","Nouvelles armes"] },
+          { label: "Guerre totale", color: "#6c5ce7", children: ["Mobilisation éco.","Femmes au travail","Propagande","Génocide arménien"] },
+          { label: "Fin", color: "#00b894", children: ["Armistice 11/11/1918","Traité Versailles 1919","10M de morts","Désillusion"] }
+        ]}
+      },
+      {
+        id: "deuxieme-guerre", title: "La Seconde Guerre mondiale", desc: "1939-1945 : guerre totale et génocide",
+        quiz: [
+          { q: "Quel événement marque le début de la 2e Guerre mondiale ?", options: ["L'attaque de Pearl Harbor","L'invasion de la Pologne par l'Allemagne","La capitulation de la France","La déclaration de guerre de l'URSS"], correct: 1, explanation: "Le 1er septembre 1939, Hitler envahit la Pologne. Le 3 septembre, France et Royaume-Uni déclarent la guerre à l'Allemagne." },
+          { q: "Qu'appelle-t-on la 'Solution finale' ?", options: ["L'armistice de 1940","Le plan de paix nazi","Le programme d'extermination des Juifs d'Europe par les nazis","La capitulation allemande"], correct: 2, explanation: "La 'Solution finale' (Endlösung) est le plan nazi d'extermination systématique des Juifs d'Europe, décidé à la conférence de Wannsee (1942)." },
+          { q: "Qu'est-ce que l'appel du 18 juin 1940 ?", options: ["La capitulation française","L'appel du général de Gaulle depuis Londres pour continuer le combat","La déclaration de guerre de l'URSS","Le début du débarquement en Normandie"], correct: 1, explanation: "De Gaulle refuse l'armistice signé par Pétain et appelle, depuis Londres sur la BBC, les Français à résister." },
+          { q: "Le débarquement de Normandie a lieu le :", options: ["6 juin 1944","8 mai 1945","1er septembre 1939","11 novembre 1943"], correct: 0, explanation: "Le D-Day, 6 juin 1944 : les Alliés débarquent en Normandie. C'est le début de la libération de la France." },
+          { q: "Quand se termine la guerre en Europe ?", options: ["6 août 1945","8 mai 1945","2 septembre 1945","11 novembre 1944"], correct: 1, explanation: "Le 8 mai 1945 : l'Allemagne capitule sans conditions. C'est la fin de la guerre en Europe (VE Day)." }
+        ],
+        flashcards: [
+          { front: "Blitzkrieg", back: "Guerre éclair : attaque rapide combinant chars, avions et infanterie motorisée. Permet à l'Allemagne de conquérir l'Europe rapidement (1939-1941)." },
+          { front: "Régime de Vichy", back: "Gouvernement collaborationniste français (1940-1944), dirigé par Pétain. Collabore avec l'Allemagne nazie, persécute les Juifs." },
+          { front: "Résistance", back: "Mouvement clandestin contre l'occupant nazi. Maquis, sabotages, renseignements, réseaux. Jean Moulin unifie la Résistance intérieure (1943)." },
+          { front: "Shoah", back: "Génocide des Juifs par les nazis : 6 millions de victimes. Camps d'extermination (Auschwitz, Treblinka). Mot hébreu signifiant 'catastrophe'." },
+          { front: "D-Day (6 juin 1944)", back: "Débarquement allié en Normandie. Plus grande opération amphibie de l'histoire. Début de la libération de l'Europe occidentale." },
+          { front: "8 mai 1945", back: "Capitulation sans conditions de l'Allemagne nazie. Fin de la Seconde Guerre mondiale en Europe. Journée de la victoire (VE Day)." }
+        ],
+        summary: `<h2>La Seconde Guerre mondiale (1939-1945)</h2>
+<h3>1. Les débuts (1939-1941)</h3>
+<p>Le <strong>1er septembre 1939</strong> : invasion de la Pologne par Hitler. La France signe l'armistice en juin 1940. Pétain instaure le <em>régime de Vichy</em>, collaborateur des nazis.</p>
+<p><strong>De Gaulle</strong> appelle à la Résistance depuis Londres (18 juin 1940).</p>
+<h3>2. La Shoah</h3>
+<p>Les nazis mettent en place la <strong>'Solution finale'</strong> (1942) : extermination systématique des Juifs d'Europe. <strong>6 millions de victimes</strong> dans les camps d'extermination (Auschwitz, Treblinka…).</p>
+<div class="date-box">⚠️ Conférence de Wannsee (janvier 1942) : planification de l'extermination de 11 millions de Juifs européens.</div>
+<h3>3. Le tournant de la guerre (1942-1944)</h3>
+<ul>
+<li>Stalingrad (fév. 1943) : défaite majeure de l'Allemagne à l'Est</li>
+<li>Débarquement en Normandie : <strong>6 juin 1944</strong> (D-Day)</li>
+<li>Libération de Paris : 25 août 1944</li>
+</ul>
+<h3>4. La fin</h3>
+<p><strong>8 mai 1945</strong> : capitulation de l'Allemagne. <strong>2 septembre 1945</strong> : fin de la guerre dans le Pacifique après les bombes atomiques sur Hiroshima et Nagasaki.</p>
+<p>Bilan : <strong>~60 millions de morts</strong>, dont la moitié de civils.</p>`,
+        mindmap: { center: "2nde Guerre mondiale", branches: [
+          { label: "1939-1941", color: "#0984e3", children: ["Invasion Pologne","Blitzkrieg","France occupée","De Gaulle BBC"] },
+          { label: "Shoah", color: "#e94560", children: ["Solution finale","Camps extermination","6 millions de Juifs","Wannsee 1942"] },
+          { label: "Résistance", color: "#00b894", children: ["Maquis","Jean Moulin","Réseau de rens.","Vichy vs FFI"] },
+          { label: "Victoire", color: "#fdcb6e", children: ["D-Day 6/6/1944","Libération Paris","8 mai 1945 Europe","2 sept. 1945 Pacifique"] }
+        ]}
+      },
+      {
+        id: "guerre-froide", title: "La Guerre froide", desc: "1947-1991 : rivalité USA vs URSS",
+        quiz: [
+          { q: "Que signifie 'Guerre froide' ?", options: ["Une guerre dans les régions polaires","Un conflit armé direct entre USA et URSS","Une rivalité idéologique sans affrontement direct entre superpuissances","Une guerre économique entre pays riches"], correct: 2, explanation: "La Guerre froide est une rivalité globale entre les USA (capitalisme, démocratie) et l'URSS (communisme) sans jamais s'affronter directement." },
+          { q: "Quand est construit le mur de Berlin ?", options: ["1947","1961","1953","1972"], correct: 1, explanation: "Le mur de Berlin est construit dans la nuit du 12 au 13 août 1961 par la RDA pour stopper l'exode vers l'Ouest." },
+          { q: "Qu'est-ce que la 'course aux armements' ?", options: ["Une compétition sportive","La rivalité entre USA et URSS pour développer des armes nucléaires","Un programme spatial","Des sanctions économiques"], correct: 1, explanation: "USA et URSS s'engagent dans une spirale de production d'armes nucléaires, créant un équilibre de la terreur (MAD)." },
+          { q: "Quand tombe le mur de Berlin ?", options: ["1985","1991","9 novembre 1989","25 décembre 1991"], correct: 2, explanation: "Le mur de Berlin tombe le 9 novembre 1989, symbole de la fin de la Guerre froide et de la réunification allemande à venir." },
+          { q: "Qu'est-ce que l'OTAN ?", options: ["Une organisation économique soviétique","L'alliance militaire des pays occidentaux","Un traité de paix après la WWII","Une organisation internationale de l'ONU"], correct: 1, explanation: "L'OTAN (1949) est l'alliance militaire des démocraties occidentales sous leadership américain, opposée au Pacte de Varsovie (1955)." }
+        ],
+        flashcards: [
+          { front: "Guerre froide", back: "Rivalité idéologique (1947-1991) entre USA (capitalisme) et URSS (communisme) sans guerre directe mais par pays interposés." },
+          { front: "Doctrine Truman (1947)", back: "Les USA s'engagent à contenir l'expansion du communisme dans le monde entier. Début officiel de la Guerre froide." },
+          { front: "Rideau de fer", back: "Expression de Churchill (1946) pour désigner la frontière entre Europe occidentale (libre) et Europe orientale (soviétique)." },
+          { front: "Crise de Cuba (1962)", back: "L'URSS installe des missiles à Cuba. 13 jours de tension nucléaire. Kennedy vs Khrouchtchev. Résolution diplomatique." },
+          { front: "Mur de Berlin", back: "Construit le 13 août 1961 par la RDA pour séparer Berlin-Est (soviétique) de Berlin-Ouest. Tombé le 9 novembre 1989." },
+          { front: "Détente", back: "Période d'apaisement relatif USA-URSS (années 1970) : accords SALT sur les armements nucléaires, Helsinki 1975." }
+        ],
+        summary: `<h2>La Guerre froide (1947-1991)</h2>
+<h3>1. Les fondements de la Guerre froide</h3>
+<p>Après 1945, deux <strong>superpuissances</strong> s'affrontent : les <em>États-Unis</em> (capitalisme, démocratie) et l'<em>URSS</em> (communisme). La <strong>doctrine Truman</strong> (1947) et le <strong>plan Marshall</strong> marquent le début du conflit.</p>
+<h3>2. Un monde bipolaire</h3>
+<ul>
+<li>Bloc occidental : OTAN (1949), économie de marché</li>
+<li>Bloc soviétique : Pacte de Varsovie (1955), économies planifiées</li>
+<li><strong>Rideau de fer</strong> : frontière entre les deux Europes</li>
+</ul>
+<div class="date-box">🚀 1957 : Spoutnik (URSS) — début de la conquête spatiale. 1969 : Apollo 11 (USA) — Américains sur la Lune.</div>
+<h3>3. Les crises</h3>
+<ul>
+<li><strong>Guerre de Corée</strong> (1950-1953) : premier conflit par procuration</li>
+<li><strong>Crise de Cuba</strong> (1962) : 13 jours au bord de la guerre nucléaire</li>
+<li><strong>Mur de Berlin</strong> (1961-1989) : symbole de la division du monde</li>
+<li><strong>Guerre du Vietnam</strong> (1964-1975) : défaite américaine</li>
+</ul>
+<h3>4. La fin (1985-1991)</h3>
+<p>Gorbatchev (URSS) lance la <em>perestroïka</em> et la <em>glasnost</em>. Le mur de Berlin tombe le <strong>9 novembre 1989</strong>. L'URSS se dissout le <strong>25 décembre 1991</strong>.</p>`,
+        mindmap: { center: "Guerre froide", branches: [
+          { label: "Blocs", color: "#0984e3", children: ["USA + OTAN","URSS + Pacte Varsovie","Rideau de fer","Pays non-alignés"] },
+          { label: "Crises", color: "#e94560", children: ["Corée 1950","Berlin 1961","Cuba 1962","Vietnam 1975"] },
+          { label: "Course aux armements", color: "#6c5ce7", children: ["Bombe atomique","Missiles","Course spatiale","Équilibre terreur (MAD)"] },
+          { label: "Fin", color: "#00b894", children: ["Gorbatchev","Mur Berlin 1989","Dissolution URSS 1991","Victoire USA"] }
+        ]}
+      }
+    ]
+  },
+  francais: {
+    emoji: "📖", name: "Français", color: "#6c5ce7",
+    chapters: [
+      {
+        id: "argumentation", title: "L'argumentation", desc: "Convaincre et persuader",
+        quiz: [
+          { q: "Quelle est la différence entre convaincre et persuader ?", options: ["Il n'y en a aucune","Convaincre s'adresse à la raison, persuader aux émotions","Convaincre utilise des exemples, persuader des chiffres","Convaincre est oral, persuader est écrit"], correct: 1, explanation: "Convaincre = raison (arguments logiques, preuves). Persuader = émotions et sensations (exemples frappants, ton)." },
+          { q: "Qu'est-ce qu'une thèse ?", options: ["Un exemple","La position que l'auteur défend","Un argument contre","Une citation"], correct: 1, explanation: "La thèse est le point de vue, l'opinion que l'auteur cherche à défendre dans un texte argumentatif." },
+          { q: "Quel est l'ordre classique d'un texte argumentatif ?", options: ["Conclusion, arguments, thèse","Thèse, arguments, conclusion","Arguments, thèse, conclusion","Introduction, thèse, exemples"], correct: 1, explanation: "Structure type : thèse (position) → arguments (justifications) → exemples (illustrations) → conclusion (synthèse)." },
+          { q: "Qu'est-ce qu'une concession ?", options: ["Un argument en faveur de sa thèse","Reconnaître la valeur de la thèse adverse avant de la réfuter","Une figure de style","Un exemple littéraire"], correct: 1, explanation: "La concession accorde un point à l'adversaire ('Certes... mais...') pour mieux renforcer ensuite sa propre thèse." },
+          { q: "Qu'est-ce qu'un texte délibératif ?", options: ["Un texte qui raconte une histoire","Un texte qui défend un seul point de vue","Un texte qui examine les pour et les contre avant de conclure","Un texte poétique"], correct: 2, explanation: "Un texte délibératif examine les arguments des deux côtés (thèse ET antithèse) avant de trancher (synthèse)." }
+        ],
+        flashcards: [
+          { front: "Thèse", back: "Position défendue par l'auteur dans un texte argumentatif. Ex : 'La peine de mort est injustifiable.'" },
+          { front: "Argument", back: "Raison logique qui soutient la thèse. Ex : 'La peine de mort est irréversible en cas d'erreur judiciaire.'" },
+          { front: "Exemple", back: "Illustration concrète d'un argument (fait réel, citation, statistique, histoire). Rend l'argument plus convaincant." },
+          { front: "Concession", back: "Reconnaître la valeur partielle de l'argument adverse. Marqueurs : 'Certes', 'Il est vrai que', 'On peut admettre que'... mais." },
+          { front: "Réfutation", back: "Contredire et invalider l'argument de l'adversaire. Marqueurs : 'Cependant', 'Néanmoins', 'Pourtant', 'Or'." },
+          { front: "Texte délibératif", back: "Examine les arguments pour et contre avant de conclure. Thèse → Antithèse → Synthèse (plan dialectique)." }
+        ],
+        summary: `<h2>L'argumentation</h2>
+<h3>1. Les objectifs d'un texte argumentatif</h3>
+<ul>
+<li><strong>Convaincre</strong> : s'adresser à la raison (logos) → arguments logiques, faits, statistiques</li>
+<li><strong>Persuader</strong> : s'adresser aux émotions (pathos) → exemples frappants, images, ton</li>
+<li><strong>Délibérer</strong> : examiner les pour et les contre avant de trancher</li>
+</ul>
+<h3>2. La structure argumentative</h3>
+<p><strong>Thèse</strong> → <strong>Arguments</strong> → <strong>Exemples</strong> → <strong>Conclusion</strong></p>
+<p>Pour un plan dialectique (délibératif) :<br>Thèse → Antithèse → Synthèse</p>
+<h3>3. Les procédés argumentatifs</h3>
+<ul>
+<li><strong>Concession</strong> : "Certes... mais..." — accorder un point à l'adversaire pour mieux le réfuter</li>
+<li><strong>Réfutation</strong> : démontrer que l'argument adverse est faux ou insuffisant</li>
+<li><strong>Analogie</strong> : comparer deux situations pour éclairer la thèse</li>
+<li><strong>Ironie</strong> : dire le contraire de ce que l'on pense pour critiquer</li>
+</ul>
+<h3>4. Les connecteurs logiques</h3>
+<ul>
+<li>Addition : <em>de plus, en outre, également</em></li>
+<li>Opposition : <em>mais, cependant, néanmoins, or, pourtant</em></li>
+<li>Cause : <em>car, parce que, puisque, en effet</em></li>
+<li>Conséquence : <em>donc, ainsi, c'est pourquoi, par conséquent</em></li>
+</ul>`,
+        mindmap: { center: "Argumentation", branches: [
+          { label: "Objectifs", color: "#6c5ce7", children: ["Convaincre (raison)","Persuader (émotions)","Délibérer (pour/contre)"] },
+          { label: "Structure", color: "#0984e3", children: ["Thèse","Arguments","Exemples","Conclusion"] },
+          { label: "Procédés", color: "#e94560", children: ["Concession","Réfutation","Analogie","Ironie"] },
+          { label: "Connecteurs", color: "#00b894", children: ["Addition","Opposition","Cause","Conséquence"] }
+        ]}
+      },
+      {
+        id: "recit-formation", title: "Le récit de formation", desc: "Romans d'apprentissage et d'initiation",
+        quiz: [
+          { q: "Qu'est-ce qu'un roman de formation (Bildungsroman) ?", options: ["Un roman historique","Un roman qui suit l'évolution d'un personnage vers la maturité","Un roman policier","Un roman d'amour"], correct: 1, explanation: "Le roman de formation suit un héros jeune qui grandit, surmonte des épreuves et construit son identité tout au long du récit." },
+          { q: "Quel est le schéma type du récit de formation ?", options: ["Attaque, défense, victoire","Situation initiale, rupture, épreuves, apprentissage, maturité","Introduction, nœud, dénouement","Exposition, péripétie, chute"], correct: 1, explanation: "Le héros part d'une situation stable, vit une rupture (voyage, perte), subit des épreuves, apprend, et arrive à maturité." },
+          { q: "Quel roman est souvent cité comme roman de formation ?", options: ["20 000 lieues sous les mers","Les Misérables","L'Éducation sentimentale de Flaubert","Le Tour du monde en 80 jours"], correct: 2, explanation: "L'Éducation sentimentale (Flaubert, 1869) suit Frédéric Moreau de la jeunesse à la désillusion — roman de formation par excellence." },
+          { q: "Quelle est la fonction du mentor dans un récit de formation ?", options: ["Il est le rival du héros","Il guide et transmet un savoir au héros","Il est l'antagoniste principal","Il est un personnage comique"], correct: 1, explanation: "Le mentor (professeur, adulte expérimenté) guide le héros dans ses apprentissages (Virgile pour Dante, Gandalf pour Frodon...)." },
+          { q: "Dans un récit de formation, le héros est généralement :", options: ["Un adulte accompli","Un vieillard sage","Un enfant ou adolescent au début de sa découverte du monde","Un être surnaturel"], correct: 2, explanation: "Le héros est typiquement jeune et inexpérimenté au début. Sa progression vers la maturité est le cœur du récit." }
+        ],
+        flashcards: [
+          { front: "Roman de formation (Bildungsroman)", back: "Genre romanesque suivant l'évolution d'un jeune héros de l'enfance/adolescence à la maturité, à travers épreuves et apprentissages." },
+          { front: "Héros du récit de formation", back: "Jeune, naïf, inexpérimenté. Il grandit moralement et intellectuellement au fil des épreuves. Ex : Jean Valjean, Frédéric Moreau." },
+          { front: "Mentor", back: "Personnage qui guide le héros dans son apprentissage. Transmet un savoir ou des valeurs. Ex : Abbé Faria (Monte-Cristo), Vautrin (Balzac)." },
+          { front: "Épreuve initiatique", back: "Obstacle ou malheur que le héros doit surmonter pour progresser. La douleur est formatrice : elle enseigne, elle révèle." },
+          { front: "Désillusion", back: "Fin de l'innocence du héros : il découvre la cruauté du monde, la trahison, l'échec. Moment clé du roman de formation." },
+          { front: "Narrateur autodiégétique", back: "Narrateur qui raconte sa propre histoire à la 1ère personne (je). Fréquent dans les récits de formation (autobiographie romancée)." }
+        ],
+        summary: `<h2>Le récit de formation</h2>
+<h3>1. Définition</h3>
+<p>Le <strong>roman de formation</strong> (ou <em>Bildungsroman</em>, allemand) suit l'évolution d'un personnage jeune qui passe de l'enfance/adolescence à la <strong>maturité</strong> à travers des épreuves formatrices.</p>
+<h3>2. Le schéma du récit de formation</h3>
+<ul>
+<li><strong>Situation initiale</strong> : héros jeune, naïf, dans un monde connu</li>
+<li><strong>Rupture</strong> : départ, perte, événement perturbateur</li>
+<li><strong>Épreuves</strong> : obstacles, rencontres, désillusions</li>
+<li><strong>Apprentissage</strong> : le héros comprend, grandit</li>
+<li><strong>Maturité</strong> : le héros est transformé, il a trouvé sa place</li>
+</ul>
+<h3>3. Les personnages types</h3>
+<ul>
+<li><strong>Le héros</strong> : jeune, inexpérimenté, en quête d'identité</li>
+<li><strong>Le mentor</strong> : guide, transmet un savoir (Abbé Faria, Vautrin)</li>
+<li><strong>Les obstacles</strong> : ennemis, rivaux, circonstances adverses</li>
+</ul>
+<h3>4. Œuvres de référence</h3>
+<ul>
+<li><em>Les Misérables</em> — Victor Hugo (Cosette, Marius)</li>
+<li><em>L'Éducation sentimentale</em> — Flaubert</li>
+<li><em>Le Comte de Monte-Cristo</em> — Alexandre Dumas</li>
+</ul>`,
+        mindmap: { center: "Récit de formation", branches: [
+          { label: "Schéma", color: "#6c5ce7", children: ["Situation initiale","Rupture/départ","Épreuves","Apprentissage","Maturité"] },
+          { label: "Personnages", color: "#0984e3", children: ["Héros jeune","Mentor","Antagoniste","Figures féminines"] },
+          { label: "Thèmes", color: "#e17055", children: ["Identité","Amour","Désillusion","Monde social"] },
+          { label: "Œuvres", color: "#00b894", children: ["Les Misérables (Hugo)","Monte-Cristo (Dumas)","Éducation sentimentale (Flaubert)"] }
+        ]}
+      }
+    ]
+  },
+  maths: {
+    emoji: "📐", name: "Mathématiques", color: "#00b894",
+    chapters: [
+      {
+        id: "pythagore-thales", title: "Pythagore et Thalès", desc: "Théorèmes fondamentaux de géométrie",
+        quiz: [
+          { q: "Que dit le théorème de Pythagore ?", options: ["Dans tout triangle rectangle, la somme des angles est 180°","Dans tout triangle rectangle, le carré de l'hypoténuse est égal à la somme des carrés des deux autres côtés","Deux droites parallèles ont la même pente","Le produit des diagonales d'un rectangle est constant"], correct: 1, explanation: "Pythagore : dans un triangle rectangle (angle droit en C), AC² + BC² = AB² (AB est l'hypoténuse)." },
+          { q: "Comment reconnaît-on un triangle rectangle avec Pythagore ?", options: ["Si la somme des angles est 90°","Si le plus grand côté est la somme des deux autres","Si AB² = AC² + BC² (AB le plus grand)","Si les deux petits côtés sont égaux"], correct: 2, explanation: "La réciproque de Pythagore : si AB² = AC² + BC², alors le triangle est rectangle en C (angle droit opposé au plus grand côté)." },
+          { q: "Que dit le théorème de Thalès ?", options: ["Les diagonales d'un parallélogramme se coupent en leur milieu","Si deux droites sont coupées par des parallèles, les rapports des segments sont égaux","La somme des angles d'un triangle est 180°","Les côtés d'un triangle isocèle sont égaux"], correct: 1, explanation: "Thalès : si (DE) // (BC), alors AD/AB = AE/AC = DE/BC (proportionnalité des segments)." },
+          { q: "Dans un triangle ABC, si (DE) // (BC) avec D sur AB et E sur AC, et AD=3, AB=9, AE=4, quelle est la valeur de AC ?", options: ["6","12","8","3"], correct: 1, explanation: "Par Thalès : AD/AB = AE/AC → 3/9 = 4/AC → AC = 4×9/3 = 12." },
+          { q: "Dans un triangle rectangle, l'hypoténuse est :", options: ["Le côté adjacent à l'angle droit","Le côté le plus court","Le côté opposé à l'angle droit (le plus long)","N'importe quel côté"], correct: 2, explanation: "L'hypoténuse est toujours le côté opposé à l'angle droit. C'est le côté le plus long du triangle rectangle." }
+        ],
+        flashcards: [
+          { front: "Théorème de Pythagore", back: "Dans un triangle rectangle en C : AC² + BC² = AB²\n(AB = hypoténuse, côté opposé à l'angle droit)" },
+          { front: "Réciproque de Pythagore", back: "Si AB² = AC² + BC², alors le triangle ABC est rectangle en C. Permet de vérifier si un triangle est rectangle." },
+          { front: "Hypoténuse", back: "Côté opposé à l'angle droit dans un triangle rectangle. C'est toujours le plus grand côté. Noté généralement AB ou c." },
+          { front: "Théorème de Thalès", back: "Si (DE) // (BC) dans un triangle ABC : AD/AB = AE/AC = DE/BC\nRapports des longueurs égaux." },
+          { front: "Réciproque de Thalès", back: "Si AD/AB = AE/AC, alors (DE) // (BC). Permet de prouver que deux droites sont parallèles." },
+          { front: "Agrandissement / réduction", back: "Si k = AD/AB, alors DE = k × BC. Thalès permet de calculer les dimensions d'une figure similaire." }
+        ],
+        summary: `<h2>Pythagore et Thalès</h2>
+<h3>1. Le théorème de Pythagore</h3>
+<p>Dans un triangle rectangle en C : <strong>AC² + BC² = AB²</strong></p>
+<ul>
+<li>AB est l'<strong>hypoténuse</strong> (côté opposé à l'angle droit, le plus long)</li>
+<li>Permet de calculer un côté manquant</li>
+</ul>
+<p><em>Exemple</em> : AC = 3, BC = 4 → AB² = 9 + 16 = 25 → AB = 5</p>
+<h3>2. La réciproque de Pythagore</h3>
+<p>Si <strong>AB² = AC² + BC²</strong>, alors le triangle est rectangle en C.</p>
+<p><em>Exemple</em> : AB = 5, AC = 3, BC = 4 → 25 = 9 + 16 ✓ → rectangle en C</p>
+<h3>3. Le théorème de Thalès</h3>
+<p>Dans un triangle ABC, si (DE) // (BC) avec D ∈ [AB] et E ∈ [AC] :</p>
+<p><strong>AD/AB = AE/AC = DE/BC</strong></p>
+<p><em>Exemple</em> : AD = 2, AB = 6, AE = 3 → DE/BC = 2/6 = 1/3 → DE = BC/3</p>
+<h3>4. La réciproque de Thalès</h3>
+<p>Si AD/AB = AE/AC, alors (DE) // (BC).</p>
+<h3>5. Méthode de calcul</h3>
+<ul>
+<li>Identifier les données et ce qu'on cherche</li>
+<li>Écrire la relation (Pythagore ou Thalès)</li>
+<li>Remplacer par les valeurs connues</li>
+<li>Résoudre (calculer la racine carrée si Pythagore)</li>
+</ul>`,
+        mindmap: { center: "Pythagore & Thalès", branches: [
+          { label: "Pythagore", color: "#00b894", children: ["Triangle rectangle","AC²+BC²=AB²","Hypoténuse","Calculer un côté"] },
+          { label: "Réciproque Pyth.", color: "#0984e3", children: ["AB²=AC²+BC²?","→ Triangle rectangle","Vérification"] },
+          { label: "Thalès", color: "#6c5ce7", children: ["(DE)//(BC)","AD/AB = AE/AC","Rapports égaux","Agrandissement/réduction"] },
+          { label: "Réciproque Thalès", color: "#e17055", children: ["Rapports égaux?","→ Droites parallèles","Démonstration"] }
+        ]}
+      },
+      {
+        id: "calcul-litteral", title: "Calcul littéral et équations", desc: "Développer, factoriser, résoudre",
+        quiz: [
+          { q: "Que vaut (a + b)² ?", options: ["a² + b²","a² + 2ab + b²","a² - b²","2a + 2b"], correct: 1, explanation: "(a+b)² = a² + 2ab + b² — première identité remarquable. On développe : (a+b)(a+b) = a²+ab+ab+b²." },
+          { q: "Que vaut (a - b)(a + b) ?", options: ["a² + b²","a² - 2ab + b²","a² - b²","(a-b)²"], correct: 2, explanation: "(a-b)(a+b) = a² - b² — troisième identité remarquable. Produit d'une somme par une différence." },
+          { q: "Factoriser 4x² - 9", options: ["(2x-3)(2x+3)","(4x-3)(x+3)","(2x-9)(2x+1)","(x-3)(x+3)"], correct: 0, explanation: "4x² - 9 = (2x)² - 3² → utiliser a² - b² = (a-b)(a+b) → (2x-3)(2x+3)." },
+          { q: "Résoudre 3x + 7 = 22", options: ["x = 5","x = 7","x = 3","x = 10"], correct: 0, explanation: "3x + 7 = 22 → 3x = 22 - 7 = 15 → x = 15/3 = 5." },
+          { q: "Développer (2x - 1)²", options: ["4x² - 1","4x² - 2x + 1","4x² - 4x + 1","4x² + 4x - 1"], correct: 2, explanation: "(a-b)² = a² - 2ab + b² → (2x-1)² = 4x² - 2×2x×1 + 1 = 4x² - 4x + 1." }
+        ],
+        flashcards: [
+          { front: "(a + b)²", back: "= a² + 2ab + b²\n1ère identité remarquable. Penser : le carré du premier + 2× premier × second + le carré du second." },
+          { front: "(a - b)²", back: "= a² - 2ab + b²\n2ème identité remarquable. Même structure que (a+b)² mais le terme du milieu est négatif." },
+          { front: "(a - b)(a + b)", back: "= a² - b²\n3ème identité remarquable (différence de carrés). Très utile pour factoriser." },
+          { front: "Développer", back: "Transformer un produit en une somme. Utiliser la distributivité : k(a+b) = ka + kb, ou les identités remarquables." },
+          { front: "Factoriser", back: "Transformer une somme en un produit. Chercher un facteur commun ou reconnaître une identité remarquable." },
+          { front: "Résolution d'équation", back: "Isoler l'inconnue. Règle : ce qu'on fait d'un côté, on le fait de l'autre (addition, soustraction, multiplication, division)." }
+        ],
+        summary: `<h2>Calcul littéral et équations</h2>
+<h3>1. Les identités remarquables</h3>
+<ul>
+<li><strong>(a + b)² = a² + 2ab + b²</strong></li>
+<li><strong>(a - b)² = a² - 2ab + b²</strong></li>
+<li><strong>(a - b)(a + b) = a² - b²</strong></li>
+</ul>
+<p>Astuce : pour mémoriser, penser «carré du premier + 2× produit + carré du second».</p>
+<h3>2. Développer et réduire</h3>
+<p>Développer = multiplier (distributivité) → transformer un produit en somme.</p>
+<p>Ex : <em>3(2x + 5) = 6x + 15</em></p>
+<p>Ex : <em>(x + 3)(x - 2) = x² - 2x + 3x - 6 = x² + x - 6</em></p>
+<h3>3. Factoriser</h3>
+<p>Factoriser = trouver le facteur commun ou utiliser une identité remarquable.</p>
+<p>Ex : <em>6x + 15 = 3(2x + 5)</em></p>
+<p>Ex : <em>x² - 9 = (x-3)(x+3)</em></p>
+<h3>4. Résoudre une équation</h3>
+<p>Isoler l'inconnue en effectuant les mêmes opérations des deux côtés.</p>
+<p>Ex : <em>2x - 5 = 11 → 2x = 16 → x = 8</em></p>
+<p>Vérification : toujours remplacer x par la solution trouvée.</p>`,
+        mindmap: { center: "Calcul littéral", branches: [
+          { label: "Identités remarquables", color: "#00b894", children: ["(a+b)²","(a-b)²","(a-b)(a+b)=a²-b²"] },
+          { label: "Développer", color: "#0984e3", children: ["Distributivité","k(a+b)=ka+kb","Réduire les termes"] },
+          { label: "Factoriser", color: "#6c5ce7", children: ["Facteur commun","Identités remarquables","Vérification"] },
+          { label: "Équations", color: "#e17055", children: ["Isoler l'inconnue","Même opération des 2 côtés","Vérification"] }
+        ]}
+      }
+    ]
+  },
+  svt: {
+    emoji: "🧬", name: "SVT", color: "#00cec9",
+    chapters: [
+      {
+        id: "genetique", title: "Génétique et hérédité", desc: "ADN, chromosomes et transmission des caractères",
+        quiz: [
+          { q: "Où se trouve l'ADN dans la cellule ?", options: ["Dans les mitochondries uniquement","Dans le noyau (et les mitochondries)","Dans le cytoplasme","Dans la membrane cellulaire"], correct: 1, explanation: "L'ADN est essentiellement dans le noyau (chromosomes), mais on en trouve aussi dans les mitochondries et les chloroplastes." },
+          { q: "Combien de chromosomes possède une cellule humaine normale ?", options: ["23","46","44","48"], correct: 1, explanation: "Les cellules humaines contiennent 46 chromosomes, organisés en 23 paires (22 paires d'autosomes + 1 paire de chromosomes sexuels)." },
+          { q: "Qu'est-ce qu'un gène ?", options: ["Un chromosome entier","Une partie de l'ADN portant l'information pour fabriquer une protéine","Une cellule reproductrice","Le noyau de la cellule"], correct: 1, explanation: "Un gène est une séquence d'ADN codant pour la fabrication d'une protéine spécifique. Il occupe un locus précis sur un chromosome." },
+          { q: "Qu'est-ce qu'une mutation ?", options: ["La copie conforme de l'ADN","Une modification de la séquence d'ADN","La séparation des chromosomes","La mort cellulaire"], correct: 1, explanation: "Une mutation est une modification de la séquence des bases azotées de l'ADN. Elle peut être spontanée ou provoquée (UV, tabac, rayons X)." },
+          { q: "Qu'est-ce que la méiose ?", options: ["La division cellulaire qui produit 2 cellules identiques","La division cellulaire qui produit 4 cellules à 23 chromosomes (gamètes)","La synthèse des protéines","La réplication de l'ADN"], correct: 1, explanation: "La méiose produit 4 cellules filles à n=23 chromosomes (gamètes : spermatozoïdes et ovules). Elle permet la reproduction sexuée." }
+        ],
+        flashcards: [
+          { front: "ADN", back: "Acide DésoxyriboNucléique. Molécule en double hélice portant l'information génétique (séquence de bases : A, T, G, C). Présent dans le noyau." },
+          { front: "Chromosome", back: "Structure composée d'ADN enroulé autour de protéines (histones). Les humains ont 46 chromosomes (23 paires). Visible lors de la division cellulaire." },
+          { front: "Gène", back: "Portion d'ADN codant pour une protéine. Occupe un locus précis sur un chromosome. Il existe plusieurs versions (allèles) d'un même gène." },
+          { front: "Allèle", back: "Version d'un gène. Un individu possède 2 allèles pour chaque gène (un par chromosome d'une paire). Peut être dominant ou récessif." },
+          { front: "Mutation", back: "Modification de la séquence d'ADN. Peut être spontanée ou provoquée (mutagènes : UV, tabac). Peut être neutre, bénéfique ou néfaste." },
+          { front: "Caryotype", back: "Représentation ordonnée des chromosomes d'une cellule. Permet de détecter des anomalies (trisomie 21 = 3 chromosomes 21)." }
+        ],
+        summary: `<h2>Génétique et hérédité</h2>
+<h3>1. Du noyau à l'ADN</h3>
+<p>Chaque cellule contient un <strong>noyau</strong> avec des <strong>chromosomes</strong> (46 chez l'Homme, 23 paires). Les chromosomes sont constitués d'<strong>ADN</strong> enroulé.</p>
+<p>L'ADN est une double hélice formée de 4 bases : <em>Adénine (A), Thymine (T), Guanine (G), Cytosine (C)</em>. A s'apparie avec T, G avec C.</p>
+<h3>2. Gènes et allèles</h3>
+<ul>
+<li><strong>Gène</strong> : séquence d'ADN codant pour une protéine, à un locus précis</li>
+<li><strong>Allèle</strong> : version d'un gène (dominant ou récessif)</li>
+<li><strong>Génotype</strong> : ensemble des allèles d'un individu</li>
+<li><strong>Phénotype</strong> : caractères observables résultant du génotype</li>
+</ul>
+<h3>3. Transmission des caractères</h3>
+<p>Les gamètes (spermatozoïdes, ovules) contiennent <strong>23 chromosomes</strong> (méiose). La fécondation reconstitue les <strong>46 chromosomes</strong>.</p>
+<p>Si un allèle est <strong>dominant</strong> (noté A) : il s'exprime même avec un allèle récessif (a). Seul <em>aa</em> exprime le caractère récessif.</p>
+<h3>4. Les mutations</h3>
+<p>Modification de la séquence ADN. Mutagènes : UV, tabac, rayons X. Peut entraîner un cancer ou une maladie génétique.</p>`,
+        mindmap: { center: "Génétique", branches: [
+          { label: "Molécules", color: "#00cec9", children: ["ADN (double hélice)","Bases A-T G-C","Chromosomes (46)","Noyau cellulaire"] },
+          { label: "Gènes", color: "#0984e3", children: ["Locus","Allèles (dom./réc.)","Génotype","Phénotype"] },
+          { label: "Hérédité", color: "#6c5ce7", children: ["Méiose (23 chr.)","Fécondation (46 chr.)","Lois de Mendel","Caryotype"] },
+          { label: "Mutations", color: "#e94560", children: ["Modification ADN","Mutagènes (UV, tabac)","Cancer","Maladies génétiques"] }
+        ]}
+      }
+    ]
+  },
+  physchimie: {
+    emoji: "⚗️", name: "Physique-Chimie", color: "#e17055",
+    chapters: [
+      {
+        id: "electricite", title: "Circuits électriques", desc: "Tension, intensité, résistance (loi d'Ohm)",
+        quiz: [
+          { q: "Que mesure un voltmètre ?", options: ["L'intensité du courant","La résistance","La tension électrique (différence de potentiel)","La puissance"], correct: 2, explanation: "Un voltmètre mesure la tension (en volts, V). Il se branche en dérivation (parallèle) aux bornes du composant." },
+          { q: "Que mesure un ampèremètre ?", options: ["La tension","L'intensité du courant (en ampères)","La résistance","L'énergie"], correct: 1, explanation: "Un ampèremètre mesure l'intensité (en ampères, A). Il se branche en série dans le circuit." },
+          { q: "Quelle est la loi d'Ohm ?", options: ["U = R/I","U = R × I","R = U × I","I = U × R"], correct: 1, explanation: "Loi d'Ohm : U = R × I (Tension = Résistance × Intensité). Unités : V = Ω × A." },
+          { q: "Dans un circuit en série, l'intensité est :", options: ["Différente pour chaque composant","La même partout","Nulle dans les résistances","Plus forte aux résistances"], correct: 1, explanation: "Dans un circuit série, l'intensité est la même en tout point du circuit." },
+          { q: "La résistance d'un conducteur s'exprime en :", options: ["Volt (V)","Ampère (A)","Ohm (Ω)","Watt (W)"], correct: 2, explanation: "La résistance s'exprime en ohms (Ω), unité en l'honneur de Georg Ohm, physicien allemand." }
+        ],
+        flashcards: [
+          { front: "Tension électrique (U)", back: "Différence de potentiel entre deux points. Unité : Volt (V). Mesurée par un voltmètre (en dérivation)." },
+          { front: "Intensité du courant (I)", back: "Débit de charges électriques. Unité : Ampère (A). Mesurée par un ampèremètre (en série)." },
+          { front: "Résistance (R)", back: "Opposition au passage du courant. Unité : Ohm (Ω). Formule : R = U/I." },
+          { front: "Loi d'Ohm", back: "U = R × I\nTension (V) = Résistance (Ω) × Intensité (A). Valable pour les conducteurs ohmiques." },
+          { front: "Circuit en série", back: "Composants branchés bout à bout. L'intensité est la même partout. Les tensions s'additionnent : U_total = U1 + U2 + ..." },
+          { front: "Circuit en dérivation (parallèle)", back: "Composants branchés entre les mêmes nœuds. La tension est la même pour chacun. Les intensités s'additionnent." }
+        ],
+        summary: `<h2>Circuits électriques</h2>
+<h3>1. Les grandeurs électriques</h3>
+<ul>
+<li><strong>Tension U</strong> : en Volts (V) — mesurée par un voltmètre en dérivation</li>
+<li><strong>Intensité I</strong> : en Ampères (A) — mesurée par un ampèremètre en série</li>
+<li><strong>Résistance R</strong> : en Ohms (Ω) — opposition au passage du courant</li>
+</ul>
+<h3>2. La loi d'Ohm</h3>
+<p><strong>U = R × I</strong></p>
+<p>Donc aussi : <em>R = U/I</em> et <em>I = U/R</em></p>
+<p>Ex : R = 10 Ω, I = 0,5 A → U = 10 × 0,5 = 5 V</p>
+<h3>3. Circuits série et dérivation</h3>
+<p><strong>Série</strong> : composants bout à bout</p>
+<ul><li>I même partout</li><li>U_total = U1 + U2 + U3</li><li>R_total = R1 + R2 + R3</li></ul>
+<p><strong>Dérivation</strong> : composants entre les mêmes nœuds</p>
+<ul><li>U même pour chaque branche</li><li>I_total = I1 + I2 + I3</li></ul>
+<h3>4. La puissance électrique</h3>
+<p><strong>P = U × I</strong> (en Watts, W)</p>
+<p>Énergie consommée : E = P × t (en Joules si t en secondes, ou en Wh si t en heures)</p>`,
+        mindmap: { center: "Électricité", branches: [
+          { label: "Grandeurs", color: "#e17055", children: ["Tension U (Volts)","Intensité I (Ampères)","Résistance R (Ohms)"] },
+          { label: "Loi d'Ohm", color: "#0984e3", children: ["U = R × I","R = U/I","I = U/R","Conducteur ohmique"] },
+          { label: "Circuits", color: "#00b894", children: ["Série : I même","Dérivation : U même","Nœud, branche","Loi des nœuds"] },
+          { label: "Puissance", color: "#6c5ce7", children: ["P = U × I (Watts)","E = P × t","kWh (facture EDF)"] }
+        ]}
+      }
+    ]
+  },
+  anglais: {
+    emoji: "🇬🇧", name: "Anglais", color: "#e84393",
+    chapters: [
+      {
+        id: "past-tenses", title: "Les temps du passé", desc: "Preterite, present perfect, past continuous",
+        quiz: [
+          { q: "Quand utilise-t-on le preterite (simple past) ?", options: ["Pour une action en cours","Pour une action passée à un moment précis ou révolu","Pour une action dont le résultat est lié au présent","Pour des habitudes présentes"], correct: 1, explanation: "Le preterite (V-ed ou forme irrégulière) exprime une action passée à un moment précis ou une période révolue : 'I went to Paris last year.'" },
+          { q: "Quelle est la structure du present perfect ?", options: ["did + verbe","have/has + participe passé","be + V-ing","will + verbe"], correct: 1, explanation: "Present perfect : have/has + past participle. Ex : 'I have visited Paris.' Exprime un lien entre passé et présent." },
+          { q: "Quelle est la différence entre 'I did my homework' et 'I have done my homework' ?", options: ["Aucune","'Did' = action passée précise (hier soir) ; 'have done' = résultat lié au présent (les devoirs sont faits maintenant)","'Did' = présent ; 'have done' = futur","'Did' est plus formel"], correct: 1, explanation: "Preterite = moment passé révolu. Present perfect = action passée avec résultat/lien présent. 'I have done my homework' → maintenant je peux jouer." },
+          { q: "Comment forme-t-on le past continuous ?", options: ["had + participe passé","was/were + V-ing","did + V-ing","be + V-ed"], correct: 1, explanation: "Past continuous : was (I/he/she/it) ou were (you/we/they) + V-ing. Ex : 'I was reading when he called.'" },
+          { q: "Traduire : 'Elle travaillait quand le téléphone a sonné'", options: ["She worked when the phone rang","She was working when the phone rang","She has worked when the phone rang","She had worked when the phone rang"], correct: 1, explanation: "Action en cours interrompue = past continuous + preterite. 'She was working' (en cours) 'when the phone rang' (interruption)." }
+        ],
+        flashcards: [
+          { front: "Simple past (Preterite)", back: "Action passée à un moment précis / révolu.\nForme : V+ed (regulier) ou forme irrégulière (go→went, see→saw).\nEx : 'I visited Paris in 2022.'" },
+          { front: "Present Perfect", back: "Passé lié au présent / expérience de vie / résultat actuel.\nForme : have/has + past participle.\nEx : 'I have never been to Japan.' / 'She has just left.'" },
+          { front: "Past Continuous", back: "Action en cours à un moment du passé / action interrompue.\nForme : was/were + V-ing.\nEx : 'I was sleeping at 8pm.' / 'We were talking when it happened.'" },
+          { front: "For vs Since (Present Perfect)", back: "'For' + durée (for 3 years, for a week).\n'Since' + point de départ (since 2020, since Monday).\nEx : 'I've lived here for 5 years / since 2019.'" },
+          { front: "Already / Yet / Just", back: "Already (déjà) : 'I have already eaten.'\nYet (encore / déjà neg./interr.) : 'Have you finished yet? / Not yet.'\nJust (juste) : 'She has just arrived.'" },
+          { front: "Irregular verbs (liste clé)", back: "go→went→gone / see→saw→seen / do→did→done / have→had→had / come→came→come / take→took→taken / make→made→made" }
+        ],
+        summary: `<h2>Les temps du passé en anglais</h2>
+<h3>1. Simple Past (Preterite)</h3>
+<p>Action passée à un <strong>moment précis</strong> ou une <strong>période révolue</strong>.</p>
+<p>Réguliers : <em>V + -ed</em> (worked, visited). Irréguliers : apprendre par cœur (go→went).</p>
+<p>Négatif : <em>didn't + V</em>. Interrogatif : <em>Did + sujet + V?</em></p>
+<h3>2. Present Perfect</h3>
+<p>Lien entre passé et présent : expérience, résultat, nouvelles récentes.</p>
+<p>Structure : <strong>have/has + past participle</strong></p>
+<p>Marqueurs : already, yet, just, ever, never, for, since</p>
+<h3>3. Past Continuous</h3>
+<p>Action en cours à un moment du passé, souvent interrompue par une action courte (preterite).</p>
+<p>Structure : <strong>was/were + V-ing</strong></p>
+<p>Ex : <em>'I was studying when she called.'</em></p>
+<h3>4. Comparaison</h3>
+<ul>
+<li>'I saw him yesterday' (preterite — moment précis)</li>
+<li>'I have seen that film' (present perfect — expérience)</li>
+<li>'I was reading at 6pm' (past continuous — en cours)</li>
+</ul>`,
+        mindmap: { center: "Passé en anglais", branches: [
+          { label: "Simple Past", color: "#e84393", children: ["V+ed / irréguliers","Moment précis","didn't + V","Did + sujet + V?"] },
+          { label: "Present Perfect", color: "#0984e3", children: ["have/has + p.p.","Expérience/résultat","Already, yet, just","For / Since"] },
+          { label: "Past Continuous", color: "#6c5ce7", children: ["was/were + V-ing","Action en cours","Interrompue (when)","At 8 o'clock..."] },
+          { label: "Verbes irrég.", color: "#00b894", children: ["go→went→gone","see→saw→seen","do→did→done","take→took→taken"] }
+        ]}
+      }
+    ]
+  },
+  emc: {
+    emoji: "⚖️", name: "EMC", color: "#fdcb6e",
+    chapters: [
+      {
+        id: "democratie", title: "La démocratie", desc: "Principes, institutions et valeurs républicaines",
+        quiz: [
+          { q: "Qu'est-ce que la démocratie ?", options: ["Le gouvernement d'un seul homme","Le gouvernement du peuple, par le peuple, pour le peuple","Le gouvernement des experts","Le gouvernement de l'armée"], correct: 1, explanation: "Démocratie (grec : demos = peuple, kratos = pouvoir). Lincoln la définit : 'government of the people, by the people, for the people'." },
+          { q: "Quels sont les 3 pouvoirs dans une démocratie ?", options: ["Président, Parlement, Armée","Législatif, Exécutif, Judiciaire","Local, National, International","État, Régions, Communes"], correct: 1, explanation: "La séparation des pouvoirs (Montesquieu) : Législatif (vote les lois), Exécutif (gouverne), Judiciaire (juge). Garantit l'État de droit." },
+          { q: "Qu'est-ce que la laïcité en France ?", options: ["L'interdiction de toute religion","La séparation de l'État et des religions, garantissant la liberté de conscience","L'obligation d'être catholique","La domination d'une religion sur l'État"], correct: 1, explanation: "La laïcité (loi 1905) : l'État ne reconnaît ni ne finance aucune religion. Chacun est libre de croire ou non. Les religions sont respectées mais privées." },
+          { q: "Qu'est-ce que l'État de droit ?", options: ["Un pays avec de nombreuses lois","Un système où l'État lui-même est soumis au droit et aux lois","Un régime autoritaire légal","Un tribunal international"], correct: 1, explanation: "Dans un État de droit, les gouvernants sont soumis aux mêmes lois que les citoyens. La Constitution est la loi suprême. Les juges sont indépendants." },
+          { q: "Le suffrage universel signifie :", options: ["Seuls les hommes votent","Seuls les adultes qui payent des impôts votent","Tous les citoyens adultes ont le droit de vote","Seuls les diplômés votent"], correct: 2, explanation: "Suffrage universel : tous les citoyens majeurs (18 ans) peuvent voter, sans distinction de sexe, de fortune, de religion. En France depuis 1944 pour les femmes." }
+        ],
+        flashcards: [
+          { front: "Démocratie", back: "Gouvernement du peuple (demos=peuple, kratos=pouvoir). Le peuple exerce le pouvoir directement (démocratie directe) ou par des représentants élus (démocratie représentative)." },
+          { front: "Séparation des pouvoirs", back: "Doctrine de Montesquieu (L'Esprit des lois, 1748). Législatif (lois), Exécutif (gouverne), Judiciaire (juge). Évite les abus de pouvoir." },
+          { front: "Laïcité", back: "Séparation de l'État et des religions (loi 1905). Liberté de conscience et de culte. Neutralité de l'espace public. L'un des principes fondamentaux de la République française." },
+          { front: "État de droit", back: "Système politique où tous — citoyens et gouvernants — sont soumis au droit. La Constitution est la norme suprême. Justice indépendante." },
+          { front: "Suffrage universel", back: "Droit de vote accordé à tous les citoyens majeurs (18 ans), sans distinction. En France : hommes depuis 1848, femmes depuis 1944." },
+          { front: "Droits de l'Homme (1789)", back: "Déclaration des Droits de l'Homme et du Citoyen (26 août 1789). Liberté, égalité, souveraineté nationale, séparation des pouvoirs, présomption d'innocence." }
+        ],
+        summary: `<h2>La démocratie et la République française</h2>
+<h3>1. Les principes de la démocratie</h3>
+<p>La démocratie repose sur :</p>
+<ul>
+<li><strong>La souveraineté populaire</strong> : le peuple est la source du pouvoir</li>
+<li><strong>Le suffrage universel</strong> : tous les citoyens votent (18 ans)</li>
+<li><strong>La séparation des pouvoirs</strong> (Montesquieu) : Législatif / Exécutif / Judiciaire</li>
+<li><strong>L'État de droit</strong> : les gouvernants respectent les lois comme les citoyens</li>
+<li><strong>La protection des libertés fondamentales</strong></li>
+</ul>
+<h3>2. La République française</h3>
+<p>La France est une <strong>République laïque, démocratique et sociale</strong> (Article 1 de la Constitution de 1958).</p>
+<p>Sa devise : <em>Liberté, Égalité, Fraternité</em>.</p>
+<div class="date-box">📜 26 août 1789 : Déclaration des Droits de l'Homme et du Citoyen. Texte fondateur des droits et libertés.</div>
+<h3>3. La laïcité</h3>
+<p>La <strong>loi de 1905</strong> sépare l'Église de l'État. La laïcité garantit :</p>
+<ul>
+<li>La liberté de conscience et de culte</li>
+<li>La neutralité de l'État face aux religions</li>
+<li>L'égalité de tous les citoyens quelle que soit leur religion</li>
+</ul>
+<h3>4. Les droits et les devoirs du citoyen</h3>
+<ul>
+<li><strong>Droits</strong> : voter, s'exprimer, être jugé équitablement, être éduqué</li>
+<li><strong>Devoirs</strong> : respecter les lois, payer ses impôts, participer à la défense nationale</li>
+</ul>`,
+        mindmap: { center: "Démocratie & République", branches: [
+          { label: "Principes", color: "#fdcb6e", children: ["Souveraineté peuple","Suffrage universel","Séparation pouvoirs","État de droit"] },
+          { label: "République fr.", back: "La France", color: "#e17055", children: ["Liberté Égalité Fraternité","Constitution 1958","Art. 1 laïque sociale","DDHC 1789"] },
+          { label: "Laïcité", color: "#0984e3", children: ["Loi 1905","Liberté conscience","Neutralité État","Pluralisme religieux"] },
+          { label: "Citoyen", color: "#00b894", children: ["Droits fondamentaux","Droit de vote","Devoirs civiques","Participation démocratique"] }
+        ]}
+      }
+    ]
+  }
+};
+
+// ── STATE ───────────────────────────────────────────────────
+let state = {
+  subject: null, chapter: null, activity: null,
+  quizIndex: 0, quizScore: 0, quizAnswered: false,
+  fcIndex: 0, fcKnown: 0, fcFlipped: false,
+  streak: 0, completedToday: [],
+  ttsActive: false, speechInst: null
+};
+
+// ── UTILS ───────────────────────────────────────────────────
+function showToast(msg, duration) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), duration || 2500);
+}
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function updateHeader(title, showBack) {
+  document.getElementById('headerTitle').textContent = title;
+  const btn = document.getElementById('backBtn');
+  if (showBack) btn.classList.add('visible'); else btn.classList.remove('visible');
+}
+function goBack() {
+  if (state.activity) {
+    state.activity = null;
+    showActivities();
+  } else if (state.chapter !== null) {
+    state.chapter = null;
+    showChapters(state.subject);
+  } else {
+    state.subject = null;
+    showSubjects();
+  }
+}
+
+// ── STREAK ──────────────────────────────────────────────────
+function updateStreak() {
+  const el = document.getElementById('streakCount');
+  const n = state.completedToday.length;
+  el.textContent = n + ' activité' + (n > 1 ? 's' : '') + ' aujourd\'hui';
+  const dots = document.getElementById('streakDots');
+  dots.innerHTML = '';
+  for (let i = 0; i < 5; i++) {
+    const d = document.createElement('div');
+    d.className = 'streak-dot' + (i < n ? ' done' : '');
+    d.textContent = i < n ? '✓' : (i + 1);
+    dots.appendChild(d);
+  }
+}
+function recordCompletion(key) {
+  if (!state.completedToday.includes(key)) {
+    state.completedToday.push(key);
+    updateStreak();
+    if (state.completedToday.length % 3 === 0) {
+      document.getElementById('koalaHero').innerHTML = getKoalaSVG(80, 'star');
+      showToast('🌟 Super Ilian ! ' + state.completedToday.length + ' activités complètes !', 3000);
+    }
+  }
+}
+
+// ── SUBJECTS SCREEN ─────────────────────────────────────────
+function showSubjects() {
+  state.subject = null; state.chapter = null; state.activity = null;
+  stopSpeech();
+  showScreen('screenSubjects');
+  updateHeader('Ilian — Mes Cours', false);
+  document.getElementById('koalaHero').innerHTML = getKoalaSVG(80, 'normal');
+  const grid = document.getElementById('subjectsGrid');
+  grid.innerHTML = '';
+  Object.entries(DATA).forEach(([key, subj]) => {
+    const card = document.createElement('div');
+    card.className = 'subject-card';
+    card.style.setProperty('--subj-color', subj.color);
+    const chapCount = subj.chapters.length;
+    card.innerHTML = `<span class="emoji">${subj.emoji}</span><div class="name">${subj.name}</div><div class="chapter-count">${chapCount} chapitre${chapCount>1?'s':''}</div>`;
+    card.onclick = () => showChapters(key);
+    grid.appendChild(card);
+  });
+  updateStreak();
+  buildSidebar();
+  if (window.innerWidth >= 1024) document.getElementById('sidebar').style.display = 'flex';
+}
+
+// ── SIDEBAR ──────────────────────────────────────────────────
+function buildSidebar() {
+  const el = document.getElementById('sidebarItems');
+  el.innerHTML = '';
+  Object.entries(DATA).forEach(([key, subj]) => {
+    const item = document.createElement('div');
+    item.className = 'sidebar-item' + (state.subject === key ? ' active' : '');
+    item.innerHTML = `<span class="sidebar-emoji">${subj.emoji}</span>${subj.name}`;
+    item.onclick = () => showChapters(key);
+    el.appendChild(item);
+  });
+}
+
+// ── CHAPTERS SCREEN ──────────────────────────────────────────
+function showChapters(subjKey) {
+  state.subject = subjKey;
+  state.chapter = null; state.activity = null;
+  stopSpeech();
+  const subj = DATA[subjKey];
+  showScreen('screenChapters');
+  updateHeader(subj.emoji + ' ' + subj.name, true);
+  buildSidebar();
+  const list = document.getElementById('chapterList');
+  list.innerHTML = '';
+  subj.chapters.forEach((ch, i) => {
+    const item = document.createElement('div');
+    item.className = 'chapter-item';
+    item.style.setProperty('--ch-color', subj.color);
+    item.innerHTML = `<div class="ch-num" style="background:${subj.color}">${i+1}</div>
+      <div class="ch-info">
+        <div class="ch-title">${ch.title}</div>
+        <div class="ch-desc">${ch.desc}</div>
+      </div>`;
+    item.onclick = () => showActivities(i);
+    list.appendChild(item);
+  });
+}
+
+// ── ACTIVITIES SCREEN ────────────────────────────────────────
+function showActivities(chIdx) {
+  if (chIdx !== undefined) state.chapter = chIdx;
+  state.activity = null;
+  stopSpeech();
+  const subj = DATA[state.subject];
+  const ch = subj.chapters[state.chapter];
+  showScreen('screenActivities');
+  updateHeader(ch.title, true);
+  document.getElementById('actChapterTitle').textContent = ch.title;
+  document.getElementById('actChapterDesc').textContent = ch.desc;
+  document.getElementById('koalaActivity').innerHTML = getKoalaSVG(56, 'normal');
+  const grid = document.getElementById('activitiesGrid');
+  grid.innerHTML = '';
+  const acts = [
+    { id: 'resume', icon: '📄', name: 'Résumé', count: '1 fiche', color: subj.color },
+    { id: 'quiz', icon: '🎯', name: 'Quiz', count: ch.quiz.length + ' questions', color: '#e94560' },
+    { id: 'flashcards', icon: '🃏', name: 'Flashcards', count: ch.flashcards.length + ' cartes', color: '#fdcb6e' },
+    { id: 'mindmap', icon: '🗺️', name: 'Carte mentale', count: '1 schéma', color: '#00cec9' }
+  ];
+  acts.forEach(act => {
+    const card = document.createElement('div');
+    card.className = 'activity-card';
+    card.style.setProperty('--act-color', act.color);
+    card.innerHTML = `<span class="act-icon">${act.icon}</span><div class="act-name">${act.name}</div><div class="act-count">${act.count}</div>`;
+    card.onclick = () => startActivity(act.id);
+    grid.appendChild(card);
+  });
+}
+
+function startActivity(actId) {
+  state.activity = actId;
+  const subj = DATA[state.subject];
+  const ch = subj.chapters[state.chapter];
+  if (actId === 'quiz') startQuiz(ch);
+  else if (actId === 'flashcards') startFlash(ch);
+  else if (actId === 'resume') showSummary(ch);
+  else if (actId === 'mindmap') showMindmap(ch, subj.color);
+}
+
+// ── QUIZ ENGINE ──────────────────────────────────────────────
+function startQuiz(ch) {
+  state.quizIndex = 0; state.quizScore = 0; state.quizAnswered = false;
+  showScreen('screenQuiz');
+  updateHeader('Quiz — ' + ch.title, true);
+  renderQuestion(ch);
+}
+function renderQuestion(ch) {
+  const q = ch.quiz[state.quizIndex];
+  const total = ch.quiz.length;
+  document.getElementById('quizFill').style.width = (state.quizIndex / total * 100) + '%';
+  document.getElementById('quizProgressLabel').textContent = (state.quizIndex + 1) + '/' + total;
+  const letters = ['A','B','C','D'];
+  const content = document.getElementById('quizContent');
+  content.innerHTML = `
+    <div class="question-card">
+      <div class="question-text">${q.q}</div>
+      <div class="question-hint">Choisis la bonne réponse</div>
+      <div class="options-list">
+        ${q.options.map((opt, i) => `
+          <button class="option-btn" onclick="answerQuiz(${i},${state.quizIndex})" id="opt${i}">
+            <span class="option-letter">${letters[i]}</span>${opt}
+          </button>`).join('')}
+      </div>
+      <div class="explanation-box" id="expBox">${q.explanation}</div>
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">
+        ${state.quizIndex + 1 < total ? 'Question suivante →' : 'Voir le résultat'}
+      </button>
+    </div>`;
+}
+function answerQuiz(chosen, qIdx) {
+  if (state.quizAnswered) return;
+  state.quizAnswered = true;
+  const ch = DATA[state.subject].chapters[state.chapter];
+  const q = ch.quiz[qIdx];
+  const expBox = document.getElementById('expBox');
+  for (let i = 0; i < q.options.length; i++) {
+    const btn = document.getElementById('opt' + i);
+    if (btn) btn.disabled = true;
+  }
+  if (chosen === q.correct) {
+    state.quizScore++;
+    document.getElementById('opt' + chosen).classList.add('correct');
+    expBox.classList.add('visible');
+    document.getElementById('koalaActivity').innerHTML = getKoalaSVG(56, 'happy');
+    showToast(['Excellent ! 🎉','Parfait ! ⭐','Bravo Ilian ! 🏆','Super ! 👏'][Math.floor(Math.random()*4)]);
+  } else {
+    document.getElementById('opt' + chosen).classList.add('wrong');
+    document.getElementById('opt' + q.correct).classList.add('correct');
+    expBox.classList.add('visible', 'wrong-exp');
+  }
+  document.getElementById('nextBtn').classList.add('visible');
+}
+function nextQuestion() {
+  const ch = DATA[state.subject].chapters[state.chapter];
+  state.quizIndex++;
+  state.quizAnswered = false;
+  if (state.quizIndex >= ch.quiz.length) {
+    showQuizScore(ch);
+  } else {
+    renderQuestion(ch);
+  }
+}
+function showQuizScore(ch) {
+  const pct = Math.round(state.quizScore / ch.quiz.length * 100);
+  const subj = DATA[state.subject];
+  let color = pct >= 80 ? 'var(--green)' : pct >= 60 ? 'var(--yellow)' : 'var(--red)';
+  let msg = pct === 100 ? '🏆 Parfait !' : pct >= 80 ? '🎉 Excellent !' : pct >= 60 ? '👍 Bien !' : '💪 Continue !';
+  document.getElementById('quizContent').innerHTML = `
+    <div class="quiz-score">
+      <div style="font-size:3rem;margin-bottom:12px">${pct===100?'🏆':pct>=80?'⭐':pct>=60?'👍':'💪'}</div>
+      <div class="score-circle" style="background:${color}22;border:3px solid ${color}">
+        <div style="color:${color}">${state.quizScore}/${ch.quiz.length}</div>
+        <div style="font-size:0.9rem;color:var(--text2)">${pct}%</div>
+      </div>
+      <div class="score-msg" style="margin-top:16px">${msg}</div>
+      <div class="score-sub">Tu as répondu juste à ${state.quizScore} question${state.quizScore>1?'s':''} sur ${ch.quiz.length}</div>
+      <div class="score-actions">
+        <button class="btn btn-accent" onclick="startActivity('quiz')">Recommencer</button>
+        <button class="btn btn-green" onclick="showActivities()">← Activités</button>
+      </div>
+    </div>`;
+  recordCompletion(state.subject + '_' + state.chapter + '_quiz');
+  document.getElementById('quizFill').style.width = '100%';
+}
+
+// ── FLASHCARDS ENGINE ────────────────────────────────────────
+function startFlash(ch) {
+  state.fcIndex = 0; state.fcKnown = 0; state.fcFlipped = false;
+  showScreen('screenFlash');
+  updateHeader('Flashcards — ' + ch.title, true);
+  document.getElementById('fcComplete').style.display = 'none';
+  document.getElementById('fcKnownBtns').style.display = 'flex';
+  renderFlash(ch);
+}
+function renderFlash(ch) {
+  const card = ch.flashcards[state.fcIndex];
+  document.getElementById('fcProgress').textContent = (state.fcIndex + 1) + ' / ' + ch.flashcards.length;
+  document.getElementById('fcCounter').textContent = (state.fcIndex + 1) + '/' + ch.flashcards.length;
+  document.getElementById('fcFront').textContent = card.front;
+  document.getElementById('fcBack').textContent = card.back;
+  document.getElementById('flashcard').classList.remove('flipped');
+  state.fcFlipped = false;
+  document.getElementById('fcPrev').disabled = state.fcIndex === 0;
+  document.getElementById('fcNext').disabled = state.fcIndex === ch.flashcards.length - 1;
+}
+function flipCard() {
+  const fc = document.getElementById('flashcard');
+  if (state.fcFlipped) { fc.classList.remove('flipped'); state.fcFlipped = false; }
+  else { fc.classList.add('flipped'); state.fcFlipped = true; }
+}
+function fcNav(dir) {
+  const ch = DATA[state.subject].chapters[state.chapter];
+  state.fcIndex = Math.max(0, Math.min(ch.flashcards.length - 1, state.fcIndex + dir));
+  renderFlash(ch);
+}
+function fcMark(known) {
+  if (known) {
+    state.fcKnown++;
+    showToast('✓ Bien mémorisé ! +1', 1500);
+  }
+  const ch = DATA[state.subject].chapters[state.chapter];
+  if (state.fcIndex < ch.flashcards.length - 1) {
+    state.fcIndex++;
+    renderFlash(ch);
+  } else {
+    document.getElementById('fcComplete').style.display = 'block';
+    document.getElementById('fcKnownBtns').style.display = 'none';
+    document.getElementById('fcScore').textContent = state.fcKnown + ' carte' + (state.fcKnown>1?'s':'') + ' mémorisée' + (state.fcKnown>1?'s':'') + ' sur ' + ch.flashcards.length;
+    recordCompletion(state.subject + '_' + state.chapter + '_fc');
+  }
+}
+function restartFlash() {
+  startFlash(DATA[state.subject].chapters[state.chapter]);
+}
+
+// ── SUMMARY ──────────────────────────────────────────────────
+function showSummary(ch) {
+  showScreen('screenSummary');
+  updateHeader('Résumé — ' + ch.title, true);
+  document.getElementById('summaryContent').innerHTML = ch.summary;
+  recordCompletion(state.subject + '_' + state.chapter + '_summary');
+}
+function speakSummary() {
+  if (!('speechSynthesis' in window)) { showToast('Synthèse vocale non supportée'); return; }
+  stopSpeech();
+  const text = document.getElementById('summaryContent').innerText;
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'fr-FR'; utter.rate = 0.92;
+  window.speechSynthesis.speak(utter);
+  document.getElementById('speakBtn').textContent = '🔊 Lecture en cours…';
+  utter.onend = () => { document.getElementById('speakBtn').textContent = '🔊 Écouter'; };
+}
+function stopSpeech() {
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+  const btn = document.getElementById('speakBtn');
+  if (btn) btn.textContent = '🔊 Écouter';
+}
+function toggleTTS() {
+  if (window.speechSynthesis && window.speechSynthesis.speaking) stopSpeech();
+  else if (state.activity === 'resume') speakSummary();
+}
+
+// ── MINDMAP ──────────────────────────────────────────────────
+function showMindmap(ch, defaultColor) {
+  showScreen('screenMindmap');
+  updateHeader('Carte mentale — ' + ch.title, true);
+  drawMindmap(ch.mindmap, defaultColor);
+  recordCompletion(state.subject + '_' + state.chapter + '_mindmap');
+}
+function drawMindmap(mm, defaultColor) {
+  const svg = document.getElementById('mindmapSvg');
+  const W = 700, H = 500;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.setAttribute('width', W);
+  svg.setAttribute('height', H);
+  svg.innerHTML = '';
+  const cx = W / 2, cy = H / 2;
+  const branches = mm.branches;
+  const angleStep = (2 * Math.PI) / branches.length;
+  const branchR = 160;
+  let html = '';
+  // Center
+  html += `<ellipse cx="${cx}" cy="${cy}" rx="70" ry="36" fill="${defaultColor || '#e94560'}" opacity="0.9"/>
+  <text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="bold" fill="#fff">${mm.center}</text>`;
+  branches.forEach((br, i) => {
+    const angle = angleStep * i - Math.PI / 2;
+    const bx = cx + Math.cos(angle) * branchR;
+    const by = cy + Math.sin(angle) * branchR;
+    const color = br.color || defaultColor || '#888';
+    // Line from center to branch
+    html += `<line x1="${cx}" y1="${cy}" x2="${bx}" y2="${by}" stroke="${color}" stroke-width="2" opacity="0.6"/>`;
+    // Branch ellipse
+    html += `<ellipse cx="${bx}" cy="${by}" rx="54" ry="22" fill="${color}" opacity="0.85"/>
+    <text x="${bx}" y="${by}" text-anchor="middle" dominant-baseline="middle" font-size="11" font-weight="bold" fill="#fff">${br.label}</text>`;
+    // Children
+    if (br.children) {
+      const childAngleOffset = (angleStep * 0.5) / (br.children.length + 1);
+      br.children.forEach((child, j) => {
+        const childAngle = angle + childAngleOffset * (j - (br.children.length - 1) / 2);
+        const childR = 90;
+        const childX = bx + Math.cos(childAngle) * childR;
+        const childY = by + Math.sin(childAngle) * childR;
+        html += `<line x1="${bx}" y1="${by}" x2="${childX}" y2="${childY}" stroke="${color}" stroke-width="1.5" opacity="0.4"/>
+        <ellipse cx="${childX}" cy="${childY}" rx="44" ry="16" fill="${color}" opacity="0.3" stroke="${color}" stroke-width="1"/>
+        <text x="${childX}" y="${childY}" text-anchor="middle" dominant-baseline="middle" font-size="9.5" fill="#fff">${child}</text>`;
+      });
+    }
+  });
+  svg.innerHTML = html;
+}
+
+// ── RESOURCES ────────────────────────────────────────────────
+function openResources() {
+  document.getElementById('resourcesOverlay').classList.add('open');
+  renderResDocsTab();
+}
+function closeResources() {
+  document.getElementById('resourcesOverlay').classList.remove('open');
+}
+function closeResIfOutside(e) {
+  if (e.target === document.getElementById('resourcesOverlay')) closeResources();
+}
+function switchResTab(tab, btn) {
+  document.querySelectorAll('.res-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  if (tab === 'docs') renderResDocsTab();
+  else renderResProgrammeTab();
+}
+function renderResDocsTab() {
+  document.getElementById('resContent').innerHTML = `
+    <h4>📚 Méthode de révision</h4>
+    <ul>
+      <li>Lis d'abord le <strong>Résumé</strong> du chapitre</li>
+      <li>Fais le <strong>Quiz</strong> pour tester ta compréhension</li>
+      <li>Entraîne-toi avec les <strong>Flashcards</strong></li>
+      <li>Visualise la <strong>Carte mentale</strong> pour mémoriser la structure</li>
+    </ul>
+    <h4>🎯 Conseils brevet</h4>
+    <ul>
+      <li>Révise régulièrement plutôt qu'en une seule fois</li>
+      <li>Utilise les cartes mentales pour les nuits avant les épreuves</li>
+      <li>Les flashcards le matin, la synthèse le soir</li>
+      <li>Essaie d'expliquer le cours à voix haute (méthode Feynman)</li>
+    </ul>
+    <button class="copy-btn" onclick="copyDocs()">📋 Copier ces conseils</button>
+  `;
+}
+function copyDocs() {
+  const text = "Méthode de révision : 1) Résumé, 2) Quiz, 3) Flashcards, 4) Carte mentale. Conseils brevet : révision régulière, cartes mentales, flashcards le matin.";
+  if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => showToast('✓ Copié !')).catch(() => showToast('Copie manuelle nécessaire'));
+  else showToast('Copie non disponible');
+}
+function renderResProgrammeTab() {
+  document.getElementById('resContent').innerHTML = `
+    <h4>📋 Programme de 3ème (Brevet)</h4>
+    <ul>
+      <li><strong>Histoire-Géo</strong> : IIIe République, 1ère et 2e Guerres mondiales, Guerre froide, décolonisation, monde contemporain</li>
+      <li><strong>Français</strong> : Argumentation, récit de formation, poésie, théâtre — Brevet : rédaction + questions</li>
+      <li><strong>Maths</strong> : Pythagore, Thalès, calcul littéral, fonctions, statistiques, probabilités</li>
+      <li><strong>SVT</strong> : Génétique, évolution, corps humain, responsabilité humaine environnement</li>
+      <li><strong>Physique-Chimie</strong> : Électricité, ondes, chimie, énergie</li>
+      <li><strong>Anglais</strong> : Past tenses, modals, vocabulaire, expression écrite et orale</li>
+      <li><strong>EMC</strong> : Démocratie, laïcité, droits de l'Homme, citoyenneté</li>
+    </ul>
+    <h4>📅 Brevet des collèges</h4>
+    <ul>
+      <li>Épreuve de Français</li>
+      <li>Épreuve de Maths</li>
+      <li>Épreuve d'Histoire-Géo + EMC</li>
+      <li>Oral de soutenance de projet (chef-d'œuvre)</li>
+      <li>Contrôle continu (bulletins) — 400 points</li>
+    </ul>
+    <button class="copy-btn" onclick="copyProg()">📋 Copier le programme</button>
+  `;
+}
+function copyProg() {
+  const text = "Programme 3e : Histoire-Géo (IIIe République, guerres mondiales, guerre froide), Français (argumentation, récit de formation), Maths (Pythagore, Thalès, calcul littéral), SVT (génétique, évolution), Physique-Chimie (électricité, ondes), Anglais, EMC (démocratie, laïcité).";
+  if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => showToast('✓ Copié !')).catch(() => showToast('Copie manuelle nécessaire'));
+  else showToast('Copie non disponible');
+}
+
+// ── INIT ─────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  showSubjects();
+});
+</script>
+</body>
+</html>
