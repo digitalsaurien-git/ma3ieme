@@ -463,6 +463,46 @@ body {
 .schema-show-legend { align-self: center; background: none; border: 1.5px solid var(--border); color: var(--text2); border-radius: 20px; padding: 6px 16px; font-size: 0.8rem; cursor: pointer; }
 .schema-show-legend:hover { border-color: var(--accent); color: var(--accent); }
 
+/* DEVOIRS */
+.devoirs-banner {
+  display: flex; align-items: center; gap: 12px;
+  background: linear-gradient(135deg, var(--card), rgba(233,69,96,0.08));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin: 14px 0;
+  cursor: pointer;
+  transition: border-color .2s;
+}
+.devoirs-banner:hover { border-color: var(--accent); }
+.devoirs-banner .db-icon { font-size: 1.8rem; }
+.devoirs-banner .db-text { flex: 1; min-width: 0; }
+.devoirs-banner .db-title { font-weight: 700; font-size: 0.95rem; }
+.devoirs-banner .db-sub { font-size: 0.8rem; color: var(--text2); margin-top: 2px; }
+.devoirs-banner .db-badge { background: var(--accent); color: #fff; font-size: 0.78rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; flex-shrink: 0; }
+.devoirs-banner .db-badge.zero { background: var(--green); }
+
+.devoirs-wrap { display: flex; flex-direction: column; gap: 14px; padding: 4px; }
+.devoirs-date-group { display: flex; flex-direction: column; gap: 10px; }
+.devoirs-date-label { font-size: 0.8rem; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 6px; }
+.devoir-card { background: var(--card); border-radius: var(--radius); border-left: 4px solid var(--subj-color, var(--accent)); padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+.devoir-head { display: flex; align-items: center; gap: 8px; justify-content: space-between; flex-wrap: wrap; }
+.devoir-subj { display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 0.9rem; }
+.devoir-status { font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; background: rgba(233,69,96,0.15); color: var(--red); white-space: nowrap; }
+.devoir-status.fait { background: rgba(0,184,148,0.15); color: var(--green); }
+.devoir-title { font-weight: 600; font-size: 0.95rem; }
+.devoir-instructions { font-size: 0.85rem; color: var(--text2); line-height: 1.45; }
+.devoir-files { display: flex; gap: 6px; flex-wrap: wrap; }
+.devoir-file-chip { font-size: 0.72rem; background: var(--bg2); border: 1px solid var(--border); padding: 3px 9px; border-radius: 14px; color: var(--text2); }
+.devoir-note { font-size: 0.8rem; background: rgba(253,203,110,0.12); border: 1px solid rgba(253,203,110,0.3); border-radius: 8px; padding: 8px 10px; color: var(--text); }
+.devoir-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+.devoir-btn { border: none; border-radius: 20px; padding: 8px 16px; font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: opacity .2s; }
+.devoir-btn:hover { opacity: 0.88; }
+.devoir-btn.primary { background: var(--accent); color: #fff; }
+.devoir-btn.ready { background: transparent; border: 2px solid var(--green); color: var(--green); }
+.devoir-btn.ready.active { background: var(--green); color: #fff; }
+.devoirs-empty { text-align: center; padding: 40px 16px; color: var(--text2); }
+
 /* TOAST */
 .toast {
   position: fixed;
@@ -582,6 +622,7 @@ body {
 
 <!-- SIDEBAR (desktop) -->
 <nav class="sidebar" id="sidebar" style="display:none">
+  <div class="sidebar-item" onclick="showDevoirs()" style="font-weight:700;margin-bottom:10px">📅 Mes devoirs</div>
   <div class="sidebar-title">Matières</div>
   <div id="sidebarItems"></div>
 </nav>
@@ -592,6 +633,7 @@ body {
   <button class="back-btn" id="backBtn" onclick="goBack()">&#8249;</button>
   <h1 id="headerTitle">Ilian - Mes Cours</h1>
   <div class="header-actions">
+    <button class="icon-btn" onclick="showDevoirs()" title="Mes devoirs">📅</button>
     <button class="icon-btn" onclick="openResources()" title="Ressources">📋</button>
     <button class="icon-btn" onclick="toggleTTS()" id="ttsBtn" title="Lecture">🔊</button>
   </div>
@@ -612,7 +654,29 @@ body {
     </div>
     <div class="streak-dots" id="streakDots"></div>
   </div>
+  <div class="devoirs-banner" id="devoirsBanner" onclick="showDevoirs()">
+    <span class="db-icon">📅</span>
+    <div class="db-text">
+      <div class="db-title">Mes devoirs</div>
+      <div class="db-sub" id="devoirsBannerSub">—</div>
+    </div>
+    <span class="db-badge" id="devoirsBannerBadge">0</span>
+  </div>
   <div class="subjects-grid" id="subjectsGrid"></div>
+</div>
+
+<!-- SCREEN: DEVOIRS -->
+<div class="screen" id="screenDevoirs">
+  <div class="devoirs-wrap" id="devoirsWrap"></div>
+</div>
+
+<!-- SCREEN: DEVOIR QUIZ -->
+<div class="screen" id="screenDevoirQuiz">
+  <div class="quiz-progress">
+    <div class="quiz-progress-bar"><div class="fill" id="devQuizFill"></div></div>
+    <span id="devQuizProgressLabel">0/0</span>
+  </div>
+  <div id="devQuizContent"></div>
 </div>
 
 <!-- SCREEN: CHAPTERS -->
@@ -2419,13 +2483,268 @@ Les pommes que nous avons mangées → COD avant → <strong>accord féminin plu
   }
 };
 
+// ── DEVOIRS (synchronisés depuis l'ENT chaque semaine) ───────
+const DEVOIRS = [
+  {
+    id: "dev-anglais-20261012",
+    date: "2026-10-12",
+    dateLabel: "lundi 12 oct.",
+    subjectKey: "anglais",
+    title: "Test écrit — A good roommate (is / must / has to)",
+    instructions: "Test écrit sur 10 points : utiliser is / must / has to pour décrire les qualités et les obligations d'un bon colocataire.",
+    schoolStatus: "non-fait",
+    files: [],
+    link: null,
+    note: "Ce point de grammaire n'a pas encore de chapitre dans l'appli : relis bien ta leçon, puis entraîne-toi avec ce quiz de révision sur la règle is / must / have to.",
+    homeworkQuiz: [
+      { q: "Quelle phrase utilise correctement « must » ?", options: ["A good roommate must respect the house rules.","A good roommate must to respect the house rules.","A good roommate musts respect the house rules.","A good roommate is must respect the house rules."], correct: 0, explanation: "« must » est un modal : toujours suivi de la base verbale, sans « to » et sans « s »." },
+      { q: "Complète : « He ___ clean the kitchen every day, it's not compulsory. »", options: ["doesn't have to","don't have to","hasn't to","mustn't to"], correct: 0, explanation: "« have to » se conjugue comme un verbe normal : à la 3e personne du singulier, la négation est « doesn't have to »." },
+      { q: "Quelle est la différence entre « mustn't » et « don't have to » ?", options: ["Elles veulent dire exactement la même chose","mustn't = interdiction ; don't have to = ce n'est pas nécessaire","mustn't = pas nécessaire ; don't have to = interdiction","Ça dépend uniquement du contexte"], correct: 1, explanation: "« You mustn't smoke here » = interdit. « You don't have to come » = ce n'est pas obligatoire, tu es libre." },
+      { q: "Complète avec le verbe « to be » : « A good roommate ___ honest and tidy. »", options: ["must","has to","is","have"], correct: 2, explanation: "Pour décrire une qualité ou une caractéristique, on utilise « to be » (is/are), pas un modal d'obligation." },
+      { q: "Quelle structure exprime une obligation imposée de l'extérieur (un règlement) plutôt qu'un avis personnel ?", options: ["must","have to","is","should"], correct: 1, explanation: "« have to » exprime une obligation externe (règle, loi), alors que « must » exprime souvent une obligation ou une forte recommandation personnelle du locuteur." }
+    ]
+  },
+  {
+    id: "dev-espagnol-20261012",
+    date: "2026-10-12",
+    dateLabel: "lundi 12 oct.",
+    subjectKey: "espagnol",
+    title: "Contrôle — Le futur simple",
+    instructions: "Contrôle de 10 minutes sur le futur simple (infinitif + terminaisons + radicaux irréguliers).",
+    schoolStatus: "non-fait",
+    files: [],
+    link: { chapterId: "esp-futursimple" },
+    homeworkQuiz: null
+  },
+  {
+    id: "dev-histoire-20261012",
+    date: "2026-10-12",
+    dateLabel: "lundi 12 oct.",
+    subjectKey: "histoire",
+    title: "Évaluation d'histoire — chapitre 1 : civils et militaires dans la 1GM",
+    instructions: "Évaluation sur les civils et les militaires pendant la Première Guerre mondiale (mobilisation de toute la société).",
+    schoolStatus: "non-fait",
+    files: ["3e4-cours_1GM.pdf", "fiche_de_révision-1GM.pdf"],
+    link: { chapterId: "hist-guerretotale" },
+    homeworkQuiz: null
+  },
+  {
+    id: "dev-maths-20261012",
+    date: "2026-10-12",
+    dateLabel: "lundi 12 oct.",
+    subjectKey: "maths",
+    title: "Pythagore — exercices n°1 (17) et 6",
+    instructions: "Revoir la leçon, puis faire les exercices n°1 (17) et n°6 de la fiche d'exercices Pythagore. Regarder aussi les vidéos : théorème de Pythagore, et réciproque / contraposée.",
+    schoolStatus: "non-fait",
+    files: ["3eme_Fichedexercices_Pythagore_Prono..."],
+    link: { chapterId: "maths-pythagore" },
+    note: "⚠️ Pour les exercices n°1 et n°6, utilise bien ta fiche papier : les valeurs exactes doivent correspondre à celles données par le professeur.",
+    homeworkQuiz: null
+  }
+];
+
+function findChapterIndexById(subjKey, chapterId) {
+  const subj = DATA[subjKey];
+  if (!subj) return -1;
+  return subj.chapters.findIndex(c => c.id === chapterId);
+}
+
+function getDevoirsPrepared() {
+  try { return JSON.parse(localStorage.getItem('devoirsPrepared') || '{}'); } catch(e) { return {}; }
+}
+function setDevoirPrepared(id, val) {
+  const map = getDevoirsPrepared();
+  if (val) map[id] = true; else delete map[id];
+  try { localStorage.setItem('devoirsPrepared', JSON.stringify(map)); } catch(e) {}
+}
+
+function renderDevoirsBanner() {
+  const sub = document.getElementById('devoirsBannerSub');
+  const badge = document.getElementById('devoirsBannerBadge');
+  if (!sub || !badge) return;
+  const nonFaits = DEVOIRS.filter(d => d.schoolStatus !== 'fait').length;
+  sub.textContent = nonFaits > 0
+    ? nonFaits + ' devoir' + (nonFaits > 1 ? 's' : '') + ' à préparer'
+    : 'Tout est à jour, bravo !';
+  badge.textContent = nonFaits;
+  badge.classList.toggle('zero', nonFaits === 0);
+}
+
+function showDevoirs() {
+  state.subject = null; state.chapter = null; state.activity = null;
+  stopSpeech();
+  showScreen('screenDevoirs');
+  updateHeader('📅 Mes devoirs', true);
+  buildSidebar();
+  const wrap = document.getElementById('devoirsWrap');
+  wrap.innerHTML = '';
+  if (DEVOIRS.length === 0) {
+    wrap.innerHTML = '<div class="devoirs-empty">🎉 Aucun devoir pour le moment !</div>';
+    return;
+  }
+  const prepared = getDevoirsPrepared();
+  const byDate = {};
+  DEVOIRS.forEach(d => { (byDate[d.date] = byDate[d.date] || []).push(d); });
+  Object.keys(byDate).sort().forEach(date => {
+    const group = document.createElement('div');
+    group.className = 'devoirs-date-group';
+    const label = document.createElement('div');
+    label.className = 'devoirs-date-label';
+    label.textContent = 'Pour ' + byDate[date][0].dateLabel;
+    group.appendChild(label);
+    byDate[date].forEach(d => group.appendChild(renderDevoirCard(d, prepared)));
+    wrap.appendChild(group);
+  });
+}
+
+function renderDevoirCard(d, prepared) {
+  const subj = DATA[d.subjectKey];
+  const card = document.createElement('div');
+  card.className = 'devoir-card';
+  card.style.setProperty('--subj-color', subj.color);
+  const isReady = !!prepared[d.id];
+  const filesHtml = (d.files && d.files.length)
+    ? `<div class="devoir-files">${d.files.map(f => `<span class="devoir-file-chip">📎 ${f}</span>`).join('')}</div>`
+    : '';
+  const noteHtml = d.note ? `<div class="devoir-note">${d.note}</div>` : '';
+  let actionBtn = '';
+  if (d.homeworkQuiz) {
+    actionBtn = `<button class="devoir-btn primary" onclick="startDevoirQuiz('${d.id}')">🎯 Quiz de révision</button>`;
+  } else if (d.link) {
+    actionBtn = `<button class="devoir-btn primary" onclick="goToDevoirChapter('${d.id}')">📘 Réviser le chapitre</button>`;
+  }
+  card.innerHTML = `
+    <div class="devoir-head">
+      <div class="devoir-subj">${subj.emoji} ${subj.name}</div>
+      <div class="devoir-status ${d.schoolStatus === 'fait' ? 'fait' : ''}">${d.schoolStatus === 'fait' ? '✓ Fait' : 'Non fait'}</div>
+    </div>
+    <div class="devoir-title">${d.title}</div>
+    <div class="devoir-instructions">${d.instructions}</div>
+    ${filesHtml}
+    ${noteHtml}
+    <div class="devoir-actions">
+      ${actionBtn}
+      <button class="devoir-btn ready ${isReady ? 'active' : ''}" onclick="toggleDevoirReady('${d.id}', this)">${isReady ? '✓ Je suis prêt(e) !' : '💪 Je suis prêt(e) ?'}</button>
+    </div>`;
+  return card;
+}
+
+function toggleDevoirReady(id, btn) {
+  const prepared = getDevoirsPrepared();
+  const newVal = !prepared[id];
+  setDevoirPrepared(id, newVal);
+  btn.classList.toggle('active', newVal);
+  btn.textContent = newVal ? '✓ Je suis prêt(e) !' : '💪 Je suis prêt(e) ?';
+  if (newVal) showToast('Bravo, continue comme ça ! 💪', 1800);
+}
+
+function goToDevoirChapter(id) {
+  const d = DEVOIRS.find(x => x.id === id);
+  if (!d || !d.link) return;
+  const idx = findChapterIndexById(d.subjectKey, d.link.chapterId);
+  if (idx === -1) { showToast('Chapitre introuvable'); return; }
+  state.fromDevoirs = true;
+  state.subject = d.subjectKey;
+  buildSidebar();
+  showActivities(idx);
+}
+
+// ── DEVOIR QUIZ (quiz dédié, indépendant des fiches de matières) ──
+let devoirQuizState = { devoirId: null, index: 0, score: 0, answered: false };
+function startDevoirQuiz(id) {
+  const d = DEVOIRS.find(x => x.id === id);
+  if (!d || !d.homeworkQuiz) return;
+  devoirQuizState = { devoirId: id, index: 0, score: 0, answered: false };
+  state.inDevoirQuiz = true;
+  showScreen('screenDevoirQuiz');
+  updateHeader('🎯 ' + d.title, true);
+  renderDevoirQuizQuestion();
+}
+function renderDevoirQuizQuestion() {
+  const d = DEVOIRS.find(x => x.id === devoirQuizState.devoirId);
+  const q = d.homeworkQuiz[devoirQuizState.index];
+  const total = d.homeworkQuiz.length;
+  document.getElementById('devQuizFill').style.width = (devoirQuizState.index / total * 100) + '%';
+  document.getElementById('devQuizProgressLabel').textContent = (devoirQuizState.index + 1) + '/' + total;
+  const letters = ['A','B','C','D'];
+  document.getElementById('devQuizContent').innerHTML = `
+    <div class="question-card">
+      <div class="question-text">${q.q}</div>
+      <div class="question-hint">Choisis la bonne réponse</div>
+      <div class="options-list">
+        ${q.options.map((opt, i) => `
+          <button class="option-btn" onclick="answerDevoirQuiz(${i})" id="devOpt${i}">
+            <span class="option-letter">${letters[i]}</span>${opt}
+          </button>`).join('')}
+      </div>
+      <div class="explanation-box" id="devExpBox">${q.explanation}</div>
+      <button class="next-btn" id="devNextBtn" onclick="nextDevoirQuestion()">
+        ${devoirQuizState.index + 1 < total ? 'Question suivante →' : 'Voir le résultat'}
+      </button>
+    </div>`;
+}
+function answerDevoirQuiz(chosen) {
+  if (devoirQuizState.answered) return;
+  devoirQuizState.answered = true;
+  const d = DEVOIRS.find(x => x.id === devoirQuizState.devoirId);
+  const q = d.homeworkQuiz[devoirQuizState.index];
+  const expBox = document.getElementById('devExpBox');
+  for (let i = 0; i < q.options.length; i++) {
+    const btn = document.getElementById('devOpt' + i);
+    if (btn) btn.disabled = true;
+  }
+  if (chosen === q.correct) {
+    devoirQuizState.score++;
+    document.getElementById('devOpt' + chosen).classList.add('correct');
+    expBox.classList.add('visible');
+    showToast(['Excellent ! 🎉','Parfait ! ⭐','Bravo Ilian ! 🏆','Super ! 👏'][Math.floor(Math.random()*4)]);
+  } else {
+    document.getElementById('devOpt' + chosen).classList.add('wrong');
+    document.getElementById('devOpt' + q.correct).classList.add('correct');
+    expBox.classList.add('visible', 'wrong-exp');
+  }
+  document.getElementById('devNextBtn').classList.add('visible');
+}
+function nextDevoirQuestion() {
+  const d = DEVOIRS.find(x => x.id === devoirQuizState.devoirId);
+  devoirQuizState.index++;
+  devoirQuizState.answered = false;
+  if (devoirQuizState.index >= d.homeworkQuiz.length) {
+    showDevoirQuizScore(d);
+  } else {
+    renderDevoirQuizQuestion();
+  }
+}
+function showDevoirQuizScore(d) {
+  const pct = Math.round(devoirQuizState.score / d.homeworkQuiz.length * 100);
+  let color = pct >= 80 ? 'var(--green)' : pct >= 60 ? 'var(--yellow)' : 'var(--red)';
+  let msg = pct === 100 ? '🏆 Parfait !' : pct >= 80 ? '🎉 Excellent !' : pct >= 60 ? '👍 Bien !' : '💪 Continue !';
+  document.getElementById('devQuizContent').innerHTML = `
+    <div class="quiz-score">
+      <div style="font-size:3rem;margin-bottom:12px">${pct===100?'🏆':pct>=80?'⭐':pct>=60?'👍':'💪'}</div>
+      <div class="score-circle" style="background:${color}22;border:3px solid ${color}">
+        <div style="color:${color}">${devoirQuizState.score}/${d.homeworkQuiz.length}</div>
+        <div style="font-size:0.9rem;color:var(--text2)">${pct}%</div>
+      </div>
+      <div class="score-msg" style="margin-top:16px">${msg}</div>
+      <div class="score-sub">Tu as répondu juste à ${devoirQuizState.score} question${devoirQuizState.score>1?'s':''} sur ${d.homeworkQuiz.length}</div>
+      <div class="score-actions">
+        <button class="btn btn-accent" onclick="startDevoirQuiz('${d.id}')">Recommencer</button>
+        <button class="btn btn-green" onclick="goBack()">← Mes devoirs</button>
+      </div>
+    </div>`;
+  recordCompletion('devoir_' + d.id + '_quiz');
+  document.getElementById('devQuizFill').style.width = '100%';
+}
+
 // ── STATE ───────────────────────────────────────────────────
 let state = {
   subject: null, chapter: null, activity: null,
   quizIndex: 0, quizScore: 0, quizAnswered: false,
   fcIndex: 0, fcKnown: 0, fcFlipped: false,
   streak: 0, completedToday: [],
-  ttsActive: false, speechInst: null
+  ttsActive: false, speechInst: null,
+  fromDevoirs: false, inDevoirQuiz: false
 };
 
 // ── UTILS ───────────────────────────────────────────────────
@@ -2445,11 +2764,15 @@ function updateHeader(title, showBack) {
   if (showBack) btn.classList.add('visible'); else btn.classList.remove('visible');
 }
 function goBack() {
-  if (state.activity) {
+  if (state.inDevoirQuiz) {
+    state.inDevoirQuiz = false;
+    showDevoirs();
+  } else if (state.activity) {
     state.activity = null;
     showActivities();
   } else if (state.chapter !== null) {
     state.chapter = null;
+    if (state.fromDevoirs) { state.fromDevoirs = false; showDevoirs(); return; }
     showChapters(state.subject);
   } else {
     state.subject = null;
@@ -2501,6 +2824,7 @@ function showSubjects() {
     grid.appendChild(card);
   });
   updateStreak();
+  renderDevoirsBanner();
   buildSidebar();
   if (window.innerWidth >= 1024) document.getElementById('sidebar').style.display = 'flex';
 }
