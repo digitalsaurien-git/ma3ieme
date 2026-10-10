@@ -620,6 +620,119 @@ body {
 }
 .copy-btn:hover { background: var(--card2); }
 
+/* ── DOJO : BOUTIQUE ── */
+.dojo-coins-bar {
+  text-align: center; padding: 12px 0 16px;
+}
+.dojo-coins {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--card); padding: 8px 16px; border-radius: 20px;
+  font-weight: 800; font-size: 1.1rem; color: var(--yellow);
+  box-shadow: var(--shadow);
+}
+.shop-category { margin-bottom: 22px; }
+.shop-cat-title {
+  font-size: 0.82rem; font-weight: 700; color: var(--text2);
+  margin-bottom: 10px;
+}
+.shop-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+}
+@media (max-width: 400px) { .shop-grid { grid-template-columns: repeat(2, 1fr); } }
+.shop-item {
+  background: var(--card); border-radius: 10px;
+  padding: 10px 8px; text-align: center;
+  cursor: pointer; transition: transform .15s;
+  position: relative; border: 2px solid transparent;
+}
+.shop-item:active { transform: scale(0.95); }
+.shop-item.owned { opacity: 0.5; }
+.shop-item.owned::after {
+  content: '✓'; position: absolute; top: 5px; right: 7px;
+  color: var(--green); font-weight: 700; font-size: 0.8rem;
+}
+.shop-item.rare { border-color: rgba(108,92,231,0.35); }
+.shop-item.epic { border-color: rgba(233,69,96,0.35); }
+.shop-item.legendary { border-color: rgba(253,203,110,0.45); }
+.si-emoji { font-size: 2rem; margin-bottom: 4px; }
+.si-name { font-size: 0.7rem; font-weight: 600; margin-bottom: 3px; }
+.si-price { font-size: 0.65rem; font-weight: 700; color: var(--yellow); display: flex; align-items: center; justify-content: center; gap: 3px; }
+.si-rarity { font-size: 0.55rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+.si-rarity.common { color: var(--text2); }
+.si-rarity.rare { color: var(--purple); }
+.si-rarity.epic { color: var(--accent); }
+.si-rarity.legendary { color: var(--yellow); }
+
+/* ── DOJO : GUERRIER ── */
+.warrior-stage { text-align: center; padding: 16px 0 8px; }
+.warrior-display {
+  width: 200px; height: 230px; margin: 0 auto 12px;
+  background: linear-gradient(180deg, var(--bg) 0%, var(--card2) 50%, var(--card) 100%);
+  border-radius: var(--radius);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  border: 2px solid rgba(255,255,255,0.08);
+}
+.warrior-emoji { font-size: 5rem; position: relative; z-index: 1; }
+.warrior-name {
+  font-weight: 800; font-size: 0.9rem; margin-top: 4px;
+  color: var(--yellow); position: relative; z-index: 1;
+}
+.equip-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+.equip-slot {
+  background: var(--card); border-radius: 10px;
+  padding: 10px 6px; text-align: center;
+  border: 2px solid transparent; cursor: pointer; transition: all .2s;
+}
+.equip-slot.equipped { border-color: var(--yellow); }
+.equip-slot-emoji { font-size: 1.4rem; margin-bottom: 3px; }
+.equip-slot-label { font-size: 0.6rem; color: var(--text2); font-weight: 600; }
+
+/* ── DOJO : BESTIAIRE ── */
+.bestiary-intro {
+  text-align: center; padding: 8px 0 16px;
+  font-size: 0.82rem; color: var(--text2); line-height: 1.5;
+}
+.beast-card {
+  background: var(--card); border-radius: var(--radius);
+  padding: 16px; margin-bottom: 14px;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.beast-card.unlocked { border-color: rgba(253,203,110,0.35); }
+.beast-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.beast-name { font-weight: 800; font-size: 1rem; flex: 1; }
+.beast-name.hidden-name { color: var(--text2); font-style: italic; }
+.beast-progress-text { font-size: 0.72rem; color: var(--yellow); font-weight: 700; }
+.beast-puzzle {
+  display: grid; gap: 2px;
+  background: var(--bg); border-radius: 8px; overflow: hidden;
+  aspect-ratio: 2/1;
+}
+.puzzle-cell {
+  display: flex; align-items: center; justify-content: center;
+  transition: all .4s ease; position: relative; overflow: hidden;
+}
+.puzzle-cell:not(.revealed) {
+  background: linear-gradient(135deg, var(--card2), var(--bg2));
+}
+.puzzle-cell:not(.revealed)::after {
+  content: '?'; color: var(--text2); font-weight: 700; font-size: 0.7rem; opacity: 0.4;
+}
+.puzzle-cell.revealed { background: transparent; }
+.beast-image {
+  width: 100%; height: 100%; position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.beast-svg { width: 100%; height: 100%; }
+.beast-bar { height: 4px; background: var(--bg2); border-radius: 2px; margin-top: 10px; overflow: hidden; }
+.beast-bar-fill { height: 100%; border-radius: 2px; transition: width .6s ease; }
+
+.dojo-section-label {
+  font-size: 0.78rem; font-weight: 700; color: var(--text2);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  margin: 0 0 10px; padding-top: 4px;
+}
+
 /* LARGE SCREEN SIDEBAR */
 @media (min-width: 1024px) {
   body { display: flex; min-height: 100vh; }
@@ -686,6 +799,9 @@ body {
   <div class="header-actions">
     <button class="icon-btn" onclick="showRanking()" title="Mon classement">🏆</button>
     <button class="icon-btn" onclick="showDevoirs()" title="Mes devoirs">📅</button>
+    <button class="icon-btn" onclick="showShop()" title="Boutique">🏪</button>
+    <button class="icon-btn" onclick="showMonster()" title="Mon Guerrier">⚔️</button>
+    <button class="icon-btn" onclick="showBestiary()" title="Bestiaire">📜</button>
     <button class="icon-btn" onclick="openResources()" title="Ressources">📋</button>
     <button class="icon-btn" onclick="toggleTTS()" id="ttsBtn" title="Lecture">🔊</button>
   </div>
@@ -742,6 +858,35 @@ body {
 <!-- SCREEN: CLASSEMENT -->
 <div class="screen" id="screenRanking">
   <div class="ranking-wrap" id="rankingWrap"></div>
+</div>
+
+<!-- SCREEN: BOUTIQUE -->
+<div class="screen" id="screenShop">
+  <div class="dojo-coins-bar">
+    <div class="dojo-coins" id="shopCoinsBar">⭐ <span id="dojoCoinsDisplay">0</span></div>
+  </div>
+  <div id="shopContent"></div>
+</div>
+
+<!-- SCREEN: GUERRIER -->
+<div class="screen" id="screenMonster">
+  <div class="warrior-stage">
+    <div class="dojo-section-label" style="text-align:center;margin:0 0 12px">⚔️ Mon Guerrier</div>
+    <div class="warrior-display">
+      <div class="warrior-emoji" id="wBody">🧟</div>
+      <div class="warrior-name" id="wName">Gobelin</div>
+    </div>
+  </div>
+  <div class="dojo-section-label">🛡️ Équipement</div>
+  <div class="equip-grid" id="dojoEquipGrid"></div>
+  <div class="dojo-section-label" style="margin-top:18px">🎒 Inventaire</div>
+  <div id="dojoInventoryList" style="font-size:0.82rem;color:var(--text2);padding:0 4px"></div>
+</div>
+
+<!-- SCREEN: BESTIAIRE -->
+<div class="screen" id="screenBestiary">
+  <div class="bestiary-intro">Gagne des XP pour révéler les créatures mythologiques cachées derrière les puzzles !</div>
+  <div id="bestiaryList"></div>
 </div>
 
 <!-- SCREEN: CHAPTERS -->
@@ -1020,6 +1165,8 @@ function addXP(amount, label) {
   saveXPData(d);
   updateXPDisplay();
   if (amount > 0) {
+    addCoins(Math.ceil(amount / 2));
+    revealBeastPiece();
     showToast('+' + amount + ' XP' + (label ? ' — ' + label : ''), 1600);
     const beforeLevel = Math.floor(before / 100) + 1;
     const afterLevel = Math.floor(d.totalXP / 100) + 1;
@@ -2185,6 +2332,308 @@ function copyProg() {
   const text = "Programme 3e : Histoire-Géo (IIIe République, guerres mondiales, guerre froide), Français (argumentation, récit de formation), Maths (Pythagore, Thalès, calcul littéral), SVT (génétique, évolution), Physique-Chimie (électricité, ondes), Anglais, EMC (démocratie, laïcité).";
   if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => showToast('✓ Copié !')).catch(() => showToast('Copie manuelle nécessaire'));
   else showToast('Copie non disponible');
+}
+
+// ══════════════════════════════════════════════════════════════
+// DOJO — Boutique, Guerrier, Bestiaire
+// ══════════════════════════════════════════════════════════════
+
+// ── BEAST SVGs ──
+function bsvg(vb,inner){return '<svg viewBox="'+vb+'" fill="none" xmlns="http://www.w3.org/2000/svg">'+inner+'</svg>';}
+const BEAST_SVG={
+  'beast-dragon':bsvg('0 0 160 120','<defs><linearGradient id="gD" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".6"/><stop offset="1" stop-color="currentColor" stop-opacity=".2"/></linearGradient></defs><path d="M50 90Q42 70 48 55Q42 42 52 35Q48 22 58 18Q55 8 62 10Q68 4 75 8Q80 2 85 8Q92 4 95 10Q100 6 102 14Q108 18 105 28Q112 32 108 42Q115 50 110 58Q118 68 112 78Q120 88 108 92L95 95Q85 100 75 95Q65 100 55 95L50 90z" fill="url(#gD)" stroke="currentColor" stroke-width="1.2" stroke-opacity=".5"/><path d="M62 18L55 4 60 14M95 14L100 0 98 12" fill="currentColor" opacity=".4"/><path d="M35 55L20 48 28 52 15 42 25 48 18 38 30 50Q38 56 42 58z" fill="currentColor" opacity=".35"/><path d="M120 52L138 44 128 50 142 40 132 48 136 38 125 50Q118 55 115 58z" fill="currentColor" opacity=".35"/><circle cx="68" cy="32" r="3.5" fill="currentColor" opacity=".6"/><circle cx="68" cy="31" r="1.5" fill="#1a1a2e"/><circle cx="92" cy="30" r="3.5" fill="currentColor" opacity=".6"/><circle cx="92" cy="29" r="1.5" fill="#1a1a2e"/><path d="M72 45Q78 50 85 45" stroke="currentColor" stroke-width="1.5" fill="none" opacity=".35"/><path d="M74 48l-1 2 3-1M83 48l1 2-3-1" fill="currentColor" opacity=".35"/><path d="M55 88L48 108 58 95M100 88L108 108 98 95" fill="currentColor" opacity=".25"/>'),
+  'beast-phoenix':bsvg('0 0 160 120','<defs><linearGradient id="gP" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".6"/><stop offset="1" stop-color="currentColor" stop-opacity=".15"/></linearGradient></defs><path d="M80 25Q85 15 90 20Q95 10 92 22Q100 15 95 28Q105 22 98 35Q92 30 85 38Q80 48 75 58Q70 68 60 75Q52 82 45 78Q38 82 35 75L42 65Q52 52 60 42Q68 32 75 28z" fill="url(#gP)" stroke="currentColor" stroke-width="1" stroke-opacity=".4"/><path d="M75 58Q85 62 95 58Q105 52 115 55Q122 58 115 62Q108 66 98 68Q88 72 78 72Q70 74 65 72z" fill="currentColor" opacity=".3"/><path d="M55 78Q50 88 55 95Q60 102 62 92Q65 98 68 88Q62 84 55 78z" fill="currentColor" opacity=".25"/><path d="M45 78Q40 88 42 95Q45 98 48 90Q50 96 55 88Q50 82 45 78z" fill="currentColor" opacity=".2"/><circle cx="88" cy="26" r="2.5" fill="currentColor" opacity=".6"/><circle cx="88.5" cy="25.5" r="1" fill="#1a1a2e"/>'),
+  'beast-griffon':bsvg('0 0 160 120','<defs><linearGradient id="gG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".55"/><stop offset="1" stop-color="currentColor" stop-opacity=".15"/></linearGradient></defs><path d="M50 85Q45 65 52 52Q45 42 55 35Q58 25 68 28Q72 18 78 22Q82 15 88 20Q95 18 95 25Q102 28 98 38Q108 45 102 55Q112 65 105 75L98 82Q88 90 78 85Q68 90 58 85z" fill="url(#gG)" stroke="currentColor" stroke-width="1" stroke-opacity=".35"/><path d="M38 48L22 38 30 42 18 32 28 38 22 28 35 42Q42 50 45 55z" fill="currentColor" opacity=".3"/><path d="M112 48L128 38 120 42 132 32 122 38 128 28 115 42Q108 50 105 55z" fill="currentColor" opacity=".3"/><circle cx="75" cy="32" r="3" fill="currentColor" opacity=".55"/><circle cx="75" cy="31" r="1.2" fill="#1a1a2e"/><path d="M82 38l5-2-4 4z" fill="currentColor" opacity=".35"/><path d="M55 82L48 100 58 90M95 82L102 100 92 90" fill="currentColor" opacity=".25"/>'),
+  'beast-cerbere':bsvg('0 0 160 120','<defs><linearGradient id="gC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".5"/><stop offset="1" stop-color="currentColor" stop-opacity=".15"/></linearGradient></defs><path d="M55 95Q48 75 55 60Q48 48 58 42Q52 28 62 25Q58 15 65 18Q70 10 75 18Q80 8 85 18Q90 10 95 18Q100 12 102 22Q108 18 108 28Q115 35 108 45Q115 55 108 65Q115 78 108 88L100 95z" fill="url(#gC)" stroke="currentColor" stroke-width="1" stroke-opacity=".35"/><circle cx="65" cy="32" r="3" fill="currentColor" opacity=".6"/><circle cx="65" cy="31" r="1.2" fill="#1a1a2e"/><circle cx="80" cy="28" r="3" fill="currentColor" opacity=".6"/><circle cx="80" cy="27" r="1.2" fill="#1a1a2e"/><circle cx="95" cy="32" r="3" fill="currentColor" opacity=".6"/><circle cx="95" cy="31" r="1.2" fill="#1a1a2e"/><path d="M62 40l-2 3 4-1zM78 36l-1 3 3-1zM92 40l-2 3 4-1z" fill="currentColor" opacity=".35"/><path d="M58 90L50 108 60 96M100 90L108 108 98 96" fill="currentColor" opacity=".25"/>'),
+  'beast-minotaure':bsvg('0 0 160 120','<defs><linearGradient id="gM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".52"/><stop offset="1" stop-color="currentColor" stop-opacity=".15"/></linearGradient></defs><path d="M60 95Q52 75 58 60Q52 48 58 40Q55 28 62 25Q58 12 68 18Q72 8 78 14Q82 6 88 14Q92 8 98 18Q102 12 100 25Q105 28 102 40Q108 48 102 60Q108 75 100 95z" fill="url(#gM)" stroke="currentColor" stroke-width="1" stroke-opacity=".35"/><path d="M62 25L48 12 58 20M98 25L112 12 102 20" fill="currentColor" opacity=".4"/><circle cx="72" cy="35" r="3.5" fill="currentColor" opacity=".55"/><circle cx="72" cy="34" r="1.5" fill="#1a1a2e"/><circle cx="88" cy="35" r="3.5" fill="currentColor" opacity=".55"/><circle cx="88" cy="34" r="1.5" fill="#1a1a2e"/><path d="M75 48Q80 54 85 48" stroke="currentColor" stroke-width="1.8" fill="none" opacity=".35"/><path d="M65 92L58 110 68 98M95 92L102 110 92 98" fill="currentColor" opacity=".25"/>'),
+  'beast-hydre':bsvg('0 0 160 120','<defs><linearGradient id="gH" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".55"/><stop offset="1" stop-color="currentColor" stop-opacity=".15"/></linearGradient></defs><path d="M55 95Q48 75 55 60Q48 48 58 40Q52 25 60 18L55 5 62 15Q58 8 65 12L68 2 70 14Q72 5 78 10L80 0 82 10Q85 5 88 14L92 2 92 12Q98 8 95 15L100 5 98 18Q108 25 102 40Q112 48 105 60Q112 75 105 95z" fill="url(#gH)" stroke="currentColor" stroke-width="1" stroke-opacity=".35"/><circle cx="60" cy="14" r="2" fill="currentColor" opacity=".5"/><circle cx="60" cy="13.5" r=".8" fill="#1a1a2e"/><circle cx="70" cy="8" r="2" fill="currentColor" opacity=".5"/><circle cx="70" cy="7.5" r=".8" fill="#1a1a2e"/><circle cx="80" cy="5" r="2" fill="currentColor" opacity=".5"/><circle cx="80" cy="4.5" r=".8" fill="#1a1a2e"/><circle cx="90" cy="8" r="2" fill="currentColor" opacity=".5"/><circle cx="90" cy="7.5" r=".8" fill="#1a1a2e"/><circle cx="98" cy="14" r="2" fill="currentColor" opacity=".5"/><circle cx="98" cy="13.5" r=".8" fill="#1a1a2e"/><path d="M60 90L52 108 62 96M100 90L108 108 98 96" fill="currentColor" opacity=".25"/>'),
+  'beast-pegase':bsvg('0 0 160 120','<defs><linearGradient id="gPe" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".5"/><stop offset="1" stop-color="currentColor" stop-opacity=".12"/></linearGradient></defs><path d="M50 85Q42 68 52 55Q45 42 55 35Q58 25 68 28Q72 18 78 25Q85 20 85 30Q95 35 90 45Q100 50 95 60Q105 68 98 78Q105 88 92 90L82 92Q72 95 62 88z" fill="url(#gPe)" stroke="currentColor" stroke-width="1" stroke-opacity=".35"/><path d="M35 42L15 25 28 32 8 15 22 28 15 15 30 35Q38 42 42 48z" fill="currentColor" opacity=".3"/><path d="M108 38L130 22 118 30 138 15 125 26 130 18 115 32Q108 40 105 45z" fill="currentColor" opacity=".3"/><circle cx="72" cy="30" r="2.5" fill="currentColor" opacity=".55"/><circle cx="72" cy="29.5" r="1" fill="#1a1a2e"/><path d="M55 85L48 105 58 92M90 85L98 105 88 92" fill="currentColor" opacity=".25"/>'),
+  'beast-kraken':bsvg('0 0 160 120','<defs><linearGradient id="gK" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".5"/><stop offset="1" stop-color="currentColor" stop-opacity=".12"/></linearGradient></defs><path d="M55 35Q62 22 75 18Q85 15 98 20Q110 28 112 40Q115 52 108 60" fill="url(#gK)" stroke="currentColor" stroke-width="1" stroke-opacity=".35"/><path d="M108 60Q118 68 112 78Q108 85 100 80Q105 90 95 88Q98 98 88 92Q92 105 80 95Q82 108 72 98Q68 108 65 95Q58 105 58 92Q50 98 52 85Q42 90 48 78Q38 82 42 70Q35 72 40 62Q32 60 42 52Q35 48 45 42Q38 38 48 35Q42 30 52 30z" fill="currentColor" opacity=".22" stroke="currentColor" stroke-width=".8" stroke-opacity=".25"/><circle cx="75" cy="35" r="5" fill="currentColor" opacity=".5"/><circle cx="75" cy="34" r="2" fill="#1a1a2e"/><circle cx="95" cy="35" r="5" fill="currentColor" opacity=".5"/><circle cx="95" cy="34" r="2" fill="#1a1a2e"/>'),
+};
+
+const SHOP = [
+  {cat:'🐉 Créatures',items:[
+    {id:'body-gobelin',icon:'🧟',name:'Gobelin',price:0,type:'body',rarity:'common'},
+    {id:'body-orc',icon:'👹',name:'Orque',price:80,type:'body',rarity:'common'},
+    {id:'body-nain',icon:'⛏️',name:'Nain',price:60,type:'body',rarity:'common'},
+    {id:'body-elfe',icon:'🧝',name:'Elfe',price:100,type:'body',rarity:'rare'},
+    {id:'body-troll',icon:'👾',name:'Troll',price:120,type:'body',rarity:'rare'},
+    {id:'body-squelette',icon:'💀',name:'Squelette',price:90,type:'body',rarity:'common'},
+    {id:'body-spectre',icon:'👻',name:'Spectre',price:150,type:'body',rarity:'epic'},
+    {id:'body-sorcier',icon:'🧙',name:'Sorcier',price:180,type:'body',rarity:'epic'},
+    {id:'body-dragon',icon:'🐉',name:'Dragon',price:300,type:'body',rarity:'legendary'},
+  ]},
+  {cat:'⚔️ Armes',items:[
+    {id:'weap-dague',icon:'🗡️',name:'Dague',price:30,type:'weapon',rarity:'common'},
+    {id:'weap-epee',icon:'⚔️',name:'Épée',price:50,type:'weapon',rarity:'common'},
+    {id:'weap-hache',icon:'🪓',name:'Hache',price:60,type:'weapon',rarity:'rare'},
+    {id:'weap-arc',icon:'🏹',name:'Arc',price:55,type:'weapon',rarity:'common'},
+    {id:'weap-baton',icon:'🪄',name:'Bâton magique',price:100,type:'weapon',rarity:'epic'},
+    {id:'weap-trident',icon:'🔱',name:'Trident',price:150,type:'weapon',rarity:'legendary'},
+  ]},
+  {cat:'🛡️ Armures',items:[
+    {id:'arm-bouclier',icon:'🛡️',name:'Bouclier',price:35,type:'shield',rarity:'common'},
+    {id:'arm-casque',icon:'⛑️',name:'Casque',price:40,type:'helmet',rarity:'common'},
+    {id:'arm-cuirasse',icon:'🦺',name:'Cuirasse',price:70,type:'armor',rarity:'rare'},
+    {id:'arm-cape',icon:'🧥',name:'Cape',price:55,type:'armor',rarity:'rare'},
+    {id:'arm-gantelets',icon:'🧤',name:'Gantelets',price:35,type:'armor',rarity:'common'},
+    {id:'arm-bottes',icon:'👢',name:'Bottes',price:40,type:'boots',rarity:'common'},
+  ]},
+  {cat:'💎 Artefacts',items:[
+    {id:'acc-amulette',icon:'📿',name:'Amulette',price:70,type:'accessory',rarity:'rare'},
+    {id:'acc-anneau',icon:'💍',name:'Anneau de pouvoir',price:150,type:'accessory',rarity:'epic'},
+    {id:'acc-couronne',icon:'👑',name:'Couronne',price:250,type:'accessory',rarity:'legendary'},
+    {id:'acc-potion',icon:'🧪',name:'Potion',price:25,type:'accessory',rarity:'common'},
+    {id:'acc-parchemin',icon:'📜',name:'Parchemin',price:20,type:'accessory',rarity:'common'},
+    {id:'acc-gemme',icon:'💎',name:'Gemme sacrée',price:200,type:'accessory',rarity:'legendary'},
+  ]},
+  {cat:'🏰 Repaires',items:[
+    {id:'bg-grotte',icon:'🕳️',name:'Grotte',price:50,type:'bg',rarity:'common'},
+    {id:'bg-foret',icon:'🌲',name:'Forêt sombre',price:60,type:'bg',rarity:'common'},
+    {id:'bg-montagne',icon:'⛰️',name:'Montagne',price:70,type:'bg',rarity:'rare'},
+    {id:'bg-volcan',icon:'🌋',name:'Volcan',price:90,type:'bg',rarity:'rare'},
+    {id:'bg-chateau',icon:'🏰',name:'Château',price:120,type:'bg',rarity:'epic'},
+    {id:'bg-donjon',icon:'🏯',name:'Donjon',price:160,type:'bg',rarity:'legendary'},
+  ]},
+  {cat:'🎖️ Titres',items:[
+    {id:'title-chasseur',icon:'🎯',name:'Chasseur',price:40,type:'title',rarity:'common'},
+    {id:'title-guerrier',icon:'⚔️',name:'Guerrier',price:60,type:'title',rarity:'common'},
+    {id:'title-boss',icon:'👊',name:'Le Boss',price:100,type:'title',rarity:'rare'},
+    {id:'title-legend',icon:'⭐',name:'Légende',price:200,type:'title',rarity:'epic'},
+    {id:'title-conqueror',icon:'🚩',name:'Conquérant',price:180,type:'title',rarity:'epic'},
+    {id:'title-immortel',icon:'♾️',name:'Immortel',price:300,type:'title',rarity:'legendary'},
+  ]},
+];
+
+const EQUIP_SLOTS = [
+  {slot:'body',label:'Créature',default:'🧟'},
+  {slot:'weapon',label:'Arme',default:'🗡️'},
+  {slot:'shield',label:'Bouclier',default:'🛡️'},
+  {slot:'helmet',label:'Casque',default:'⛑️'},
+  {slot:'armor',label:'Armure',default:'🦺'},
+  {slot:'boots',label:'Bottes',default:'👢'},
+  {slot:'accessory',label:'Artefact',default:'📿'},
+  {slot:'bg',label:'Repaire',default:'🕳️'},
+  {slot:'title',label:'Titre',default:'🎖️'},
+];
+
+const BESTIARY = [
+  {id:'beast-dragon',name:'Dragon',xpNeeded:50,color:'#e94560'},
+  {id:'beast-phoenix',name:'Phénix',xpNeeded:80,color:'#e17055'},
+  {id:'beast-griffon',name:'Griffon',xpNeeded:100,color:'#fdcb6e'},
+  {id:'beast-cerbere',name:'Cerbère',xpNeeded:120,color:'#d63031'},
+  {id:'beast-minotaure',name:'Minotaure',xpNeeded:150,color:'#6c5ce7'},
+  {id:'beast-hydre',name:'Hydre',xpNeeded:180,color:'#00cec9'},
+  {id:'beast-pegase',name:'Pégase',xpNeeded:200,color:'#74b9ff'},
+  {id:'beast-kraken',name:'Kraken',xpNeeded:250,color:'#0984e3'},
+];
+
+const DOJO_GRID_COLS = 8, DOJO_GRID_ROWS = 4, DOJO_TOTAL_CELLS = 32;
+
+// ── Dojo persistent data ──
+function getDojoData() {
+  try {
+    const d = JSON.parse(localStorage.getItem('dojoData') || '{}');
+    if (!d.coins) d.coins = 0;
+    if (!d.owned) d.owned = ['body-gobelin'];
+    if (!d.equipped) d.equipped = {body:'body-gobelin'};
+    if (!d.beastRevealed) d.beastRevealed = {};
+    return d;
+  } catch(e) {
+    return {coins:0, owned:['body-gobelin'], equipped:{body:'body-gobelin'}, beastRevealed:{}};
+  }
+}
+function saveDojoData(d) {
+  try { localStorage.setItem('dojoData', JSON.stringify(d)); } catch(e) {}
+}
+
+function getDojoItem(id) {
+  for (const c of SHOP) for (const i of c.items) if (i.id === id) return i;
+  return null;
+}
+
+// ── Award coins alongside XP ──
+function addCoins(amount) {
+  const d = getDojoData();
+  d.coins = (d.coins || 0) + amount;
+  saveDojoData(d);
+  const el = document.getElementById('dojoCoinsDisplay');
+  if (el) el.textContent = d.coins;
+}
+
+// ── Reveal beast piece on activity ──
+function revealBeastPiece() {
+  const d = getDojoData();
+  for (const b of BESTIARY) {
+    const revealed = d.beastRevealed[b.id] || [];
+    if (revealed.length < DOJO_TOTAL_CELLS) {
+      const all = [];
+      for (let i = 0; i < DOJO_TOTAL_CELLS; i++) all.push(i);
+      const unrevealed = all.filter(i => !revealed.includes(i));
+      if (unrevealed.length > 0) {
+        const pick = unrevealed[Math.floor(Math.random() * unrevealed.length)];
+        if (!d.beastRevealed[b.id]) d.beastRevealed[b.id] = [];
+        d.beastRevealed[b.id].push(pick);
+        saveDojoData(d);
+      }
+      return;
+    }
+  }
+}
+
+// ── Navigation vers les écrans Dojo ──
+function showShop() {
+  showScreen('screenShop');
+  document.getElementById('headerTitle').textContent = '🏪 Boutique';
+  document.getElementById('backBtn').classList.add('visible');
+  renderShop();
+}
+function showMonster() {
+  showScreen('screenMonster');
+  document.getElementById('headerTitle').textContent = '⚔️ Mon Guerrier';
+  document.getElementById('backBtn').classList.add('visible');
+  renderMonster();
+}
+function showBestiary() {
+  showScreen('screenBestiary');
+  document.getElementById('headerTitle').textContent = '📜 Bestiaire';
+  document.getElementById('backBtn').classList.add('visible');
+  renderBestiary();
+}
+
+// ── Render Boutique ──
+function renderShop() {
+  const d = getDojoData();
+  const ct = document.getElementById('shopContent');
+  ct.innerHTML = '';
+  const el = document.getElementById('dojoCoinsDisplay');
+  if (el) el.textContent = d.coins;
+  SHOP.forEach(cat => {
+    const sec = document.createElement('div');
+    sec.className = 'shop-category';
+    sec.innerHTML = '<div class="shop-cat-title">' + cat.cat + '</div>';
+    const grid = document.createElement('div');
+    grid.className = 'shop-grid';
+    cat.items.forEach(item => {
+      const owned = d.owned.includes(item.id);
+      const el = document.createElement('div');
+      el.className = 'shop-item ' + (item.rarity || 'common') + (owned ? ' owned' : '');
+      const rarityLabels = {common:'Commun',rare:'Rare',epic:'Épique',legendary:'Légendaire'};
+      el.innerHTML =
+        '<div class="si-emoji">' + item.icon + '</div>' +
+        '<div class="si-name">' + item.name + '</div>' +
+        '<div class="si-rarity ' + item.rarity + '">' + (rarityLabels[item.rarity] || '') + '</div>' +
+        '<div class="si-price">' + (owned ? 'Acheté' : (item.price === 0 ? 'Gratuit' : '⭐ ' + item.price)) + '</div>';
+      if (!owned && item.price > 0) {
+        el.onclick = () => {
+          const dd = getDojoData();
+          if (dd.coins >= item.price) {
+            dd.coins -= item.price;
+            dd.owned.push(item.id);
+            saveDojoData(dd);
+            renderShop();
+            showToast('🎉 ' + item.name + ' acheté !');
+          } else {
+            showToast('❌ Pas assez d\'étoiles — gagne du XP d\'abord !', 2000);
+          }
+        };
+      } else if (!owned && item.price === 0) {
+        el.onclick = () => {
+          const dd = getDojoData();
+          if (!dd.owned.includes(item.id)) { dd.owned.push(item.id); saveDojoData(dd); }
+          renderShop();
+          showToast('✅ ' + item.name + ' obtenu !');
+        };
+      }
+      grid.appendChild(el);
+    });
+    sec.appendChild(grid);
+    ct.appendChild(sec);
+  });
+}
+
+// ── Render Guerrier ──
+function renderMonster() {
+  const d = getDojoData();
+  const bodyId = d.equipped.body || 'body-gobelin';
+  const bodyItem = getDojoItem(bodyId);
+  document.getElementById('wBody').textContent = bodyItem ? bodyItem.icon : '🧟';
+  document.getElementById('wName').textContent = bodyItem ? bodyItem.name : 'Gobelin';
+  const grid = document.getElementById('dojoEquipGrid');
+  grid.innerHTML = '';
+  EQUIP_SLOTS.forEach(es => {
+    const eqId = d.equipped[es.slot];
+    const eqItem = eqId ? getDojoItem(eqId) : null;
+    const s = document.createElement('div');
+    s.className = 'equip-slot' + (eqItem ? ' equipped' : '');
+    s.innerHTML =
+      '<div class="equip-slot-emoji">' + (eqItem ? eqItem.icon : es.default) + '</div>' +
+      '<div class="equip-slot-label">' + es.label + '</div>';
+    s.onclick = () => {
+      const dd = getDojoData();
+      const ownedOf = dd.owned.map(id => getDojoItem(id)).filter(i => i && i.type === es.slot);
+      if (!ownedOf.length) { showToast('Achète en boutique !'); return; }
+      const cur = ownedOf.findIndex(i => i.id === dd.equipped[es.slot]);
+      const next = (cur + 1) % ownedOf.length;
+      if (ownedOf.length === 1 && dd.equipped[es.slot] === ownedOf[0].id && es.slot !== 'body') {
+        delete dd.equipped[es.slot];
+      } else {
+        dd.equipped[es.slot] = ownedOf[next].id;
+      }
+      saveDojoData(dd);
+      renderMonster();
+    };
+    grid.appendChild(s);
+  });
+  const inv = document.getElementById('dojoInventoryList');
+  const d2 = getDojoData();
+  const items = d2.owned.map(id => getDojoItem(id)).filter(Boolean);
+  if (!items.length) {
+    inv.innerHTML = '<div style="text-align:center;padding:20px 0;color:var(--text2)">Va faire un tour en boutique !</div>';
+    return;
+  }
+  inv.innerHTML = items.map(i =>
+    '<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.06)">' +
+    '<span style="font-size:1.2rem">' + i.icon + '</span>' +
+    '<span style="flex:1">' + i.name + '</span>' +
+    (d2.equipped[i.type] === i.id ? '<span style="color:var(--green);font-size:0.7rem;font-weight:600">Équipé</span>' : '') +
+    '</div>').join('');
+}
+
+// ── Render Bestiaire ──
+function renderBestiary() {
+  const d = getDojoData();
+  const list = document.getElementById('bestiaryList');
+  list.innerHTML = '';
+  BESTIARY.forEach(b => {
+    const revealed = d.beastRevealed[b.id] || [];
+    const pct = Math.round((revealed.length / DOJO_TOTAL_CELLS) * 100);
+    const fullyRevealed = revealed.length >= DOJO_TOTAL_CELLS;
+    const card = document.createElement('div');
+    card.className = 'beast-card' + (fullyRevealed ? ' unlocked' : '');
+    const nameDisplay = fullyRevealed ? b.name : '??? Créature mystère';
+    card.innerHTML =
+      '<div class="beast-top">' +
+        '<div class="beast-name' + (fullyRevealed ? '' : ' hidden-name') + '">' + nameDisplay + '</div>' +
+        '<div class="beast-progress-text">' + pct + '%</div>' +
+      '</div>' +
+      '<div class="beast-puzzle" id="dpuzzle-' + b.id + '" style="grid-template-columns:repeat(' + DOJO_GRID_COLS + ',1fr)"></div>' +
+      '<div class="beast-bar"><div class="beast-bar-fill" style="width:' + pct + '%;background:' + b.color + '"></div></div>';
+    list.appendChild(card);
+    const puzzle = document.getElementById('dpuzzle-' + b.id);
+    const svgContent = BEAST_SVG[b.id] || '';
+    for (let i = 0; i < DOJO_TOTAL_CELLS; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'puzzle-cell' + (revealed.includes(i) ? ' revealed' : '');
+      if (i === 0) {
+        const svgWrap = document.createElement('div');
+        svgWrap.className = 'beast-image';
+        svgWrap.innerHTML = '<div class="beast-svg" style="width:100%;height:100%;color:' + b.color + '">' + svgContent + '</div>';
+        cell.appendChild(svgWrap);
+      }
+      puzzle.appendChild(cell);
+    }
+  });
 }
 
 // ── INIT ─────────────────────────────────────────────────────
