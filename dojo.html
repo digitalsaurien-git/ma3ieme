@@ -1,0 +1,911 @@
+<title>Ilian — Mes Cours</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root {
+  --bg: #f5f6fa; --bg2: #eaecf2; --card: #ffffff; --card2: #f0f2f7;
+  --accent: #e94560; --gold: #c49000; --text: #1a1a2e; --text2: #6b7b8d; --text3: #a0aec0;
+  --green: #00b894; --blue: #0984e3; --purple: #6c5ce7; --orange: #e17055;
+  --yellow: #f39c12; --teal: #00cec9; --pink: #e84393; --red: #d63031;
+  --radius: 14px; --radius-sm: 10px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.07);
+  --nav-h: 62px;
+  --pupil: #1a1a2e;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1b2a; --bg2: #1b2838; --card: #162a45; --card2: #1e3550;
+    --text: #e8ecf0; --text2: #7e95a9; --text3: #4a6275;
+    --gold: #f0c040; --shadow: 0 2px 12px rgba(0,0,0,0.3);
+    --pupil: #0d1b2a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1b2a; --bg2: #1b2838; --card: #162a45; --card2: #1e3550;
+  --text: #e8ecf0; --text2: #7e95a9; --text3: #4a6275;
+  --gold: #f0c040; --shadow: 0 2px 12px rgba(0,0,0,0.3);
+  --pupil: #0d1b2a;
+  color-scheme: dark;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  padding-block:0;padding-inline:0;overflow-x:hidden;
+}
+h1,h2,h3,.display{font-family:'Nunito',sans-serif;text-wrap:balance}
+
+/* ── HEADER ── */
+.app-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px;padding-top:calc(14px + env(safe-area-inset-top,0px));
+  background:var(--bg);
+}
+.app-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:1.15rem}
+.header-right{display:flex;align-items:center;gap:10px}
+.header-devoirs{
+  display:flex;align-items:center;gap:6px;
+  background:var(--card);padding:6px 12px;border-radius:20px;
+  font-size:0.78rem;font-weight:600;cursor:pointer;
+  transition:transform .15s;box-shadow:var(--shadow);
+}
+.header-devoirs:active{transform:scale(0.95)}
+.header-devoirs .hd-badge{
+  background:var(--accent);color:#fff;min-width:20px;height:20px;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:0.68rem;font-weight:800;
+}
+
+/* ── XP BAR ── */
+.xp-bar{
+  background:var(--card);border-radius:var(--radius);
+  padding:10px 14px;margin:0 16px 10px;
+  display:flex;align-items:center;gap:10px;box-shadow:var(--shadow);
+}
+.level-badge{
+  background:linear-gradient(135deg,#f0c040,#e6a800);color:#1a1a2e;
+  font-family:'Nunito',sans-serif;font-weight:900;font-size:0.72rem;
+  min-width:42px;height:24px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.xp-area{flex:1;min-width:0}
+.xp-label{font-size:0.78rem;font-weight:600}
+.xp-track{height:5px;background:var(--bg);border-radius:3px;overflow:hidden;margin-top:4px}
+.xp-fill{height:100%;background:linear-gradient(90deg,var(--blue),#4facfe);border-radius:3px;transition:width .5s ease}
+.xp-emoji{flex-shrink:0;font-size:1.4rem}
+
+/* ── STREAK ── */
+.streak-bar{
+  background:var(--card);border-radius:var(--radius);
+  padding:10px 14px;margin:0 16px 10px;
+  display:flex;align-items:center;gap:10px;box-shadow:var(--shadow);
+}
+.streak-emoji{flex-shrink:0;font-size:1.4rem}
+.streak-text{flex:1;min-width:0}
+.streak-title{font-size:0.7rem;color:var(--text2);font-weight:500}
+.streak-count{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem}
+.streak-dots{display:flex;gap:5px;flex-shrink:0}
+.streak-dot{
+  width:24px;height:24px;border-radius:50%;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.65rem;font-weight:700;color:var(--text3);
+  border:2px solid transparent;transition:all .3s;
+}
+.streak-dot.done{background:rgba(0,184,148,0.15);border-color:var(--green);color:var(--green)}
+
+/* ── DEVOIRS BANNER ── */
+.devoirs-banner{
+  background:var(--card);border-radius:var(--radius);
+  padding:12px 14px;margin:0 16px 10px;
+  display:flex;align-items:center;gap:12px;
+  box-shadow:var(--shadow);cursor:pointer;transition:transform .15s;
+}
+.devoirs-banner:active{transform:scale(0.98)}
+.db-emoji{flex-shrink:0;font-size:1.3rem}
+.db-text{flex:1;min-width:0}
+.db-title{font-size:0.88rem;font-weight:700}
+.db-sub{font-size:0.7rem;color:var(--text2);margin-top:1px}
+.db-badge{
+  background:var(--accent);color:#fff;min-width:26px;height:26px;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;flex-shrink:0;
+}
+
+/* ── COURSE TILES ── */
+.section-label{
+  font-size:0.78rem;font-weight:700;color:var(--text2);
+  text-transform:uppercase;letter-spacing:0.06em;margin:0 16px 10px;padding-top:4px;
+  display:flex;align-items:center;gap:6px;
+}
+.courses-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:10px;
+  padding:0 16px;
+  padding-bottom:calc(var(--nav-h) + 24px + env(safe-area-inset-bottom,0px));
+}
+@media(min-width:500px){.courses-grid{grid-template-columns:repeat(3,1fr)}}
+.course-tile{
+  background:var(--card);border-radius:var(--radius);
+  padding:16px 12px 14px;text-align:center;
+  box-shadow:var(--shadow);cursor:pointer;transition:transform .15s;
+  position:relative;overflow:hidden;
+}
+.course-tile:active{transform:scale(0.96)}
+.course-tile::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--tile-color);
+}
+.course-emoji{font-size:2rem;margin-bottom:6px}
+.course-name{font-size:0.82rem;font-weight:700}
+.course-chapters{font-size:0.68rem;color:var(--text2);margin-top:3px}
+.course-belt{
+  display:inline-block;width:20px;height:8px;border-radius:4px;margin-top:6px;
+  border:1px solid rgba(0,0,0,0.1);
+}
+
+/* ── BOTTOM NAV ── */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;height:var(--nav-h);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  background:var(--card);border-top:1px solid rgba(0,0,0,0.06);
+  display:flex;z-index:100;box-shadow:0 -2px 10px rgba(0,0,0,0.05);
+}
+.nav-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;cursor:pointer;color:var(--text3);
+  font-size:0.58rem;font-weight:600;transition:color .2s;
+  -webkit-tap-highlight-color:transparent;user-select:none;
+}
+.nav-item .nav-emoji{font-size:1.2rem}
+.nav-item.active{color:var(--accent)}
+.nav-item:not(.active):hover{color:var(--text2)}
+
+/* ── SCREENS ── */
+.screen{display:none}
+.screen.active{display:block}
+.scr{
+  padding:16px;max-width:600px;margin:0 auto;
+  padding-bottom:calc(var(--nav-h) + 24px + env(safe-area-inset-bottom,0px));
+}
+
+/* ── BACK BTN ── */
+.back-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 0;margin-bottom:12px;
+  font-size:0.85rem;font-weight:600;color:var(--blue);
+  cursor:pointer;background:none;border:none;
+}
+
+/* ── DEVOIRS LIST ── */
+.devoir-card{
+  background:var(--card);border-radius:var(--radius-sm);
+  padding:12px 14px;margin-bottom:8px;
+  display:flex;align-items:center;gap:12px;
+  box-shadow:var(--shadow);border-left:4px solid var(--accent);transition:transform .15s;
+}
+.devoir-emoji{flex-shrink:0;font-size:1.4rem}
+.devoir-info{flex:1;min-width:0}
+.devoir-title{font-size:0.85rem;font-weight:600}
+.devoir-date{font-size:0.7rem;color:var(--text2);margin-top:2px}
+.devoir-check{
+  width:28px;height:28px;border-radius:50%;border:2px solid var(--text3);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;cursor:pointer;transition:all .3s;
+}
+.devoir-check.checked{background:var(--green);border-color:var(--green);color:#fff;font-size:0.85rem}
+.devoir-card.archiving{animation:slideOut 0.4s ease forwards}
+@keyframes slideOut{to{transform:translateX(100%);opacity:0;height:0;padding:0;margin:0;overflow:hidden}}
+
+/* ── BOUTIQUE ── */
+.shop-header{text-align:center;padding:12px 0 16px}
+.shop-coins{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--card);padding:8px 16px;border-radius:20px;
+  font-family:'Nunito',sans-serif;font-weight:800;font-size:1.1rem;
+  color:var(--gold);box-shadow:var(--shadow);
+}
+.shop-category{margin-bottom:22px}
+.shop-cat-title{
+  font-size:0.82rem;font-weight:700;color:var(--text2);
+  margin-bottom:10px;display:flex;align-items:center;gap:6px;
+}
+.shop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media(max-width:400px){.shop-grid{grid-template-columns:repeat(2,1fr)}}
+
+.shop-item{
+  background:var(--card);border-radius:var(--radius-sm);
+  padding:10px 8px 10px;text-align:center;
+  cursor:pointer;transition:transform .15s,box-shadow .15s;
+  position:relative;border:2px solid var(--bg);
+  box-shadow:var(--shadow);
+}
+.shop-item:active{transform:scale(0.95)}
+.shop-item.owned{opacity:0.5}
+.shop-item.owned::after{
+  content:'✓';position:absolute;top:5px;right:7px;
+  color:var(--green);font-weight:700;font-size:0.8rem;
+}
+.shop-item.rare{border-color:rgba(108,92,231,0.3)}
+.shop-item.epic{border-color:rgba(233,69,96,0.3)}
+.shop-item.legendary{border-color:rgba(212,160,0,0.4);box-shadow:0 2px 12px rgba(212,160,0,0.12)}
+.si-emoji{font-size:2rem;margin-bottom:4px}
+.si-name{font-size:0.7rem;font-weight:600;margin-bottom:3px}
+.si-price{font-size:0.65rem;font-weight:700;color:var(--gold);display:flex;align-items:center;justify-content:center;gap:3px}
+.si-rarity{font-size:0.55rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;margin-top:2px}
+.si-rarity.common{color:var(--text3)}
+.si-rarity.rare{color:var(--purple)}
+.si-rarity.epic{color:var(--accent)}
+.si-rarity.legendary{color:var(--gold)}
+
+/* ── GUERRIER ── */
+.warrior-stage{text-align:center;padding:16px 0 8px}
+.warrior-display{
+  width:200px;height:230px;margin:0 auto 12px;
+  background:linear-gradient(180deg,var(--bg) 0%,var(--card2) 50%,var(--card) 100%);
+  border-radius:var(--radius);box-shadow:0 4px 20px rgba(0,0,0,0.08);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  border:2px solid rgba(0,0,0,0.06);
+}
+.warrior-emoji{font-size:5rem;position:relative;z-index:1}
+.warrior-name{
+  font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;
+  margin-top:4px;color:var(--gold);position:relative;z-index:1;
+}
+.equip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.equip-slot{
+  background:var(--card);border-radius:var(--radius-sm);
+  padding:10px 6px;text-align:center;box-shadow:var(--shadow);
+  border:2px solid transparent;cursor:pointer;transition:all .2s;
+}
+.equip-slot.equipped{border-color:var(--gold)}
+.equip-slot-emoji{font-size:1.4rem;margin-bottom:3px}
+.equip-slot-label{font-size:0.6rem;color:var(--text2);font-weight:600}
+
+/* ── BESTIAIRE / PUZZLE ── */
+.bestiary-intro{
+  text-align:center;padding:8px 0 16px;
+  font-size:0.82rem;color:var(--text2);line-height:1.5;
+}
+.beast-card{
+  background:var(--card);border-radius:var(--radius);
+  padding:16px;margin-bottom:14px;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(0,0,0,0.04);
+  cursor:pointer;transition:transform .15s;
+}
+.beast-card:active{transform:scale(0.98)}
+.beast-card.unlocked{border-color:rgba(212,160,0,0.3);box-shadow:0 4px 16px rgba(212,160,0,0.1)}
+.beast-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.beast-name{font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;flex:1}
+.beast-name.hidden-name{color:var(--text3);font-style:italic}
+.beast-progress-text{font-size:0.72rem;color:var(--gold);font-weight:700}
+.beast-puzzle{
+  display:grid;gap:2px;
+  background:var(--bg);border-radius:8px;overflow:hidden;
+  aspect-ratio:2/1;
+}
+.puzzle-cell{
+  background:var(--card2);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .4s ease;position:relative;overflow:hidden;
+}
+.puzzle-cell.revealed{background:transparent}
+.puzzle-cell:not(.revealed){
+  background:linear-gradient(135deg,var(--card2),var(--bg2));
+}
+.puzzle-cell:not(.revealed)::after{
+  content:'?';color:var(--text3);font-weight:700;font-size:0.7rem;opacity:0.4;
+}
+.beast-image{
+  width:100%;height:100%;position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.beast-svg{width:100%;height:100%}
+.beast-bar{
+  height:4px;background:var(--bg);border-radius:2px;margin-top:10px;overflow:hidden;
+}
+.beast-bar-fill{height:100%;border-radius:2px;transition:width .6s ease}
+
+/* ── PALMARES ── */
+.ranking-row{
+  background:var(--card);border-radius:var(--radius-sm);
+  padding:10px 14px;margin-bottom:6px;
+  display:flex;align-items:center;gap:12px;box-shadow:var(--shadow);
+}
+.ranking-emoji{flex-shrink:0;font-size:1.3rem}
+.ranking-info{flex:1;min-width:0}
+.ranking-name{font-size:0.85rem;font-weight:600}
+.ranking-bar-track{height:5px;background:var(--bg);border-radius:3px;margin-top:5px;overflow:hidden}
+.ranking-bar-fill{height:100%;border-radius:3px;transition:width .6s ease}
+.ranking-pct{
+  font-family:'Nunito',sans-serif;font-weight:800;font-size:0.85rem;
+  color:var(--text2);width:42px;text-align:right;flex-shrink:0;
+}
+.ranking-belt{
+  width:20px;height:8px;border-radius:4px;flex-shrink:0;
+  border:1px solid rgba(0,0,0,0.1);
+}
+.archived-devoir{
+  background:var(--card);border-radius:var(--radius-sm);
+  padding:10px 14px;margin-bottom:6px;
+  display:flex;align-items:center;gap:10px;opacity:0.7;
+}
+
+/* ── RESSOURCES ── */
+.res-card{
+  background:var(--card);border-radius:var(--radius);
+  padding:16px;margin-bottom:10px;
+  display:flex;align-items:center;gap:14px;
+  box-shadow:var(--shadow);cursor:pointer;transition:transform .15s;
+}
+.res-card:active{transform:scale(0.98)}
+.res-emoji{flex-shrink:0;font-size:1.5rem}
+.res-title{font-size:0.9rem;font-weight:600}
+.res-desc{font-size:0.72rem;color:var(--text2);margin-top:2px}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-20px);
+  background:var(--card);color:var(--text);padding:10px 20px;border-radius:20px;
+  font-size:0.85rem;font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,0.15);
+  z-index:200;opacity:0;transition:opacity .3s,transform .3s;
+  pointer-events:none;white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+
+<!-- ═══ HEADER ═══ -->
+<div class="app-header">
+  <div class="app-title">Ilian — Mes Cours</div>
+  <div class="header-right">
+    <div class="header-devoirs" id="headerDevoirs" onclick="navigateTo('screenDevoirs')">
+      <span>📅</span> <span id="hdDevoirsText">4 devoirs</span>
+      <span class="hd-badge" id="hdBadge">4</span>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ═══ ACCUEIL ═══ -->
+<div class="screen active" id="screenHome">
+  <div class="xp-bar">
+    <div class="level-badge" id="levelBadge">Niv. 1</div>
+    <div class="xp-area">
+      <div class="xp-top"><span class="xp-label" id="xpText">Niveau 1 · 0 XP</span></div>
+      <div class="xp-track"><div class="xp-fill" id="xpFill" style="width:0%"></div></div>
+    </div>
+    <div class="xp-emoji">🏆</div>
+  </div>
+  <div class="streak-bar">
+    <div class="streak-emoji">🔥</div>
+    <div class="streak-text">
+      <div class="streak-title">Série du jour</div>
+      <div class="streak-count" id="streakCount">0 activité aujourd'hui</div>
+    </div>
+    <div class="streak-dots" id="streakDots"></div>
+  </div>
+  <div class="devoirs-banner" id="devoirsBanner" onclick="navigateTo('screenDevoirs')">
+    <div class="db-emoji">📋</div>
+    <div class="db-text">
+      <div class="db-title">Mes devoirs</div>
+      <div class="db-sub" id="dbSub">4 devoirs à préparer</div>
+    </div>
+    <div class="db-badge" id="dbBadge">4</div>
+  </div>
+  <div class="section-label" id="coursesLabel">📚 Mes cours</div>
+  <div class="courses-grid" id="coursesGrid"></div>
+</div>
+
+<!-- ═══ DEVOIRS ═══ -->
+<div class="screen" id="screenDevoirs">
+  <div class="scr">
+    <button class="back-btn" onclick="navigateTo('screenHome')">← Retour</button>
+    <div class="section-label" style="margin:0 0 10px">✏️ Devoirs à préparer</div>
+    <div id="devoirsList"></div>
+    <div id="noDevoirsMsg" style="display:none;text-align:center;padding:40px 0;color:var(--text2);font-size:0.9rem">
+      Tous les devoirs sont faits ! 🎉
+    </div>
+  </div>
+</div>
+
+<!-- ═══ BOUTIQUE ═══ -->
+<div class="screen" id="screenShop">
+  <div class="scr">
+    <div class="shop-header">
+      <div class="shop-coins" id="shopCoinsBar">⭐ <span id="coinCount">0</span></div>
+    </div>
+    <div id="shopContent"></div>
+  </div>
+</div>
+
+<!-- ═══ GUERRIER ═══ -->
+<div class="screen" id="screenMonster">
+  <div class="scr">
+    <div class="warrior-stage">
+      <div class="section-label" style="justify-content:center;margin:0 0 12px">⚔️ Mon Guerrier</div>
+      <div class="warrior-display">
+        <div class="warrior-emoji" id="wBody">🧟</div>
+        <div class="warrior-name" id="wName">Gobelin</div>
+      </div>
+    </div>
+    <div class="section-label">🛡️ Équipement</div>
+    <div class="equip-grid" id="equipGrid"></div>
+    <div class="section-label" style="margin-top:18px">🎒 Inventaire</div>
+    <div id="inventoryList" style="font-size:0.82rem;color:var(--text2);padding:0 4px"></div>
+  </div>
+</div>
+
+<!-- ═══ BESTIAIRE ═══ -->
+<div class="screen" id="screenBestiary">
+  <div class="scr">
+    <div class="section-label" style="margin:0 0 6px">📜 Bestiaire fantastique</div>
+    <div class="bestiary-intro">Gagne des XP pour révéler les créatures mythologiques cachées derrière les puzzles !</div>
+    <div id="bestiaryList"></div>
+  </div>
+</div>
+
+<!-- ═══ PALMARES ═══ -->
+<div class="screen" id="screenPalmares">
+  <div class="scr">
+    <div class="section-label" style="margin:0 0 10px">🏅 Classement par matière</div>
+    <div id="rankingList"></div>
+    <div id="archivedSection" style="margin-top:24px"></div>
+  </div>
+</div>
+
+<!-- ═══ RESSOURCES ═══ -->
+<div class="screen" id="screenRes">
+  <div class="scr">
+    <div class="section-label" style="margin:0 0 10px">🔗 Ressources pédagogiques</div>
+    <div id="resList"></div>
+  </div>
+</div>
+
+<!-- ═══ BOTTOM NAV ═══ -->
+<div class="bottom-nav" id="bottomNav"></div>
+
+<script>
+// ══════════════════════════════════════════════════════
+// BESTIAIRE SVGs — detailed creatures for puzzle reveal
+// ══════════════════════════════════════════════════════
+function svg(vb,inner){
+  return '<svg viewBox="'+vb+'" fill="none" xmlns="http://www.w3.org/2000/svg">'+inner+'</svg>';
+}
+
+const BEAST_SVG={
+  'beast-dragon':svg('0 0 160 120','<defs><linearGradient id="gD" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".6"/><stop offset="1" stop-color="currentColor" stop-opacity=".2"/></linearGradient></defs><path d="M50 90Q42 70 48 55Q42 42 52 35Q48 22 58 18Q55 8 62 10Q68 4 75 8Q80 2 85 8Q92 4 95 10Q100 6 102 14Q108 18 105 28Q112 32 108 42Q115 50 110 58Q118 68 112 78Q120 88 108 92L95 95Q85 100 75 95Q65 100 55 95L50 90z" fill="url(#gD)" stroke="currentColor" stroke-width="1.2" stroke-opacity=".5"/><path d="M62 18L55 4 60 14M95 14L100 0 98 12" fill="currentColor" opacity=".4"/><path d="M35 55L20 48 28 52 15 42 25 48 18 38 30 50Q38 56 42 58z" fill="currentColor" opacity=".35"/><path d="M120 52L138 44 128 50 142 40 132 48 136 38 125 50Q118 55 115 58z" fill="currentColor" opacity=".35"/><circle cx="68" cy="32" r="3.5" fill="currentColor" opacity=".6"/><circle cx="68" cy="31" r="1.5" fill="var(--pupil)"/><circle cx="92" cy="30" r="3.5" fill="currentColor" opacity=".6"/><circle cx="92" cy="29" r="1.5" fill="var(--pupil)"/><path d="M72 45Q78 50 85 45" stroke="currentColor" stroke-width="1.5" fill="none" opacity=".35"/><path d="M74 48l-1 2 3-1M83 48l1 2-3-1" fill="currentColor" opacity=".35"/><path d="M55 88L48 108 58 95M100 88L108 108 98 95" fill="currentColor" opacity=".25"/>'),
+
+  'beast-phoenix':svg('0 0 160 120','<defs><linearGradient id="gP" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".6"/><stop offset="1" stop-color="currentColor" stop-opacity=".15"/></linearGradient></defs><path d="M80 25Q85 15 90 20Q95 10 92 22Q100 15 95 28Q105 22 98 35Q92 30 85 38Q80 48 75 58Q70 68 60 75Q52 82 45 78Q38 82 35 75L42 65Q52 52 60 42Q68 32 75 28z" fill="url(#gP)" stroke="currentColor" stroke-width="1" stroke-opacity=".4"/><path d="M75 58Q85 62 95 58Q105 52 115 55Q122 58 115 62Q108 66 98 68Q88 72 78 72Q70 74 65 72z" fill="currentColor" opacity=".3"/><path d="M55 78Q50 88 55 95Q60 102 62 92Q65 98 68 88Q62 84 55 78z" fill="currentColor" opacity=".25"/><path d="M45 78Q40 88 42 95Q45 98 48 90Q50 96 55 88Q50 82 45 78z" fill="currentColor" opacity=".2"/><circle cx="88" cy="26" r="2.5" fill="currentColor" opacity=".6"/><circle cx="88.5" cy="25.5" r="1" fill="var(--pupil)"/>'),
+
+  'beast-griffon':svg('0 0 160 120','<defs><linearGradient id="gG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".55"/><stop offset="1" stop-color="currentColor" stop-opacity=".15"/></linearGradient></defs><path d="M50 85Q45 65 52 52Q45 42 55 35Q58 25 68 28Q72 18 78 22Q82 15 88 20Q95 18 95 25Q102 28 98 38Q108 45 102 55Q112 65 105 75L98 82Q88 90 78 85Q68 90 58 85z" fill="url(#gG)" stroke="currentColor" stroke-width="1" stroke-opacity=".35"/><path d="M38 48L22 38 30 42 18 32 28 38 22 28 35 42Q42 50 45 55z" fill="currentColor" opacity=".3"/><path d="M112 48L128 38 120 42 132 32 122 38 128 28 115 42Q108 50 105 55z" fill="currentColor" opacity=".3"/><circle cx="75" cy="32" r="3" fill="currentColor" opacity=".55"/><circle cx="75" cy="31" r="1.2" fill="var(--pupil)"/><path d="M82 38l5-2-4 4z" fill="currentColor" opacity=".35"/><path d="M55 82L48 100 58 90M95 82L102 100 92 90" fill="currentColor" opacity=".25"/>'),
+
+  'beast-cerbere':svg('0 0 160 120','<defs><linearGradient id="gC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".5"/><stop offset="1" stop-color="currentColor" stop-opacity=".15"/></linearGradient></defs><path d="M55 95Q48 75 55 60Q48 48 58 42Q52 28 62 25Q58 15 65 18Q70 10 75 18Q80 8 85 18Q90 10 95 18Q100 12 102 22Q108 18 108 28Q115 35 108 45Q115 55 108 65Q115 78 108 88L100 95z" fill="url(#gC)" stroke="currentColor" stroke-width="1" stroke-opacity=".35"/><circle cx="65" cy="32" r="3" fill="currentColor" opacity=".6"/><circle cx="65" cy="31" r="1.2" fill="var(--pupil)"/><circle cx="80" cy="28" r="3" fill="currentColor" opacity=".6"/><circle cx="80" cy="27" r="1.2" fill="var(--pupil)"/><circle cx="95" cy="32" r="3" fill="currentColor" opacity=".6"/><circle cx="95" cy="31" r="1.2" fill="var(--pupil)"/><path d="M62 40l-2 3 4-1zM78 36l-1 3 3-1zM92 40l-2 3 4-1z" fill="currentColor" opacity=".35"/><path d="M58 90L50 108 60 96M100 90L108 108 98 96" fill="currentColor" opacity=".25"/>'),
+
+  'beast-minotaure':svg('0 0 160 120','<defs><linearGradient id="gM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".52"/><stop offset="1" stop-color="currentColor" stop-opacity=".15"/></linearGradient></defs><path d="M60 95Q52 75 58 60Q52 48 58 40Q55 28 62 25Q58 12 68 18Q72 8 78 14Q82 6 88 14Q92 8 98 18Q102 12 100 25Q105 28 102 40Q108 48 102 60Q108 75 100 95z" fill="url(#gM)" stroke="currentColor" stroke-width="1" stroke-opacity=".35"/><path d="M62 25L48 12 58 20M98 25L112 12 102 20" fill="currentColor" opacity=".4"/><circle cx="72" cy="35" r="3.5" fill="currentColor" opacity=".55"/><circle cx="72" cy="34" r="1.5" fill="var(--pupil)"/><circle cx="88" cy="35" r="3.5" fill="currentColor" opacity=".55"/><circle cx="88" cy="34" r="1.5" fill="var(--pupil)"/><path d="M75 48Q80 54 85 48" stroke="currentColor" stroke-width="1.8" fill="none" opacity=".35"/><path d="M65 92L58 110 68 98M95 92L102 110 92 98" fill="currentColor" opacity=".25"/>'),
+
+  'beast-hydre':svg('0 0 160 120','<defs><linearGradient id="gH" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".55"/><stop offset="1" stop-color="currentColor" stop-opacity=".15"/></linearGradient></defs><path d="M55 95Q48 75 55 60Q48 48 58 40Q52 25 60 18L55 5 62 15Q58 8 65 12L68 2 70 14Q72 5 78 10L80 0 82 10Q85 5 88 14L92 2 92 12Q98 8 95 15L100 5 98 18Q108 25 102 40Q112 48 105 60Q112 75 105 95z" fill="url(#gH)" stroke="currentColor" stroke-width="1" stroke-opacity=".35"/><circle cx="60" cy="14" r="2" fill="currentColor" opacity=".5"/><circle cx="60" cy="13.5" r=".8" fill="var(--pupil)"/><circle cx="70" cy="8" r="2" fill="currentColor" opacity=".5"/><circle cx="70" cy="7.5" r=".8" fill="var(--pupil)"/><circle cx="80" cy="5" r="2" fill="currentColor" opacity=".5"/><circle cx="80" cy="4.5" r=".8" fill="var(--pupil)"/><circle cx="90" cy="8" r="2" fill="currentColor" opacity=".5"/><circle cx="90" cy="7.5" r=".8" fill="var(--pupil)"/><circle cx="98" cy="14" r="2" fill="currentColor" opacity=".5"/><circle cx="98" cy="13.5" r=".8" fill="var(--pupil)"/><path d="M60 90L52 108 62 96M100 90L108 108 98 96" fill="currentColor" opacity=".25"/>'),
+
+  'beast-pegase':svg('0 0 160 120','<defs><linearGradient id="gPe" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".5"/><stop offset="1" stop-color="currentColor" stop-opacity=".12"/></linearGradient></defs><path d="M50 85Q42 68 52 55Q45 42 55 35Q58 25 68 28Q72 18 78 25Q85 20 85 30Q95 35 90 45Q100 50 95 60Q105 68 98 78Q105 88 92 90L82 92Q72 95 62 88z" fill="url(#gPe)" stroke="currentColor" stroke-width="1" stroke-opacity=".35"/><path d="M35 42L15 25 28 32 8 15 22 28 15 15 30 35Q38 42 42 48z" fill="currentColor" opacity=".3"/><path d="M108 38L130 22 118 30 138 15 125 26 130 18 115 32Q108 40 105 45z" fill="currentColor" opacity=".3"/><circle cx="72" cy="30" r="2.5" fill="currentColor" opacity=".55"/><circle cx="72" cy="29.5" r="1" fill="var(--pupil)"/><path d="M55 85L48 105 58 92M90 85L98 105 88 92" fill="currentColor" opacity=".25"/>'),
+
+  'beast-kraken':svg('0 0 160 120','<defs><linearGradient id="gK" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".5"/><stop offset="1" stop-color="currentColor" stop-opacity=".12"/></linearGradient></defs><path d="M55 35Q62 22 75 18Q85 15 98 20Q110 28 112 40Q115 52 108 60" fill="url(#gK)" stroke="currentColor" stroke-width="1" stroke-opacity=".35"/><path d="M108 60Q118 68 112 78Q108 85 100 80Q105 90 95 88Q98 98 88 92Q92 105 80 95Q82 108 72 98Q68 108 65 95Q58 105 58 92Q50 98 52 85Q42 90 48 78Q38 82 42 70Q35 72 40 62Q32 60 42 52Q35 48 45 42Q38 38 48 35Q42 30 52 30z" fill="currentColor" opacity=".22" stroke="currentColor" stroke-width=".8" stroke-opacity=".25"/><circle cx="75" cy="35" r="5" fill="currentColor" opacity=".5"/><circle cx="75" cy="34" r="2" fill="var(--pupil)"/><circle cx="95" cy="35" r="5" fill="currentColor" opacity=".5"/><circle cx="95" cy="34" r="2" fill="var(--pupil)"/>'),
+};
+
+// ── DATA ──
+const SUBJECTS = [
+  {key:'histoire',name:'Histoire-Géo',emoji:'🏛️',color:'#0984e3',chapters:8},
+  {key:'francais',name:'Français',emoji:'📖',color:'#6c5ce7',chapters:4},
+  {key:'maths',name:'Mathématiques',emoji:'📐',color:'#00b894',chapters:5},
+  {key:'svt',name:'SVT',emoji:'🧬',color:'#00cec9',chapters:3},
+  {key:'physchimie',name:'Physique-Chimie',emoji:'⚗️',color:'#e17055',chapters:5},
+  {key:'anglais',name:'Anglais',emoji:'🇬🇧',color:'#e84393',chapters:1},
+  {key:'emc',name:'EMC',emoji:'⚖️',color:'#fdcb6e',chapters:2},
+  {key:'espagnol',name:'Espagnol',emoji:'🇪🇸',color:'#d63031',chapters:10},
+  {key:'sport',name:'Sport',emoji:'⚽',color:'#fd79a8',chapters:1},
+  {key:'techno',name:'Techno',emoji:'⚙️',color:'#4b6584',chapters:1},
+];
+const DEVOIRS = [
+  {id:'dev-anglais',emoji:'🇬🇧',title:'Anglais — Present the document',date:'lundi 12 oct.',color:'#e84393'},
+  {id:'dev-espagnol',emoji:'🇪🇸',title:'Espagnol — De mayor',date:'lundi 12 oct.',color:'#d63031'},
+  {id:'dev-histoire',emoji:'🏛️',title:'Histoire — Civils et militaires',date:'mardi 13 oct.',color:'#0984e3'},
+  {id:'dev-maths',emoji:'📐',title:'Maths — Pythagore',date:'mardi 13 oct.',color:'#00b894'},
+];
+const BELT_COLORS = ['#f5f5f5','#f9ca24','#e67e22','#27ae60','#2980b9','#795548','#212121'];
+const BELT_NAMES = ['Blanche','Jaune','Orange','Verte','Bleue','Marron','Noire'];
+
+const SHOP = [
+  {cat:'🐉 Créatures',items:[
+    {id:'body-gobelin',icon:'🧟',name:'Gobelin',price:0,type:'body',rarity:'common'},
+    {id:'body-orc',icon:'👹',name:'Orque',price:80,type:'body',rarity:'common'},
+    {id:'body-nain',icon:'⛏️',name:'Nain',price:60,type:'body',rarity:'common'},
+    {id:'body-elfe',icon:'🧝',name:'Elfe',price:100,type:'body',rarity:'rare'},
+    {id:'body-troll',icon:'👾',name:'Troll',price:120,type:'body',rarity:'rare'},
+    {id:'body-squelette',icon:'💀',name:'Squelette',price:90,type:'body',rarity:'common'},
+    {id:'body-spectre',icon:'👻',name:'Spectre',price:150,type:'body',rarity:'epic'},
+    {id:'body-sorcier',icon:'🧙',name:'Sorcier',price:180,type:'body',rarity:'epic'},
+    {id:'body-dragon',icon:'🐉',name:'Dragon',price:300,type:'body',rarity:'legendary'},
+  ]},
+  {cat:'⚔️ Armes',items:[
+    {id:'weap-dague',icon:'🗡️',name:'Dague',price:30,type:'weapon',rarity:'common'},
+    {id:'weap-epee',icon:'⚔️',name:'Épée',price:50,type:'weapon',rarity:'common'},
+    {id:'weap-hache',icon:'🪓',name:'Hache',price:60,type:'weapon',rarity:'rare'},
+    {id:'weap-arc',icon:'🏹',name:'Arc',price:55,type:'weapon',rarity:'common'},
+    {id:'weap-baton',icon:'🪄',name:'Bâton magique',price:100,type:'weapon',rarity:'epic'},
+    {id:'weap-trident',icon:'🔱',name:'Trident',price:150,type:'weapon',rarity:'legendary'},
+  ]},
+  {cat:'🛡️ Armures',items:[
+    {id:'arm-bouclier',icon:'🛡️',name:'Bouclier',price:35,type:'shield',rarity:'common'},
+    {id:'arm-casque',icon:'⛑️',name:'Casque',price:40,type:'helmet',rarity:'common'},
+    {id:'arm-cuirasse',icon:'🦺',name:'Cuirasse',price:70,type:'armor',rarity:'rare'},
+    {id:'arm-cape',icon:'🧥',name:'Cape',price:55,type:'armor',rarity:'rare'},
+    {id:'arm-gantelets',icon:'🧤',name:'Gantelets',price:35,type:'armor',rarity:'common'},
+    {id:'arm-bottes',icon:'👢',name:'Bottes',price:40,type:'boots',rarity:'common'},
+  ]},
+  {cat:'💎 Artefacts',items:[
+    {id:'acc-amulette',icon:'📿',name:'Amulette',price:70,type:'accessory',rarity:'rare'},
+    {id:'acc-anneau',icon:'💍',name:'Anneau de pouvoir',price:150,type:'accessory',rarity:'epic'},
+    {id:'acc-couronne',icon:'👑',name:'Couronne',price:250,type:'accessory',rarity:'legendary'},
+    {id:'acc-potion',icon:'🧪',name:'Potion',price:25,type:'accessory',rarity:'common'},
+    {id:'acc-parchemin',icon:'📜',name:'Parchemin',price:20,type:'accessory',rarity:'common'},
+    {id:'acc-gemme',icon:'💎',name:'Gemme sacrée',price:200,type:'accessory',rarity:'legendary'},
+  ]},
+  {cat:'🏰 Repaires',items:[
+    {id:'bg-grotte',icon:'🕳️',name:'Grotte',price:50,type:'bg',rarity:'common'},
+    {id:'bg-foret',icon:'🌲',name:'Forêt sombre',price:60,type:'bg',rarity:'common'},
+    {id:'bg-montagne',icon:'⛰️',name:'Montagne',price:70,type:'bg',rarity:'rare'},
+    {id:'bg-volcan',icon:'🌋',name:'Volcan',price:90,type:'bg',rarity:'rare'},
+    {id:'bg-chateau',icon:'🏰',name:'Château',price:120,type:'bg',rarity:'epic'},
+    {id:'bg-donjon',icon:'🏯',name:'Donjon',price:160,type:'bg',rarity:'legendary'},
+  ]},
+  {cat:'🎖️ Titres',items:[
+    {id:'title-chasseur',icon:'🎯',name:'Chasseur',price:40,type:'title',rarity:'common'},
+    {id:'title-guerrier',icon:'⚔️',name:'Guerrier',price:60,type:'title',rarity:'common'},
+    {id:'title-boss',icon:'👊',name:'Le Boss',price:100,type:'title',rarity:'rare'},
+    {id:'title-legend',icon:'⭐',name:'Légende',price:200,type:'title',rarity:'epic'},
+    {id:'title-conqueror',icon:'🚩',name:'Conquérant',price:180,type:'title',rarity:'epic'},
+    {id:'title-immortel',icon:'♾️',name:'Immortel',price:300,type:'title',rarity:'legendary'},
+  ]},
+];
+
+const EQUIP_SLOTS = [
+  {slot:'body',label:'Créature',default:'🧟'},
+  {slot:'weapon',label:'Arme',default:'🗡️'},
+  {slot:'shield',label:'Bouclier',default:'🛡️'},
+  {slot:'helmet',label:'Casque',default:'⛑️'},
+  {slot:'armor',label:'Armure',default:'🦺'},
+  {slot:'boots',label:'Bottes',default:'👢'},
+  {slot:'accessory',label:'Artefact',default:'📿'},
+  {slot:'bg',label:'Repaire',default:'🕳️'},
+  {slot:'title',label:'Titre',default:'🎖️'},
+];
+
+const BESTIARY = [
+  {id:'beast-dragon',name:'Dragon',xpNeeded:50,color:'#e94560'},
+  {id:'beast-phoenix',name:'Phénix',xpNeeded:80,color:'#e17055'},
+  {id:'beast-griffon',name:'Griffon',xpNeeded:100,color:'#fdcb6e'},
+  {id:'beast-cerbere',name:'Cerbère',xpNeeded:120,color:'#d63031'},
+  {id:'beast-minotaure',name:'Minotaure',xpNeeded:150,color:'#6c5ce7'},
+  {id:'beast-hydre',name:'Hydre',xpNeeded:180,color:'#00cec9'},
+  {id:'beast-pegase',name:'Pégase',xpNeeded:200,color:'#74b9ff'},
+  {id:'beast-kraken',name:'Kraken',xpNeeded:250,color:'#0984e3'},
+];
+
+const RESOURCES = [
+  {icon:'✏️',title:'Fiches de révision',desc:'Toutes les fiches par matière'},
+  {icon:'🏅',title:'Annales du brevet',desc:'Sujets et corrigés'},
+  {icon:'📊',title:'Formulaires',desc:'Maths, physique, chimie'},
+  {icon:'📅',title:'Planning de révision',desc:'Organisation des semaines'},
+  {icon:'🔗',title:'Liens utiles',desc:'Sites recommandés par les profs'},
+];
+
+// ── STATE ──
+function load(k,d){try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+
+function getState(){
+  const s=load('proto_v4',{});
+  const today=new Date().toISOString().slice(0,10);
+  if(s.date!==today){s.date=today;s.dailyDone=0}
+  if(!s.xp)s.xp=0;
+  if(!s.coins)s.coins=0;
+  if(!s.owned)s.owned=['body-gobelin'];
+  if(!s.archivedDevoirs)s.archivedDevoirs=[];
+  if(!s.equipped)s.equipped={body:'body-gobelin'};
+  if(!s.beastRevealed)s.beastRevealed={};
+  if(!s.masteries){
+    s.masteries={};
+    SUBJECTS.forEach(sub=>{s.masteries[sub.key]=Math.floor(Math.random()*101)});
+  }
+  return s;
+}
+let state=getState();
+function saveState(){save('proto_v4',state)}
+function getLevel(){return Math.floor(state.xp/100)+1}
+function getXPInLevel(){return state.xp%100}
+function beltIndex(pct){const t=[0,15,30,45,60,75,90];let i=0;for(let j=0;j<t.length;j++){if(pct>=t[j])i=j}return i}
+
+function getItem(id){for(const c of SHOP)for(const i of c.items)if(i.id===id)return i;return null}
+
+// ── TOAST ──
+let toastTimer;
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2000);
+}
+
+// ── NAV ──
+function initNav(){
+  const navData=[
+    {screen:'screenHome',icon:'🏠',label:'Accueil'},
+    {screen:'screenShop',icon:'🏪',label:'Boutique'},
+    {screen:'screenMonster',icon:'⚔️',label:'Guerrier'},
+    {screen:'screenBestiary',icon:'📜',label:'Bestiaire'},
+    {screen:'screenPalmares',icon:'🏆',label:'Palmarès'},
+    {screen:'screenRes',icon:'🔗',label:'Ressources'},
+  ];
+  const nav=document.getElementById('bottomNav');nav.innerHTML='';
+  navData.forEach((n,i)=>{
+    const d=document.createElement('div');
+    d.className='nav-item'+(i===0?' active':'');
+    d.dataset.screen=n.screen;
+    d.innerHTML='<span class="nav-emoji">'+n.icon+'</span><span>'+n.label+'</span>';
+    d.onclick=()=>navigateTo(n.screen);
+    nav.appendChild(d);
+  });
+}
+
+function navigateTo(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.screen===id));
+  if(id==='screenShop')renderShop();
+  if(id==='screenMonster')renderMonster();
+  if(id==='screenBestiary')renderBestiary();
+  if(id==='screenPalmares')renderPalmares();
+  if(id==='screenRes')renderResources();
+  if(id==='screenDevoirs')renderDevoirsList();
+}
+
+// ── UPDATE TOP ──
+function updateTopBar(){
+  const lv=getLevel(),xp=getXPInLevel();
+  document.getElementById('levelBadge').textContent='Niv. '+lv;
+  document.getElementById('xpText').textContent='Niveau '+lv+' · '+xp+' XP';
+  document.getElementById('xpFill').style.width=xp+'%';
+  const n=state.dailyDone||0;
+  document.getElementById('streakCount').textContent=
+    n===0?'0 activité aujourd\'hui':n===1?'1 activité aujourd\'hui':n+' activités aujourd\'hui';
+  const dots=document.getElementById('streakDots');
+  dots.innerHTML='';
+  for(let i=1;i<=5;i++){
+    const d=document.createElement('div');
+    d.className='streak-dot'+(i<=n?' done':'');
+    d.textContent=i<=n?'✓':i;
+    dots.appendChild(d);
+  }
+  const active=DEVOIRS.filter(d=>!state.archivedDevoirs.includes(d.id));
+  const banner=document.getElementById('devoirsBanner');
+  const hd=document.getElementById('headerDevoirs');
+  if(active.length===0){
+    banner.style.display='none';hd.style.display='none';
+  }else{
+    banner.style.display='';hd.style.display='';
+    document.getElementById('dbSub').textContent=active.length+' devoir'+(active.length>1?'s':'')+' à préparer';
+    document.getElementById('dbBadge').textContent=active.length;
+    document.getElementById('hdDevoirsText').textContent=active.length+' devoir'+(active.length>1?'s':'');
+    document.getElementById('hdBadge').textContent=active.length;
+  }
+}
+
+function doActivity(){
+  state.dailyDone=(state.dailyDone||0)+1;
+  state.xp+=10;state.coins+=5;
+  revealBeastPiece();
+  saveState();updateTopBar();
+  showToast('+10 XP · +5 ⭐');
+  if(state.dailyDone===5){
+    setTimeout(()=>{state.coins+=20;saveState();updateTopBar();showToast('🎯 Objectif atteint ! +20 ⭐ bonus')},800);
+  }
+}
+
+// ── COURSES ──
+function renderCourses(){
+  const grid=document.getElementById('coursesGrid');grid.innerHTML='';
+  SUBJECTS.forEach(sub=>{
+    const t=document.createElement('div');t.className='course-tile';
+    t.style.setProperty('--tile-color',sub.color);
+    const pct=state.masteries[sub.key]||0,bi=beltIndex(pct);
+    t.innerHTML='<div class="course-emoji">'+sub.emoji+'</div>'+
+      '<div class="course-name">'+sub.name+'</div>'+
+      '<div class="course-chapters">'+sub.chapters+' chapitre'+(sub.chapters>1?'s':'')+'</div>'+
+      '<div class="course-belt" style="background:'+BELT_COLORS[bi]+'" title="Ceinture '+BELT_NAMES[bi]+'"></div>';
+    t.onclick=()=>doActivity();
+    grid.appendChild(t);
+  });
+}
+
+// ── DEVOIRS ──
+function renderDevoirsList(){
+  const list=document.getElementById('devoirsList');list.innerHTML='';
+  const active=DEVOIRS.filter(d=>!state.archivedDevoirs.includes(d.id));
+  document.getElementById('noDevoirsMsg').style.display=active.length?'none':'';
+  active.forEach(d=>{
+    const c=document.createElement('div');c.className='devoir-card';c.style.borderLeftColor=d.color;
+    c.innerHTML='<div class="devoir-emoji">'+d.emoji+'</div>'+
+      '<div class="devoir-info"><div class="devoir-title">'+d.title+'</div>'+
+      '<div class="devoir-date">'+d.date+'</div></div>'+
+      '<div class="devoir-check"></div>';
+    const chk=c.querySelector('.devoir-check');
+    chk.onclick=(e)=>{
+      e.stopPropagation();chk.classList.add('checked');chk.textContent='✓';
+      state.archivedDevoirs.push(d.id);state.xp+=15;state.coins+=10;
+      revealBeastPiece();
+      saveState();updateTopBar();showToast('✅ Devoir terminé ! +15 XP · +10 ⭐');
+      setTimeout(()=>{c.classList.add('archiving');setTimeout(()=>renderDevoirsList(),450)},600);
+    };
+    list.appendChild(c);
+  });
+}
+
+// ── SHOP ──
+function renderShop(){
+  const ct=document.getElementById('shopContent');ct.innerHTML='';
+  document.getElementById('shopCoinsBar').innerHTML='⭐ <span id="coinCount">'+state.coins+'</span>';
+  SHOP.forEach(cat=>{
+    const sec=document.createElement('div');sec.className='shop-category';
+    sec.innerHTML='<div class="shop-cat-title">'+cat.cat+'</div>';
+    const grid=document.createElement('div');grid.className='shop-grid';
+    cat.items.forEach(item=>{
+      const owned=state.owned.includes(item.id);
+      const el=document.createElement('div');
+      el.className='shop-item '+(item.rarity||'common')+(owned?' owned':'');
+      const rarityLabels={common:'Commun',rare:'Rare',epic:'Épique',legendary:'Légendaire'};
+      el.innerHTML='<div class="si-emoji">'+item.icon+'</div>'+
+        '<div class="si-name">'+item.name+'</div>'+
+        '<div class="si-rarity '+item.rarity+'">'+(rarityLabels[item.rarity]||'')+'</div>'+
+        '<div class="si-price">'+(owned?'Acheté':(item.price===0?'Gratuit':'⭐ '+item.price))+'</div>';
+      if(!owned&&item.price>0){
+        el.onclick=()=>{
+          if(state.coins>=item.price){
+            state.coins-=item.price;state.owned.push(item.id);
+            saveState();updateTopBar();renderShop();showToast('🎉 '+item.name+' acheté !');
+          }else{showToast('❌ Pas assez d\'étoiles')}
+        };
+      }
+      grid.appendChild(el);
+    });
+    sec.appendChild(grid);ct.appendChild(sec);
+  });
+}
+
+// ── GUERRIER ──
+function renderMonster(){
+  const bodyId=state.equipped.body||'body-gobelin';
+  const bodyItem=getItem(bodyId);
+  document.getElementById('wBody').textContent=bodyItem?bodyItem.icon:'🧟';
+  document.getElementById('wName').textContent=bodyItem?bodyItem.name:'Gobelin';
+  const grid=document.getElementById('equipGrid');grid.innerHTML='';
+  EQUIP_SLOTS.forEach(es=>{
+    const eqId=state.equipped[es.slot],eqItem=eqId?getItem(eqId):null;
+    const s=document.createElement('div');
+    s.className='equip-slot'+(eqItem?' equipped':'');
+    s.innerHTML='<div class="equip-slot-emoji">'+(eqItem?eqItem.icon:es.default)+'</div>'+
+      '<div class="equip-slot-label">'+es.label+'</div>';
+    s.onclick=()=>{
+      const ownedOf=state.owned.map(id=>getItem(id)).filter(i=>i&&i.type===es.slot);
+      if(!ownedOf.length){showToast('Achète en boutique !');return}
+      const cur=ownedOf.findIndex(i=>i.id===eqId);
+      const next=(cur+1)%ownedOf.length;
+      if(ownedOf.length===1&&eqId===ownedOf[0].id&&es.slot!=='body')delete state.equipped[es.slot];
+      else state.equipped[es.slot]=ownedOf[next].id;
+      saveState();renderMonster();
+    };
+    grid.appendChild(s);
+  });
+  const inv=document.getElementById('inventoryList');
+  const items=state.owned.map(id=>getItem(id)).filter(Boolean);
+  if(!items.length){inv.innerHTML='<div style="text-align:center;padding:20px 0;color:var(--text3)">Va faire un tour en boutique !</div>';return}
+  inv.innerHTML=items.map(i=>
+    '<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.05)">'+
+    '<span style="font-size:1.2rem">'+i.icon+'</span><span style="flex:1">'+i.name+'</span>'+
+    (state.equipped[i.type]===i.id?'<span style="color:var(--green);font-size:0.7rem;font-weight:600">Équipé</span>':'')+
+    '</div>').join('');
+}
+
+// ── BESTIAIRE (puzzle reveal) ──
+const GRID_COLS=8,GRID_ROWS=4,TOTAL_CELLS=GRID_COLS*GRID_ROWS;
+
+function getRevealedCells(beastId){
+  return state.beastRevealed[beastId]||[];
+}
+
+function revealBeastPiece(){
+  for(const b of BESTIARY){
+    const revealed=getRevealedCells(b.id);
+    if(revealed.length<TOTAL_CELLS){
+      const all=[];for(let i=0;i<TOTAL_CELLS;i++)all.push(i);
+      const unrevealed=all.filter(i=>!revealed.includes(i));
+      if(unrevealed.length>0){
+        const pick=unrevealed[Math.floor(Math.random()*unrevealed.length)];
+        if(!state.beastRevealed[b.id])state.beastRevealed[b.id]=[];
+        state.beastRevealed[b.id].push(pick);
+      }
+      return;
+    }
+  }
+}
+
+function renderBestiary(){
+  const list=document.getElementById('bestiaryList');list.innerHTML='';
+  BESTIARY.forEach(b=>{
+    const revealed=getRevealedCells(b.id);
+    const pct=Math.round((revealed.length/TOTAL_CELLS)*100);
+    const fullyRevealed=revealed.length>=TOTAL_CELLS;
+    const card=document.createElement('div');
+    card.className='beast-card'+(fullyRevealed?' unlocked':'');
+    const nameDisplay=fullyRevealed?b.name:'??? Créature mystère';
+    card.innerHTML=
+      '<div class="beast-top">'+
+        '<div class="beast-name'+(fullyRevealed?'':' hidden-name')+'">'+nameDisplay+'</div>'+
+        '<div class="beast-progress-text">'+pct+'%</div>'+
+      '</div>'+
+      '<div class="beast-puzzle" id="puzzle-'+b.id+'" style="grid-template-columns:repeat('+GRID_COLS+',1fr)"></div>'+
+      '<div class="beast-bar"><div class="beast-bar-fill" style="width:'+pct+'%;background:'+b.color+'"></div></div>';
+    list.appendChild(card);
+    const puzzle=document.getElementById('puzzle-'+b.id);
+    const beastSvgContent=BEAST_SVG[b.id]||'';
+    for(let i=0;i<TOTAL_CELLS;i++){
+      const cell=document.createElement('div');
+      cell.className='puzzle-cell'+(revealed.includes(i)?' revealed':'');
+      if(i===0){
+        const svgContainer=document.createElement('div');
+        svgContainer.className='beast-image';
+        svgContainer.innerHTML='<div class="beast-svg" style="width:100%;height:100%;color:'+b.color+'">'+beastSvgContent+'</div>';
+        cell.appendChild(svgContainer);
+      }
+      puzzle.appendChild(cell);
+    }
+  });
+}
+
+// ── PALMARES ──
+function renderPalmares(){
+  const list=document.getElementById('rankingList');list.innerHTML='';
+  const sorted=[...SUBJECTS].sort((a,b)=>(state.masteries[b.key]||0)-(state.masteries[a.key]||0));
+  sorted.forEach(sub=>{
+    const pct=state.masteries[sub.key]||0,bi=beltIndex(pct);
+    const r=document.createElement('div');r.className='ranking-row';
+    r.innerHTML='<div class="ranking-emoji">'+sub.emoji+'</div>'+
+      '<div class="ranking-info"><div class="ranking-name">'+sub.name+'</div>'+
+      '<div class="ranking-bar-track"><div class="ranking-bar-fill" style="width:'+pct+'%;background:'+sub.color+'"></div></div></div>'+
+      '<div class="ranking-belt" style="background:'+BELT_COLORS[bi]+'" title="'+BELT_NAMES[bi]+'"></div>'+
+      '<div class="ranking-pct">'+pct+'%</div>';
+    list.appendChild(r);
+  });
+  const sec=document.getElementById('archivedSection');
+  if(!state.archivedDevoirs.length){sec.innerHTML='';return}
+  sec.innerHTML='<div class="section-label" style="margin:0 0 10px">✅ Devoirs terminés</div>';
+  state.archivedDevoirs.forEach(id=>{
+    const d=DEVOIRS.find(x=>x.id===id);if(!d)return;
+    const r=document.createElement('div');r.className='archived-devoir';
+    r.innerHTML='<span style="font-size:1.1rem">'+d.emoji+'</span><div style="flex:1;font-size:0.82rem;font-weight:500">'+d.title+'</div><div style="color:var(--green);font-size:0.75rem;font-weight:600">✓ Fait</div>';
+    sec.appendChild(r);
+  });
+}
+
+// ── RESSOURCES ──
+function renderResources(){
+  const list=document.getElementById('resList');list.innerHTML='';
+  RESOURCES.forEach(r=>{
+    const c=document.createElement('div');c.className='res-card';
+    c.innerHTML='<div class="res-emoji">'+r.icon+'</div><div><div class="res-title">'+r.title+'</div><div class="res-desc">'+r.desc+'</div></div>';
+    list.appendChild(c);
+  });
+}
+
+// ── INIT ──
+initNav();
+updateTopBar();
+renderCourses();
+</script>
