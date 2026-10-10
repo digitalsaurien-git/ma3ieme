@@ -74,8 +74,40 @@ body {
 .icon-btn:hover { background: rgba(255,255,255,0.1); }
 
 /* SCREENS */
-.screen { display: none; padding: 16px; max-width: 900px; margin: 0 auto; }
+.screen { display: none; padding: 16px; max-width: 900px; margin: 0 auto; padding-bottom: 80px; }
 .screen.active { display: block; }
+
+/* BOTTOM NAV */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg2);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 0 calc(8px + env(safe-area-inset-bottom, 0px));
+  z-index: 100;
+}
+.bottom-nav-btn {
+  background: none;
+  border: none;
+  color: var(--text2);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 6px 16px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transition: color 0.2s, background 0.2s;
+}
+.bottom-nav-btn span { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; }
+.bottom-nav-btn.active { color: var(--yellow); }
+.bottom-nav-btn:hover { background: rgba(255,255,255,0.07); }
 
 /* HERO */
 .hero {
@@ -799,19 +831,22 @@ body {
   <div class="header-actions">
     <button class="icon-btn" onclick="showRanking()" title="Mon classement">🏆</button>
     <button class="icon-btn" onclick="showDevoirs()" title="Mes devoirs">📅</button>
-    <button class="icon-btn" onclick="showShop()" title="Boutique">🏪</button>
-    <button class="icon-btn" onclick="showMonster()" title="Mon Guerrier">⚔️</button>
-    <button class="icon-btn" onclick="showBestiary()" title="Bestiaire">📜</button>
     <button class="icon-btn" onclick="openResources()" title="Ressources">📋</button>
     <button class="icon-btn" onclick="toggleTTS()" id="ttsBtn" title="Lecture">🔊</button>
   </div>
 </header>
 
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav" id="bottomNav">
+  <button class="bottom-nav-btn" onclick="showShop()" id="bnShop" title="Boutique">🏪<span>Boutique</span></button>
+  <button class="bottom-nav-btn" onclick="showMonster()" id="bnMonster" title="Mon Guerrier">⚔️<span>Guerrier</span></button>
+  <button class="bottom-nav-btn" onclick="showBestiary()" id="bnBestiary" title="Bestiaire">📜<span>Bestiaire</span></button>
+</nav>
+
 <!-- SCREEN: SUBJECTS -->
 <div class="screen active" id="screenSubjects">
   <div class="hero">
     <div id="koalaHero"></div>
-    <h2>Salut Ilian ! 🎓</h2>
     <p>Quelle matière révises-tu aujourd'hui&nbsp;?</p>
   </div>
   <div class="xp-banner" id="xpBanner" onclick="showRanking()">
@@ -1811,7 +1846,8 @@ function showSubjects() {
   state.subject = null; state.chapter = null; state.activity = null;
   stopSpeech();
   showScreen('screenSubjects');
-  updateHeader('Ilian — Mes Cours', false);
+  setBottomNavActive(null);
+  updateHeader('Mes Cours', false);
   document.getElementById('koalaHero').innerHTML = getJudokaSVG(80, 'normal');
   const grid = document.getElementById('subjectsGrid');
   grid.innerHTML = '';
@@ -2482,22 +2518,31 @@ function revealBeastPiece() {
 }
 
 // ── Navigation vers les écrans Dojo ──
+function setBottomNavActive(id) {
+  ['bnShop','bnMonster','bnBestiary'].forEach(b => {
+    const el = document.getElementById(b);
+    if (el) el.classList.toggle('active', b === id);
+  });
+}
 function showShop() {
   showScreen('screenShop');
   document.getElementById('headerTitle').textContent = '🏪 Boutique';
   document.getElementById('backBtn').classList.add('visible');
+  setBottomNavActive('bnShop');
   renderShop();
 }
 function showMonster() {
   showScreen('screenMonster');
   document.getElementById('headerTitle').textContent = '⚔️ Mon Guerrier';
   document.getElementById('backBtn').classList.add('visible');
+  setBottomNavActive('bnMonster');
   renderMonster();
 }
 function showBestiary() {
   showScreen('screenBestiary');
   document.getElementById('headerTitle').textContent = '📜 Bestiaire';
   document.getElementById('backBtn').classList.add('visible');
+  setBottomNavActive('bnBestiary');
   renderBestiary();
 }
 
