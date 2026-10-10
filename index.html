@@ -222,7 +222,9 @@ body {
 .activity-card .act-icon { font-size: 2rem; display: block; margin-bottom: 8px; }
 .activity-card .act-name { font-size: 0.85rem; font-weight: 600; }
 .activity-card .act-count { font-size: 0.75rem; color: var(--text2); margin-top: 4px; }
-.activity-card.done .act-icon::after { content: ' ✓'; font-size: 0.8rem; }
+.activity-card.done { border-color: var(--green) !important; opacity: 0.85; }
+.act-done-badge { font-size: 0.75rem; vertical-align: super; }
+.chapter-done-today { border-left-color: var(--green) !important; }
 
 /* QUIZ */
 .quiz-progress {
@@ -970,6 +972,37 @@ function getJudokaSVG(size, mood, subjectKey) {
   </svg>`;
 }
 
+// ── RÉVISIONS DU JOUR (coche verte quotidienne) ──────────────
+function todayStr() {
+  const d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+function getDailyDone() {
+  try {
+    const raw = JSON.parse(localStorage.getItem('dailyDone') || '{}');
+    if (raw.date === todayStr()) return raw;
+  } catch(e) {}
+  return { date: todayStr(), done: {} };
+}
+function saveDailyDone(dd) {
+  try { localStorage.setItem('dailyDone', JSON.stringify(dd)); } catch(e) {}
+}
+function markActivityDone(chId, actId) {
+  const dd = getDailyDone();
+  if (!dd.done[chId]) dd.done[chId] = [];
+  if (!dd.done[chId].includes(actId)) dd.done[chId].push(actId);
+  saveDailyDone(dd);
+}
+function isDoneToday(chId, actId) {
+  const dd = getDailyDone();
+  return !!(dd.done[chId] && dd.done[chId].includes(actId));
+}
+function isChapterFullyDone(ch, availableActIds) {
+  const dd = getDailyDone();
+  const done = dd.done[ch.id] || [];
+  return availableActIds.every(id => done.includes(id));
+}
+
 // ── XP & CEINTURES (progression façon Duolingo) ───────────────
 function getXPData() {
   try { return JSON.parse(localStorage.getItem('xpData') || '{}'); } catch(e) { return {}; }
@@ -1615,6 +1648,15 @@ function recordCompletion(key) {
       showToast('🌟 Super Ilian ! ' + state.completedToday.length + ' activités complètes !', 3000);
     }
   }
+  // Persistance quotidienne : extraire chId et actId du format "subj_chIdx_actType"
+  // On mappe plutôt sur ch.id + actId
+  if (state.subject && state.chapter !== null && !key.startsWith('devoir_')) {
+    const ch = DATA[state.subject].chapters[state.chapter];
+    const suffixes = { '_summary': 'resume', '_quiz': 'quiz', '_fc': 'flashcards', '_mindmap': 'mindmap', '_video': 'video', '_schema': 'schema' };
+    for (const [sfx, act] of Object.entries(suffixes)) {
+      if (key.endsWith(sfx)) { markActivityDone(ch.id, act); break; }
+    }
+  }
 }
 
 // ── SUBJECTS SCREEN ─────────────────────────────────────────
@@ -1670,13 +1712,21 @@ function showChapters(subjKey) {
   subj.chapters.forEach((ch, i) => {
     if (!isVisibleChapter(ch)) return;
     shown++;
+    // Calculer les activités disponibles pour ce chapitre
+    const avail = ['resume'];
+    if (ch.quiz && ch.quiz.length) avail.push('quiz');
+    if (ch.flashcards && ch.flashcards.length) avail.push('flashcards');
+    if (ch.mindmap) avail.push('mindmap');
+    if (ch.video) avail.push('video');
+    if (ch.schema) avail.push('schema');
+    const fullyDone = isChapterFullyDone(ch, avail);
     const item = document.createElement('div');
-    item.className = 'chapter-item';
+    item.className = 'chapter-item' + (fullyDone ? ' chapter-done-today' : '');
     item.style.setProperty('--ch-color', subj.color);
-    item.innerHTML = `<div class="ch-num" style="background:${subj.color}">${shown}</div>
+    item.innerHTML = `<div class="ch-num" style="background:${fullyDone ? 'var(--green)' : subj.color}">${fullyDone ? '✓' : shown}</div>
       <div class="ch-info">
-        <div class="ch-title">${ch.title}</div>
-        <div class="ch-desc">${ch.desc}</div>
+        <div class="ch-title">${ch.title}${fullyDone ? ' <span style="color:var(--green);font-size:0.85em">✅</span>' : ''}</div>
+        <div class="ch-desc">${fullyDone ? '<span style="color:var(--green)">Révisé aujourd\'hui !</span>' : ch.desc}</div>
       </div>`;
     item.onclick = () => showActivities(i);
     list.appendChild(item);
@@ -1710,11 +1760,13 @@ function showActivities(chIdx) {
   if (ch.mindmap) acts.push({ id: 'mindmap', icon: '🗺️', name: 'Carte mentale', count: '1 schéma', color: '#00cec9' });
   if (ch.video) acts.push({ id: 'video', icon: '▶️', name: 'Vidéo', count: '1 vidéo', color: '#a29bfe' });
   if (ch.schema) acts.push({ id: 'schema', icon: '🫀', name: 'Schéma', count: (ch.schema.points || []).length + ' éléments', color: '#e17055' });
+  const availActIds = acts.map(a => a.id);
   acts.forEach(act => {
+    const done = isDoneToday(ch.id, act.id);
     const card = document.createElement('div');
-    card.className = 'activity-card';
+    card.className = 'activity-card' + (done ? ' done' : '');
     card.style.setProperty('--act-color', act.color);
-    card.innerHTML = `<span class="act-icon">${act.icon}</span><div class="act-name">${act.name}</div><div class="act-count">${act.count}</div>`;
+    card.innerHTML = `<span class="act-icon">${act.icon}${done ? '<span class="act-done-badge">✅</span>' : ''}</span><div class="act-name">${act.name}</div><div class="act-count">${done ? '<span style="color:var(--green)">Révisé aujourd\'hui ✓</span>' : act.count}</div>`;
     card.onclick = () => startActivity(act.id);
     grid.appendChild(card);
   });
